@@ -53,18 +53,6 @@
         }
     })
 
-	var width = $(window).width();
-		$(window).resize(function() {
-			if (width > 992 && $(window).width() < 992) {
-				location.reload();
-			}
-			else if (width < 992 && $(window).width() > 992) {
-				location.reload();
-			}
-	})
-
-
-
 	$(document).on("click", ".naccs .menu div", function() {
 		var numberIndex = $(this).index();
 	
@@ -82,8 +70,8 @@
 		}
 	});
 
-	$('.owl-features').owlCarousel({
-		items:3,
+	$('.owl-cites-town').owlCarousel({
+		items:4,
 		loop:true,
 		dots: false,
 		nav: true,
@@ -93,25 +81,22 @@
 			  0:{
 				  items:1
 			  },
-			  600:{
+			  800:{
 				  items:2
 			  },
-			  1200:{
-				  items:3
-			  },
-			  1800:{
-				items:3
+			  1000:{
+				  items:4
 			}
 		}
 	})
 
-	$('.owl-collection').owlCarousel({
+	$('.owl-weekly-offers').owlCarousel({
 		items:3,
 		loop:true,
 		dots: false,
 		nav: true,
 		autoplay: true,
-		margin:30,
+		margin:15,
 		responsive:{
 			  0:{
 				  items:1
