@@ -5,14 +5,17 @@ def index(request):
     return render(request, 'pages/index.html')
 
 
-def browse(request):
-    return render(request, 'pages/browse.html')
+def about(request):
+    return render(request, 'pages/about.html')
 
-def details(request):
-    return render(request, 'pages/details.html')
+def deals(request):
+    return render(request, 'pages/deals.html')
 
-def streams(request):
-    return render(request, 'pages/streams.html')
+def reservation(request):
+    return render(request, 'pages/reservation.html')
 
-def profile(request):
-    return render(request, 'pages/profile.html')    
+# def profile(request):
+#     return render(request, 'pages/profile.html')    
+
+# def login(request):
+#     return render(request, 'pages/login.html')    
