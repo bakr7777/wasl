@@ -73,6 +73,8 @@ INSTALLED_APPS = [
     'FM',
 
     'Chat',
+    
+    'page',
 
 
 ]

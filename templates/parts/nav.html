@@ -12,10 +12,11 @@
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
-                        <li><a href="{% url 'index' %}" class="">Home</a></li>
-                        <li><a href="{% url 'about' %}">About</a></li>
-                        <li><a href="{% url 'deals' %}">Deals</a></li>
-                        <li><a href="{% url 'reservation' %}">Reservation</a></li>
+                        <li><a href="{% url 'index' %}" class=" {% if request.resolver_match.url_name == 'index' %}active{% endif %} ">الصفحة الرئيسية</a></li>
+                        <li><a href="{% url 'about' %}" class=" {% if request.resolver_match.url_name == 'about' %}active{% endif %} ">عن وصل</a></li>
+                        <li><a href="{% url 'deals' %}" class=" {% if request.resolver_match.url_name == 'deals' %}active{% endif %} ">استثمر</a></li>
+                        <li><a href="{% url 'reservation' %}" class=" {% if request.resolver_match.url_name == 'reservation' %}active{% endif %} ">اضف مشروع</a></li>
+                        <li><a href="{% url 'login' %}" class=" {% if request.resolver_match.url_name == 'login' %}active{% endif %} ">تسجيل دخول</a></li>
                         <li><a href="{% url 'reservation' %}">Book Yours</a></li>
                     </ul>   
                     <a class='menu-trigger'>
