@@ -337,6 +337,7 @@ Header Style
 }
 
 .header-area {
+  direction: rtl;
   background-color: #22b3c1;
   position: absolute;
   height: 70px;
