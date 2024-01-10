@@ -17,4 +17,9 @@ def reservation(request):
 def login(request):
     return render(request, 'pages/login.html')    
 
+def signIn(request):
+    return render(request, 'pages/signIn.html')
+
+def vir(request):
+    return render(request, 'pages/vir.html')    
 # Create your views here.
