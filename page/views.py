@@ -21,5 +21,8 @@ def signIn(request):
     return render(request, 'pages/signIn.html')
 
 def vir(request):
-    return render(request, 'pages/vir.html')    
-# Create your views here.
+    return render(request, 'pages/vir.html')
+
+def addpost(request):
+    return render(request, 'pages/addpost.html')        
+
