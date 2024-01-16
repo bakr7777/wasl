@@ -211,8 +211,12 @@ section {
   font-size: 30px;
   font-weight: 700;
   text-transform: capitalize;
-  color: #2a2a2a;
-}
+  background-color: #22b3c1;
+  border-color: #22b3c1;
+  color: #fff;
+  border-radius: 61px;
+  opacity: 0.8;
+   }
 
 /* 
 ---------------------------------------------
@@ -823,7 +827,7 @@ Banner Style
   background-size: cover;
 }
 #section-1 .content-slider .slider #top-banner-2 {
-  background: url('../images/banner-02.jpg') no-repeat center center;
+  background: url('../images/project-4086546c9718348e.png') no-repeat center center;
   background-size: cover;
 }
 #section-1 .content-slider .slider #top-banner-3 {
@@ -1063,6 +1067,8 @@ Call To Action Style
 */
 
 .call-to-action {
+  direction: rtl;
+
   margin-top: 120px;
   background-image: url(../images/cta-bg.jpg);
   background-repeat: no-repeat;
@@ -1072,6 +1078,7 @@ Call To Action Style
 }
 
 .call-to-action h2 {
+  direction: rtl;
   font-size: 40px;
   color: #fff;
   margin-bottom: 10px;
@@ -1082,12 +1089,16 @@ Call To Action Style
   font-size: 20px;
   color: #fff;
   font-weight: 600;
+  direction: rtl;
+
   letter-spacing: 0.5px;
 }
 
 .call-to-action .border-button {
   text-align: right;
-  margin-top: 20px;
+    direction: rtl;
+
+  margin-top: 107px;
 }
 
 .call-to-action .border-button a {
@@ -1933,8 +1944,7 @@ Deals Page Style
 }
 
 .amazing-deals .item .image {
-  border-top-left-radius: 23px;
-  border-bottom-left-radius: 23px;
+  
   overflow: hidden;
 }
 
@@ -1972,15 +1982,21 @@ Deals Page Style
 }
 
 .amazing-deals .item .content {
+      direction: rtl;
+
   padding: 30px 0px;
 }
 
 .amazing-deals .item p {
+    color: #111;
+    direction: rtl;
+
   padding-top: 25px;
   margin-top: 10px;
   border-top: 1px solid #ddd;
   margin-bottom: 30px;
 }
+
 
 .amazing-deals ul.page-numbers {
   text-align: center;
@@ -2278,6 +2294,7 @@ body {
   .call-to-action h2,
   .call-to-action h4 {
     text-align: center;
+    
   }
   .call-to-action .border-button {
     text-align: center;
@@ -2307,6 +2324,7 @@ body {
     padding-right: 0px;
   }
   .amazing-deals .item .content {
+    direction: rtl;
     padding: 30px !important;
   }
   .more-info .info-item {
