@@ -75,6 +75,7 @@ header, nav, section, article, aside, footer, hgroup {
   box-sizing: border-box;
 }
 
+
 html, body {
   font-family: 'Poppins', sans-serif;
   font-weight: 400;
@@ -88,6 +89,7 @@ html, body {
 a {
 	color: #22b3c1;
   text-decoration: none !important;
+  
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -211,8 +213,12 @@ section {
   font-size: 30px;
   font-weight: 700;
   text-transform: capitalize;
-  color: #2a2a2a;
-}
+  background-color: #22b3c1;
+  border-color: #22b3c1;
+  color: #fff;
+  border-radius: 61px;
+  opacity: 0.8;
+   }
 
 /* 
 ---------------------------------------------
@@ -823,7 +829,7 @@ Banner Style
   background-size: cover;
 }
 #section-1 .content-slider .slider #top-banner-2 {
-  background: url('../images/banner-02.jpg') no-repeat center center;
+  background: url('../images/project-4086546c9718348e.png') no-repeat center center;
   background-size: cover;
 }
 #section-1 .content-slider .slider #top-banner-3 {
@@ -934,6 +940,7 @@ Banner Style
 Visit Country Style
 --------------------------------------------- 
 */
+
 
 .visit-country {
   margin-top: 120px;
@@ -1053,9 +1060,17 @@ Visit Country Style
 .visit-country ul.page-numbers li:last-child a {
   border: none;
 }
+.my-5.text-center{
+  background-color: #1da1f2;
+}
 
-
-
+.text-center {
+  text-align: center;
+}
+.my-5 {
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;}
+  
 /* 
 ---------------------------------------------
 Call To Action Style
@@ -1063,6 +1078,8 @@ Call To Action Style
 */
 
 .call-to-action {
+  direction: rtl;
+
   margin-top: 120px;
   background-image: url(../images/cta-bg.jpg);
   background-repeat: no-repeat;
@@ -1072,6 +1089,7 @@ Call To Action Style
 }
 
 .call-to-action h2 {
+  direction: rtl;
   font-size: 40px;
   color: #fff;
   margin-bottom: 10px;
@@ -1082,17 +1100,22 @@ Call To Action Style
   font-size: 20px;
   color: #fff;
   font-weight: 600;
+  direction: rtl;
+
   letter-spacing: 0.5px;
 }
 
 .call-to-action .border-button {
   text-align: right;
-  margin-top: 20px;
+    direction: rtl;
+
+  margin-top: 114px;
 }
 
 .call-to-action .border-button a {
   color: #fff;
-  border-color: #fff
+  border-color: #fff;
+  height: 114px;
 }
 
 .call-to-action .border-button a:hover {
@@ -1931,10 +1954,9 @@ Deals Page Style
 .amazing-deals {
   margin-top: 120px;
 }
-
+ 
 .amazing-deals .item .image {
-  border-top-left-radius: 23px;
-  border-bottom-left-radius: 23px;
+  
   overflow: hidden;
 }
 
@@ -1972,15 +1994,26 @@ Deals Page Style
 }
 
 .amazing-deals .item .content {
+      direction: rtl;
+
   padding: 30px 0px;
 }
+ .col-lg-6{
+
+margin: 20px;
+
+ }
 
 .amazing-deals .item p {
+    color: #111;
+    direction: rtl;
+
   padding-top: 25px;
   margin-top: 10px;
   border-top: 1px solid #ddd;
   margin-bottom: 30px;
 }
+
 
 .amazing-deals ul.page-numbers {
   text-align: center;
@@ -2278,6 +2311,7 @@ body {
   .call-to-action h2,
   .call-to-action h4 {
     text-align: center;
+    
   }
   .call-to-action .border-button {
     text-align: center;
@@ -2307,6 +2341,7 @@ body {
     padding-right: 0px;
   }
   .amazing-deals .item .content {
+    direction: rtl;
     padding: 30px !important;
   }
   .more-info .info-item {
