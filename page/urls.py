@@ -10,4 +10,5 @@ urlpatterns = [
     path('signIn', views.signIn, name='signIn'),
     path('vir', views.vir, name='vir'), 
     path('addpost', views.addpost, name='addpost'),
+    path('promoreq', views.promoreq, name='promoreq'),
 ]
