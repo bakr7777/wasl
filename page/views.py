@@ -24,5 +24,8 @@ def vir(request):
     return render(request, 'pages/vir.html')
 
 def addpost(request):
-    return render(request, 'pages/addpost.html')        
+    return render(request, 'pages/addpost.html')
+
+def promoreq(request):
+    return render(request, 'pages/promoreq.html')        
 
