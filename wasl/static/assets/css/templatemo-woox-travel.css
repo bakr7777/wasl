@@ -25,6 +25,7 @@ font & reset css
 --------------------------------------------- 
 */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900");
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&display=swap");
 /* 
 ---------------------------------------------
 reset
@@ -38,6 +39,7 @@ figure, header, nav, section, article, aside, footer, figcaption {
   padding: 0;
   border: 0;
   outline: 0;
+  font-family: 'IBM Plex Sans Arabic';
 }
 
 .clearfix:after {
@@ -69,6 +71,7 @@ ul, li {
 
 header, nav, section, article, aside, footer, hgroup {
   display: block;
+  font-family: 'IBM Plex Sans Arabic', sans-serif;
 }
 
 * {
