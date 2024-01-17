@@ -27,7 +27,11 @@ def addpost(request):
     return render(request, 'pages/addpost.html')
 
 def promoreq(request):
-    return render(request, 'pages/promoreq.html')        
+    return render(request, 'pages/promoreq.html')
+
+def update(request):
+    return render(request, 'pages/update.html')
+
 
 def invreq(request):
     return render(request, 'pages/invreq.html')
