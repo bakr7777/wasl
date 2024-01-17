@@ -33,3 +33,5 @@ def update(request):
     return render(request, 'pages/update.html')
 
 
+def invreq(request):
+    return render(request, 'pages/invreq.html')

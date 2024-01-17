@@ -1,0 +1,188 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'assets/css/templatemo-woox-travel.css' %}">
+    <style>
+        /* This is the CSS file */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.prq {
+    width: 100%;
+    min-height: 100vh;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.containerP {
+    background: #fff;
+    max-width: 800px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.headerP {
+    background-color: #000000;
+    padding: 20px;
+    text-align: center;
+}
+
+.headerP h1 {
+    font-size: 36px;
+    color: #ffffff;
+}
+
+.content {
+    padding: 20px;
+}
+
+.content h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.content p {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.content form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.content form label {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.content form select {
+    width: 300px;
+    height: 40px;
+    font-size: 18px;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+}
+
+.content form span {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+@media (max-width: 575px) {
+
+}
+
+.content form button {
+    width: 200px;
+    height: 40px;
+    font-size: 18px;
+    color: #fff;
+    background-color: #333;
+    border: none;
+    cursor: pointer;
+}
+
+.footer {
+    background-color: #333;
+    padding: 20px;
+    text-align: center;
+}
+
+.footer p {
+    font-size: 18px;
+    color: #fff;
+}
+
+.intext{
+    margin: 7px;
+    background: #e5e5e5;
+    line-height: 50px;
+    border-radius: 5px;
+    color: #555;
+
+}
+
+    </style>
+  </head>
+
+  <body>
+ <!-- ***** Header Area Start ***** -->
+ <header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="{% url 'index' %}" class="logo">
+                        <img src="{% static 'assets/images/mylogo.png' %}" alt="">
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                        <li><a href="{% url 'index' %}" class=" {% if request.resolver_match.url_name == 'index' %}active{% endif %} ">الصفحة الرئيسية</a></li>
+                        <li><a href="{% url 'about' %}" class=" {% if request.resolver_match.url_name == 'about' %}active{% endif %} ">عن وصل</a></li>
+                        <li><a href="{% url 'deals' %}" class=" {% if request.resolver_match.url_name == 'deals' %}active{% endif %} ">استثمر</a></li>
+                        <li><a href="{% url 'reservation' %}" class=" {% if request.resolver_match.url_name == 'reservation' %}active{% endif %} ">اضف مشروع</a></li>
+                        <li><a href="{% url 'login' %}" class=" {% if request.resolver_match.url_name == 'login' %}active{% endif %} ">تسجيل دخول</a></li>
+                        <li><a href="{% url 'promoreq' %}" class=" {% if request.resolver_match.url_name == 'promoreq' %}active{% endif %} ">Book Yours</a></li>
+                    </ul>   
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+  </header>
+  <!-- ***** Header Area End ***** -->
+<div class="prq" style="background-image: url({% static 'assets/images/bg-01.jpg' %});">
+    <div class="containerP">
+        <div class="headerP">
+            <h1> حول المشروع  </h1>
+        </div>
+        <div class="content">
+            <h2>  لمعلومات أكثر   </h2>
+            <p> يمكنك إيداع مبلغ  تأمين لمعرفة التفاصيل حول المشروع  </p>
+            <form id="promotion-form">
+              
+                <input class="intext" type="text">
+                <button type="submit">طلب استثمار</button>
+            </form>
+        </div>
+    
+    </div>
+</div>
+
+
+</body>
