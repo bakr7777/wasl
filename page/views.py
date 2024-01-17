@@ -29,3 +29,5 @@ def addpost(request):
 def promoreq(request):
     return render(request, 'pages/promoreq.html')        
 
+def invreq(request):
+    return render(request, 'pages/invreq.html')

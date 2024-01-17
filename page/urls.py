@@ -11,4 +11,5 @@ urlpatterns = [
     path('vir', views.vir, name='vir'), 
     path('addpost', views.addpost, name='addpost'),
     path('promoreq', views.promoreq, name='promoreq'),
+    path('invreq', views.invreq, name='invreq'),
 ]
