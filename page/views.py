@@ -31,5 +31,7 @@ def promoreq(request):
 
 def update(request):
     return render(request, 'pages/update.html')
+def condations(request):
+    return render(request, 'pages/condations.html')
 
 
