@@ -35,3 +35,5 @@ def condations(request):
     return render(request, 'pages/condations.html')
 
 
+def invreq(request):
+    return render(request, 'pages/invreq.html')

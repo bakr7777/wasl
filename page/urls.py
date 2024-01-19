@@ -12,5 +12,6 @@ urlpatterns = [
     path('addpost', views.addpost, name='addpost'),
     path('promoreq', views.promoreq, name='promoreq'),
     path('update', views.update, name='update'),
+    path('invreq', views.invreq, name='invreq'),
     path('condations', views.condations, name='condations'),
 ]
