@@ -75,7 +75,6 @@ header, nav, section, article, aside, footer, hgroup {
   box-sizing: border-box;
 }
 
-
 html, body {
   font-family: 'Poppins', sans-serif;
   font-weight: 400;
@@ -89,7 +88,6 @@ html, body {
 a {
 	color: #22b3c1;
   text-decoration: none !important;
-  
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -941,7 +939,6 @@ Visit Country Style
 --------------------------------------------- 
 */
 
-
 .visit-country {
   margin-top: 120px;
 }
@@ -1060,17 +1057,9 @@ Visit Country Style
 .visit-country ul.page-numbers li:last-child a {
   border: none;
 }
-.my-5.text-center{
-  background-color: #1da1f2;
-}
 
-.text-center {
-  text-align: center;
-}
-.my-5 {
-  margin-top: 1.25rem;
-  margin-bottom: 1.25rem;}
-  
+
+
 /* 
 ---------------------------------------------
 Call To Action Style
@@ -1109,13 +1098,12 @@ Call To Action Style
   text-align: right;
     direction: rtl;
 
-  margin-top: 114px;
+  margin-top: 107px;
 }
 
 .call-to-action .border-button a {
   color: #fff;
-  border-color: #fff;
-  height: 114px;
+  border-color: #fff
 }
 
 .call-to-action .border-button a:hover {
@@ -1954,7 +1942,7 @@ Deals Page Style
 .amazing-deals {
   margin-top: 120px;
 }
- 
+
 .amazing-deals .item .image {
   
   overflow: hidden;
@@ -1998,11 +1986,6 @@ Deals Page Style
 
   padding: 30px 0px;
 }
- .col-lg-6{
-
-margin: 20px;
-
- }
 
 .amazing-deals .item p {
     color: #111;
@@ -2140,6 +2123,9 @@ Reservation Page Style
   font-size: 20px;
   font-weight: 700;
   margin-bottom: 10px;
+  border-radius: 50px;
+    background: #22b3c1;
+  
 }
 
 .more-info .info-item a {
