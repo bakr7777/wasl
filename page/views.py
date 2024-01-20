@@ -31,9 +31,12 @@ def promoreq(request):
 
 def update(request):
     return render(request, 'pages/update.html')
+
 def condations(request):
     return render(request, 'pages/condations.html')
 
-
 def invreq(request):
     return render(request, 'pages/invreq.html')
+
+def ownpro(request):
+    return render(request, 'pages/ownpro.html')    
