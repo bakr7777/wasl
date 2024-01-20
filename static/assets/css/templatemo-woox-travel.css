@@ -65,7 +65,9 @@ ul, li {
   padding: 0;
   margin: 0;
   list-style: none;
+  color: #000000;
 }
+
 
 header, nav, section, article, aside, footer, hgroup {
   display: block;
@@ -91,10 +93,12 @@ a {
 }
 
 h1, h2, h3, h4, h5, h6 {
+  direction: rtl;
   margin-top: 0px;
   margin-bottom: 0px;
-  color: #2a2a2a;
+  color: #000000;
   font-weight: 700;
+  direction: rtl;
 }
 
 ul {
@@ -102,10 +106,12 @@ ul {
 }
 
 p {
+  direction: rtl;
   font-size: 15px;
   line-height: 30px;
-  color: #afafaf;
+  color: #000000;
 }
+
 
 img {
   width: 100%;
@@ -1149,18 +1155,18 @@ About Page Style
 
 .about-main-content {
   margin-top: 70px;
-  background-image: url(../images/about-content-bg.jpg);
+  background-image: url(../images/wasl1.jpg);
   background-attachment: fixed;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 380px;
   background-position: center center;
   padding: 130px 0px 200px 0px;
 }
 
 .blur-bg {
-	width: 100%;
-  height: 100%;
-  background: url(../images/about-content-bg.jpg) no-repeat center center fixed;
+	width: 50%;
+  height: 50%;
+  background: url(../images/about-content-mg.jpg) no-repeat center center fixed;
   background-size: cover;
   filter: blur(8px) brightness(80%);
   position: absolute;
@@ -1179,7 +1185,8 @@ About Page Style
 }
 
 .about-main-content .content h2 {
-  color: #fff;
+  direction: rtl;
+  color: #000000;
   position: relative;
   z-index: 2;
   font-size: 50px;
@@ -1196,7 +1203,8 @@ About Page Style
 }
 
 .about-main-content .content h4 {
-  color: #fff;
+  direction: rtl;
+  color: #000000;
   position: relative;
   z-index: 2;
   font-size: 20px;
@@ -1204,7 +1212,8 @@ About Page Style
 }
 
 .about-main-content .content p {
-  color: #fff;
+  direction: rtl;
+  color: #000000;
   position: relative;
   z-index: 2;
   padding: 0px 15%;
@@ -1231,34 +1240,38 @@ About Page Style
   max-height: 100%;
   position: relative;
   margin-top: -70px;
-  background-color: #fff;
+  background-color: #22b3c1;
   border-radius: 23px;
   padding: 60px;
   box-shadow: 0px 0px 15px rgba(0,0,0,0.15);
 }
 
 .cities-town .slider-content h2 {
+  direction: rtl;
   font-size: 30px;
   margin-bottom: 30px;
 }
 
 .cities-town .slider-content h2 em {
+  direction: rtl;
   font-style: normal;
   color: #22b3c1;
 }
 
 .cities-town .slider-content .item .thumb {
+  direction: rtl;
   position: relative;
   border-radius: 10px;
   overflow: hidden;
 }
 
 .cities-town .slider-content .item .thumb h4 {
+  direction: rtl;
   position: absolute;
   left: 30px;
   bottom: 30px;
   font-size: 20px;
-  color: #fff;
+  color: #000000;
 }
 
 .cities-town .owl-nav {
@@ -1271,26 +1284,26 @@ About Page Style
   display: none;
 }
 
-.cities-town .owl-nav .owl-next::after {
+/* .cities-town .owl-nav .owl-next::after {
   font-family: "FontAwesome";
   content: '\f061'; 
-  color: #cdcdcd;
+  color: #000000;
   font-size: 20px;
   transition: all .3s;
-}
+} */
 
 .cities-town .owl-nav .owl-prev span {
   display: none;
 }
 
-.cities-town .owl-nav .owl-prev::after {
+/* .cities-town .owl-nav .owl-prev::after {
   font-family: "FontAwesome";
   content: '\f060'; 
   color: #cdcdcd;
   margin-right: 15px;
   font-size: 20px;
   transition: all .3s;
-}
+} */
 
 .cities-town .owl-nav .owl-prev:hover::after,
 .cities-town .owl-nav .owl-next:hover::after {
@@ -1319,6 +1332,7 @@ About Page Style
 }
 
 .weekly-offers .item .thumb .text {
+  direction: rtl;
   position: absolute;
   background-color: #fff;
   border-radius: 23px;
@@ -1330,11 +1344,13 @@ About Page Style
 }
 
 .weekly-offers .item .thumb .text h4 {
+  direction: ltr;
   font-size: 20px;
   display: inline-block;
 }
 
 .weekly-offers .item .thumb .text h6 {
+  direction: rtl;
   display: inline-block;
   float: right;
   text-align: right;
@@ -1344,19 +1360,22 @@ About Page Style
 
 .weekly-offers .item .thumb .text h4 span,
 .weekly-offers .item .thumb .text h6 span {
+  direction: rtl;
   font-size: 15px;
-  color: #afafaf;
+  color: #000000;
   font-weight: 400;
 }
 
 .weekly-offers .item .thumb .text ul {
+  direction: rtl;
   border-top: 1px solid #eee;
   margin-top: 25px;
   padding-top: 25px;
 }
 
 .weekly-offers .item .thumb .text ul li {
-  color: #afafaf;
+  direction: rtl;
+  color: #000000;
   font-size: 14px;
   margin-bottom: 10px;
 }
@@ -1400,7 +1419,7 @@ About Page Style
   border-radius: 50%;
   transition: all .3s;
   margin-left: 5px;
-}
+} 
 
 .weekly-offers .owl-nav .owl-prev span {
   display: none;
@@ -1450,6 +1469,7 @@ About Page Style
 }
 
 .more-about .info-item h4 {
+  direction: rtl;
   font-size: 20px;
 }
 
@@ -1843,6 +1863,36 @@ body .options .option .label .info .sub {
   opacity: 0.85;
 }
 
+.containerr {
+  display: flex; /* يجعل الـ divs تظهر جنبًا إلى جنب */
+  justify-content: space-between; /* يوزع المسافة بين الـ divs بالتساوي */
+  max-width: 800px;
+  margin: 50px auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.box11, .box22 {
+  flex: 1; /* يحصل كل div على نصف المساحة */
+  padding: 20px;
+  border: 1px solid #000000;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.box11 {
+  background-color: #22b3c1;
+  font-c: #000000;
+}
+
+.box22 {
+  background-color: #22b3c1;
+  color: #000000;
+}
+
+
 
 
 
@@ -1869,6 +1919,7 @@ Deals Page Style
 }
 
 .page-heading h2 {
+  direction: rtl;
   font-size: 50px;
   font-weight: 700;
   color: #fff;
