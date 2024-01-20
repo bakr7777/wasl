@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="page-wrapperA bg-gra-03 p-t-45 p-b-50">
+    <div class="wrapperA wrapperA--w790">
+        <div class="cardA card-5A">
+            <div class="card-headingA">
+                <h2 class="titleA">اضف مشروع</h2>
+            </div>
+            <div class="card-bodyA">
+                <form action="{% url 'vir' %}">
+                    <div class="form-row p-t-20A">
+                        <label class="label label--blockA"></label>
+                       
+                    </div>
+                   
+                    <div class="form-rowA">
+                        <div class="nameA" >إسم المشروع</div>
+                        <div class="valueA">
+                            <div class="input-groupA">
+                                <input class="input--style-5A" type="text" placeholder="ادخل اسم المشروع هنا" name="company">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-rowA">
+                        <div class="nameA">تصنيف المشروع</div>
+                        <div class="valueA">
+                            <div class="input-groupA">
+                                <div class="rs-select2A js-select2A-simpleA selectA--no-search">
+                                    <select name="subjectA">
+                                        <option disabled="disabled" selected="selected">اختار صنف لمشروعك</option>
+                                        <option>الكتروني</option>
+                                        <option>عقاري</option>
+                                        <option>شركة</option>
+                                    </select>
+                                    <div class="select2A-dropdownA"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-rowA">
+                        <div class="nameA">الوصف</div>
+                        <div class="valueA">
+                            <div class="input-groupA">
+                                <input class="input--style-5A" type="text" placeholder="ادخل وصف مختصر للمشروع هنا" name="email">
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="form-rowA">
+                        <div class="nameA">التكلفة المقدرة</div>
+                        <div class="valueA">
+                            <div class="input-groupA">
+                                <input class="input--style-5A" type="text" placeholder="" name="company">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-rowA">
+                        <div class="nameA">الصور</div>
+                        <div class="valueA">
+                            <div class="input-groupA">
+                                <input class="input--style-5A" type="file" name="company" multiple accept="image/*">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-rowA">
+                        <div class="nameA">العنوان</div>
+                        <div class="valueA">
+                            <div class="input-groupA">
+                                <input class="input--style-5A" type="text" name="company">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-rowA">
+                        <div class="nameA">التفاصيل</div>
+                        <div class="valueA">
+                            <div class="input-groupA">
+                                <input class="input--style-5A" type="text" name="company">
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <button class="btnA btnA--radiusA-2A btnA--redA" type="submit">اضافة المشروع</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
