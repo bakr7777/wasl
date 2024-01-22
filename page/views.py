@@ -42,3 +42,6 @@ def ownpro(request):
 
 def project(request):
     return render(request, 'pages/project.html')
+
+def prodesc(request):
+    return render(request, 'pages/prodesc.html')
