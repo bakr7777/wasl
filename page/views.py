@@ -37,6 +37,8 @@ def condations(request):
 
 def invreq(request):
     return render(request, 'pages/invreq.html')
-
 def ownpro(request):
-    return render(request, 'pages/ownpro.html')    
+    return render(request, 'pages/ownpro.html')
+
+def project(request):
+    return render(request, 'pages/project.html')
