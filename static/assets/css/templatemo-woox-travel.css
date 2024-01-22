@@ -2183,6 +2183,9 @@ Reservation Page Style
   font-size: 20px;
   font-weight: 700;
   margin-bottom: 10px;
+  border-radius: 50px;
+    background: #22b3c1;
+  
 }
 
 .more-info .info-item a {
