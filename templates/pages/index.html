@@ -2,43 +2,55 @@
 {% load static %}
 {% block content %}
 
-
-<!-- ***** Main Banner Area Start ***** -->
+<div class="promo-requests">
   <section id="section-1">
     <div class="content-slider">
-      <input type="radio" id="banner1" class="sec-1-input" name="banner" checked>
-      <input type="radio" id="banner2" class="sec-1-input" name="banner">
-      <input type="radio" id="banner3" class="sec-1-input" name="banner">
-      <input type="radio" id="banner4" class="sec-1-input" name="banner">
+      {% for promo_request in promo_requests %}
+        <input type="radio" id="banner{{ forloop.counter }}" class="sec-1-input" name="banner" {% if forloop.first %}checked{% endif %}>
+      {% endfor %}
       <div class="slider">
-        <div id="top-banner-1" class="banner">
-          <div class="banner-inner-wrapper header-text">
-            <div class="main-caption">
-              <h1>قم بالاستثمار في مشروعنا لتحقيق ارباح غير مسبوقة </h1>
-              <h1>
-                منتجات السباكة و الانابيب للمشاريع و المقاولات</h1>
-              <div class="border-button"><a href="{% url 'deals' %}">الاستثمار في المشروع</a></div>
-            </div>
-            <div class="container">
-              <div class="row">
-                <div class="col-lg-12">
-                  <div class="more-info">
-                    <div class="row">
-                      <div class="col-lg-3 col-sm-6 col-6">
-                        <i class="fa fa-user"></i>
-                        <h4><span>:  شركة ابن يونس للمقاولات </span><br>+967779135111</h4>
-                      </div>
-                      <div class="col-lg-3 col-sm-6 col-6">
-                        <i class="fa fa-globe"></i>
-                        <h4><span>: تصنيف المشروع</span><br>بناء وصناعة<em></em></h4>
-                      </div>
-                      <div class="col-lg-3 col-sm-6 col-6">
-                        <i class="fa fa-home"></i>
-                        <h4><span>:قيمة المشروع</span><br>$946.000</h4>
-                      </div>
-                      <div class="col-lg-3 col-sm-6 col-6">
-                        <div class="main-button">
-                          <a href="{% url 'about' %}">قراءة المزيد</a>
+        {% for promo_request in promo_requests %}
+          <div id="top-banner-{{ forloop.counter }}" class="banner" style="background-image: url('{{ promo_request.project.image.url }}');
+                  background-position: center center;
+                  height: 100%;
+                 ">
+            <div class="banner-inner-wrapper header-text">
+              <div class="main-caption">
+                <h1>{{ promo_request.project.title }}</h1>
+                <h1>{{ promo_request.project.discripe }}</h1>
+                <div class="border-button"><a href="{% url 'deals' %}">الاستثمار في المشروع</a></div>
+              </div>
+              <div class="container">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="more-info">
+                      <div class="row">
+
+                        <div class="col-lg-3 col-sm-6 col-6" style="flex: 0 0 auto;
+                                              width: 20%;" >
+                          <i class="fa fa-map"></i>
+                          <h4><span>  موقع المشروع:</span><br>{{ promo_request.project.address }}<em></em></h4>
+                        </div>
+                        <div class="col-lg-3 col-sm-6 col-6" style="flex: 0 0 auto;
+                                              width: 20%;" >
+                          <i class="fa fa-globe"></i>
+                          <h4><span> تصنيف المشروع :</span><br>{{ promo_request.project.category }}<em></em></h4>
+                        </div>
+                        <div class="col-lg-3 col-sm-6 col-6" style="flex: 0 0 auto;
+                                              width: 20%;" >
+                          <i class="fa fa-home"></i>
+                          <h4><span>  التكلفة المقدرة :</span><br>{{ promo_request.project.cost }}</h4>
+                        </div>
+                        <div class="col-lg-3 col-sm-6 col-6" style="flex: 0 0 auto;
+                                              width: 20%;">
+                          <i class="fa fa-user"></i>
+                          <h4><span>  اسم المشروع:</span><br>{{ promo_request.project.title }}</h4>
+                        </div>
+                        <div class="col-lg-3 col-sm-6 col-6" style="flex: 0 0 auto;
+                                              width: 20%;" >
+                          <div class="main-button">
+                            <a href="{% url 'deals' %}">قراءة المزيد</a>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -47,414 +59,333 @@
               </div>
             </div>
           </div>
-        </div>
-        <div id="top-banner-2" class="banner">
-          <div class="banner-inner-wrapper header-text">
-            <div class="main-caption">
-              <h1>: قم بالاستثمار في مشروعنا لتحقيق ارباح غير مسبوقة </h1>
-              <h1>مشروع شركة الشواء للوجبات</h1>
-              <div class="border-button"><a href="{% url 'deals' %}">الاستثمار في المشروع</a></div>
-            </div>
-            <div class="container">
-              <div class="row">
-                <div class="col-lg-12">
-                  <div class="more-info">
-                    <div class="row">
-                      <div class="col-lg-3 col-sm-6 col-6">
-                        <i class="fa fa-user"></i>
-                        <h4><span>مجموعةالراقي للماكولات </span><br>+967772633382</h4>
-                      </div>
-                      <div class="col-lg-3 col-sm-6 col-6">
-                        <i class="fa fa-globe"></i>
-                        <h4><span>تصنيف المشروع:</span><br>طبخ ومأكولات <em></em></h4>
-                      </div>
-                      <div class="col-lg-3 col-sm-6 col-6">
-                        <i class="fa fa-home"></i>
-                        <h4><span>قيمة المشروع :</span><br>$1.100.200</h4>
-                      </div>
-                      <div class="col-lg-3 col-sm-6 col-6">
-                        <div class="main-button">
-                          <a href="{% url 'deals' %}">قراءة المزيد</a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div id="top-banner-3" class="banner">
-          <div class="banner-inner-wrapper header-text">
-            <div class="main-caption">
-              <h1>  قم بالاستثمار في مشروعنا لتحقيق ارباح غير مسبوقة </h1>
-              <h1>مستودعات البركة لمستلزمات السيارات</h1>
-              <div class="border-button"><a href="{% url 'deals' %}">الاستثمار في المشروع</a></div>
-            </div>
-            <div class="container">
-              <div class="row">
-                <div class="col-lg-12">
-                  <div class="more-info">
-                    <div class="row">
-                      <div class="col-lg-3 col-sm-6 col-6">
-                        <i class="fa fa-user"></i>
-                        <h4><span>السريع لقطع غيار السيارات </span><br>+9677791351111</h4>
-                      </div>
-                      <div class="col-lg-3 col-sm-6 col-6">
-                        <i class="fa fa-globe"></i>
-                        <h4><span>:تصنيف المشروع</span><br>مستلزمات سيارات<em></em></h4>
-                      </div>
-                      <div class="col-lg-3 col-sm-6 col-6">
-                        <i class="fa fa-home"></i>
-                        <h4><span>قيمة المشروع</span><br>$425.600</h4>
-                      </div>
-                      <div class="col-lg-3 col-sm-6 col-6">
-                        <div class="main-button">
-                          <a href="{% url 'deals' %}">قراءة المزيد</a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div id="top-banner-4" class="banner">
-          <div class="banner-inner-wrapper header-text">
-            <div class="main-caption">
-              <h1> :قم بالاستثمار في مشروعنا لتحقيق ارباح غير مسبوقة</h1>
-              <h1>فاست لتوصيل الوجبات السريعة</h1>
-              <div class="border-button"><a href="{% url 'deals' %}">الاستثمار في المشروع</a></div>
-            </div>
-            <div class="container">
-              <div class="row">
-                <div class="col-lg-12">
-                  <div class="more-info">
-                    <div class="row">
-                      <div class="col-lg-3 col-sm-6 col-6">
-                        <i class="fa fa-user"></i>
-                        <h4><span>:فاست  لتوصيل الوجبات السريعة</span><br>+967779135111</h4>
-                      </div>
-                      <div class="col-lg-3 col-sm-6 col-6">
-                        <i class="fa fa-globe"></i>
-                        <h4><span>:تصنيف المشروع</span><br>خدمات توصيل الطعام <em></em></h4>
-                      </div>
-                      <div class="col-lg-3 col-sm-6 col-6">
-                        <i class="fa fa-home"></i>
-                        <h4><span>:قيمة المشروع</span><br>$165.450</h4>
-                      </div>
-                      <div class="col-lg-3 col-sm-6 col-6">
-                        <div class="main-button">
-                          <a href="{% url 'deals' %}">قراءة المزيد </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        {% endfor %}
       </div>
       <nav>
         <div class="controls">
-          <label for="banner1"><span class="progressbar"><span class="progressbar-fill"></span></span><span class="text">1</span></label>
-          <label for="banner2"><span class="progressbar"><span class="progressbar-fill"></span></span><span class="text">2</span></label>
-          <label for="banner3"><span class="progressbar"><span class="progressbar-fill"></span></span><span class="text">3</span></label>
-          <label for="banner4"><span class="progressbar"><span class="progressbar-fill"></span></span><span class="text">4</span></label>
+          {% for promo_request in promo_requests %}
+            <label for="banner{{ forloop.counter }}"><span class="progressbar"><span class="progressbar-fill"></span></span><span class="text">{{ forloop.counter }}</span></label>
+          {% endfor %}
         </div>
       </nav>
     </div>
   </section>
+</div>
+<div class="amazing-deals">
+  <div class="container">
+    <div class="row">
+    
+      <div class="containerrr">
+        <div class="box11">  
+          <h2> لماذا منصة وصل ؟</h2>
+        <p style="color: black ;font-size: 18px;">1.      توفير فرص استثمارية مبتكرة وواعدة:
 
- 
+          <br>
+          - توفير فرص استثمارية متنوعة للمستثمرين.
+          <br>
+ - تعزيز تنويع محفظة الاستثمارات وزيادة الفرص لتحقيق عوائد مجزية.
 
-  <!-- ***** Main Banner Area End ***** -->
-  <div class="amazing-deals">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6 offset-lg-3">
-          <div class="section-heading text-center">
-            <h2><p1 style="color:darkblue; width: 20px;">أهدافنا</p1><br>
-              تهدف منصة وصل إلى خلق بيئة رقمية آمنة وجذابة وسهلة الاستخدام دون شروط وقيود معقدة للاستثمار. بالإضافة إلى تقديم حلول متكاملة لأصحاب المشاريع والمستثمرين تحت ملجأ واحد لإتاحة الفرصة لأصحاب المشاريع لعرض مشاريعهم وتقديم مجموعة متنوعة من الفرص الاستثمارية للمستثمرين</h2>
-            <p></p>
-          </div>
-        </div>
-        <div class="col-lg-6 col-sm-6">
-          <div class="item">
-            <div class="row">
-              <div class="col-lg-6">
-                <div class="image">
-                  <img src="{% static  'assets/images/deals-02.jpg' %}" >
-                </div>
-              </div>
-              <div class="col-lg-6 align-self-center">
-                <div class="content">
-                  <span class="info">سوقي للتجارة الالكترونية </span>
-                  <h4>سعر المشروع</h4>
-                  <div class="row">
-                    <div class="col-6">
-                      <i class="fa fa-clock"></i>
-                      <span class="list">تصيف المشروع</span>
-                    </div>
-                    <div class="col-6">
-                      <i class="fa fa-map"></i>
-                      <span class="list">معلومات المشروع</span>
-                    </div>
-                  </div>
-                  <p>سوقي هو عباره عن شركة تجارة الكترونية قائمة علا الاستيراد من الصين والبيع في عدة بلدان</p>
-                  <div class="main-button">
-                    <a href="{% url 'invreq' %}">الاستثمار في المشروع</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-6 col-sm-6">
-          <div class="item">
-            <div class="row">
-              <div class="col-lg-6">
-                <div class="image">
-                  <img src="{% static  'assets/images/deals-04.jpg' %}" >
-                </div>
-              </div>
-              <div class="col-lg-6 align-self-center">
-                <div class="content">
-                  <span class="info">التعاون لادارةالحفلات </span>
-                  <h4>سعر المشروع</h4>
-                  <div class="row">
-                    <div class="col-6">
-                      <i class="fa fa-clock"></i>
-                      <span class="list">تصنيف المشروع</span>
-                    </div>
-                    <div class="col-6">
-                      <i class="fa fa-map"></i>
-                      <span class="list">معلومات المشروع </span>
-                    </div>
-                  </div>
-                  <p>مشروع لادارة الحفلات والمناسبات وتقديم خدمات التنضيم والترتيبات التي تسبق وتلي المناسبات  </p>
-                  <div class="main-button">
-                    <a href="{% url 'invreq' %}">استثمر في المشروع </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-6 col-sm-6">
-          <div class="item">
-            <div class="row">
-              <div class="col-lg-6">
-                <div class="image">
-                  <img src="{% static  'assets/images/deals-04.jpg' %}" >
-                </div>
-              </div>
-              <div class="col-lg-6 align-self-center">
-                <div class="content">
-                  <span class="info">سانتكس فضة وعقيق </span>
-                  <h4>سعر المشروع </h4>
-                  <div class="row">
-                    <div class="col-6">
-                      <i class="fa fa-clock"></i>
-                      <span class="list">تصنيف المشروع </span>
-                    </div>
-                    <div class="col-6">
-                      <i class="fa fa-map"></i>
-                      <span class="list">معلومات المشروع</span>
-                    </div>
-                  </div>
-                  <p>استيراد وبيع الفضة والعقيق في البلاد وخارجها مع توفر خدمة التوصيل    </p>
-                  <div class="main-button">
-                    <a href="{% url 'invreq' %}">الاستثمار في المشروع </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-6 col-sm-6">
-          <div class="item">
-            <div class="row">
-              <div class="col-lg-6">
-                <div class="image">
-                  <img src="{% static  'assets/images/deals-03.jpg' %}" >
-                </div>
-              </div>
-              <div class="col-lg-6 align-self-center">
-                <div class="content">
-                  <span class="info">ماي كار لتنجيد المركبات</span>
-                  <h4>سعر المشروع </h4>
-                  <div class="row">
-                    <div class="col-6">
-                      <i class="fa fa-clock"></i>
-                      <span class="list">تصنيف المشروع</span>
-                    </div>
-                    <div class="col-6">
-                      <i class="fa fa-map"></i>
-                      <span class="list">معلومات المشروع </span>
-                    </div>
-                  </div>
-                  <p>مجمع لتنجيد وزينة المركبات بمختلف انواعها دلع سيارتك  </p>
-                  <div class="main-button">
-                    <a href="{% url 'invreq' %}">Make a Reservation</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-6 col-sm-6">
-          <div class="item">
-            <div class="row">
-              <div class="col-lg-6">
-                <div class="image">
-                  <img src="{% static  'assets/images/deals-02.jpg' %}" >
-                </div>
-              </div>
-              <div class="col-lg-6 align-self-center">
-                <div class="content">
-                  <span class="info">فيكس سوفت </span>
-                  <h4>سعر المشروع </h4>
-                  <div class="row">
-                    <div class="col-6">
-                      <i class="fa fa-clock"></i>
-                      <span class="list">تصنيف المشروع </span>
-                    </div>
-                    <div class="col-6">
-                      <i class="fa fa-map"></i>
-                      <span class="list">معلومات المشروع</span>
-                    </div>
-                  </div>
-                  <p>شركة برمجيات تطبيقات الهاتف والانظمة والمواقع بجودة عالية  </p>
-                  <div class="main-button">
-                    <a href="{% url 'invreq' %}">الاستثمار في المشروع</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-6 col-sm-6">
-          <div class="item">
-            <div class="row">
-              <div class="col-lg-6">
-                <div class="image">
-                  <img src="{% static  'assets/images/deals-01.jpg' %}" >
-                </div>
-              </div>
-              <div class="col-lg-6 align-self-center">
-                <div class="content">
-                  <span class="info">شركة العوبلي لبيع الحديد</span>
-                  <h4>سعر المشروع</h4>
-                  <div class="row">
-                    <div class="col-6">
-                      <i class="fa fa-clock"></i>
-                      <span class="list">تصنيف المشروع</span>
-                    </div>
-                    <div class="col-6">
-                      <i class="fa fa-map"></i>
-                      <span class="list">معلومات المشروع</span>
-                    </div>
-                  </div>
-                  <p>هو مشروع لبيع الحديد بجميع انواعة وهو قائم على  مشروع لبيع الحديد بجميع انواعة </p>
-                  <div class="main-button">
-                    <a href="{% url 'invreq' %}">استثمر الان</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      
-          <style>
-            /* تنسيق الديف الرئيسي */
-.main-container {
-  display: flex;
-  justify-content: space-around;
-  align-items: center; /* يوضع المحتوى في المنتصف على محور التوزيع الرأسي */
-  padding: 20px;
-  background-color: #ffffff; /* لون الخلفية */
-}
-.info-text:focus{
-  background: rgb(208, 143, 58);
-  transform: scale(1.1);
 
-}
-
-/* تنسيق القطعة */
-.info-blockk {
-  text-align: center;
-  padding: 20px;
-  border: 2px solid #f7f7f7; /* لون الحدود */
-  border-radius: 10px;
-  width: 300px; /* عرض القطعة */
-  height: 250px; /* ارتفاع القطعة */
-  background-color: #f7f7f7;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-/* تنسيق النصوص */
-.info-text {
-  font-size: 22px;
-  margin-bottom: 10px;
-  color: #000000; /* لون النص */
-}
-
-/* تنسيق الروابط */
-.info-linkk {
-  text-decoration: none;
-  background-color: #22b3c1; /* لون الخلفية */
-  color: #fff; /* لون النص */
-  padding: 10px;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-}
-
-.info-linkk:hover {
-  background-color: #afafaf; /* لون الخلفية عند التحويل */
-}
-
-          </style>
           
-          <div class="my-5 text-center"><button class="bg-Primary hover:bg-Primary/90 border-2 border-Primary text-StaticWhite focus:outline-Primary-300 transition-colors ease-in-out duration-300 rounded-lg p-2 outline-offset-2 text-center w-2/3 max-w-xs md:py-3" type="button"><div class="text-lg md:text-xl " style="background-color: #22b3c1;" >عرض المزيد</div></button></div>
-        
-        
-          <!-- الديف الرئيسي -->
-          <div class="main-container">
-            <!-- القطعة الأولى -->
-            <div class="info-blockk">
-              <div class="info-text">قدم طلبك للحصول على استثمار
-                هل تبحث عن تمويل يساعد بنمو شركتك ويحقق أهدافك  </div>
-              <a href="{% url 'addpost' %}" class="info-linkk">ارفع مشروع  </a>
-            </div>
-        
-            <!-- القطعة الثانية -->
-            <div class="info-blockk">
-              <div class="info-text"> قم بااستكشاف افضل واخر الفرص الاستثمارية المتاحة وكن جزءًا من إحدى الشركات الواعدة</div>
-              <a href="/explore_opportunities" class="info-linkk"> استثمر</a>
-            </div>
-          </div>
+
+
+          
+        </p>
+        <p style="color: black ;font-size: 18px;"> 2. تسهيل عملية الاستثمار وتحسين نتائجها:<br>
+          - استخدام التكنولوجيا لتسهيل عمليات الاستثمار.<br>
+          - تحسين تجربة المستثمر وفعالية استخدام المنصة
        
+
+          .
+        </p>
+        <p style="color: black ;font-size: 18px;">3. تعزيز التواصل بين المستثمرين وأصحاب المشاريع:<br>
+          - إنشاء بيئة تواصل فعالة بين المستثمرين ورواد الأعمال.<br>
+          - تعزيز التفاعل والتعاون لتحقيق المشاريع.
+
+          .
+        </p>
+        <p style="color: black ;font-size: 18px;">4. تحسين مستوى الشفافية والثقة:<br>
+          - رفع مستوى الشفافية في عمليات الاستثمار.<br>
+          - بناء ثقة المستثمرين وتحفيز مشاركتهم.
+       
+
+         
+        </p>
+        <p style="color: black ;font-size: 18px;">5. دعم رواد الأعمال والمشاريع الناشئة:<br>
+          - تقديم الدعم والموارد لرواد الأعمال والمشاريع الناشئة.<br>
+          - تعزيز نجاحها وتطوير أعمالها على المدى الطويل.
+       
+          .
+        </p>
         
+          </div>
+          
+        <div class="box22">  
+           <!-- الديف الرئيسي -->
+      <div class="main-containerr">
+      
+      </div>
+         
+        </div>
   
+      </div>
+      
+     
+      
+        <!-- الديف الرئيسي -->
+        <div class="main-container">
+          <!-- القطعة الأولى -->
+          <div class="info-blockk">
+            <div class="info-text">قدم طلبك للحصول على استثمار
+              هل تبحث عن تمويل يساعد بنمو شركتك ويحقق أهدافك  </div>
+            <a href="{% url 'addpost' %}" class="info-linkk">ارفع مشروع  </a>
+          </div>
+      
+          <!-- القطعة الثانية -->
+          <div class="info-blockk">
+            <div class="info-text"> قم بااستكشاف افضل واخر الفرص الاستثمارية المتاحة وكن جزءًا من إحدى الشركات الواعدة</div>
+            <a href="/explore_opportunities" class="info-linkk"> استثمر</a>
+          </div>
+        </div>
         
-          <div class="call-to-action">
-            <div class="container">
-              <div class="row">
-                <div class="col-lg-8">
-                  <h2>هل تبحث عن مشاريع للاستثمار فيها وربح  المال من خلال المساهمة في المشاريع؟</h2>
-                  <h1>قم بالاعلان عن مشروعك لايجاد المستثمرين -> </h1>
-                </div>
-                <div class="col-lg-4">
-                  <div class="border-button">
-                    <a href="reservation.html">اسعار باقات</a>
+      
+<!-- إضافة قسم التصنيف حسب الفئة -->
+
+<div class="row justify-content-center mb-3">
+  <div class="col-4">
+    
+    <ul class="nav" style="direction: rtl ; width:max-content ;  ">
+        <a class="nav-link bg-primary category-link"  data-category="all" href="#" style="height: 40px;">الكل</a>
+      
+      {% for category in categories %}
+        <li class="nav-item">
+          <a class="nav-link bg-primary category-link" data-category="{{ category.category }}" href="#">{{ category.category }}</a>
+        </li>
+        
+      {% endfor %}
+
+      
+
+
+    </ul>
+  </div>
+</div>
+
+<!-- البرمجة النصية لتحديد الفئة المختارة -->
+<script>
+  const categoryLinks = document.querySelectorAll('.category-link');
+  categoryLinks.forEach(link => {
+    link.addEventListener('click', (event) => {
+      event.preventDefault();
+      const selectedCategory = link.dataset.category;
+
+      const projectItems = document.querySelectorAll('.project-item');
+      projectItems.forEach(item => {
+        const itemCategory = item.dataset.category;
+        if (itemCategory === selectedCategory || selectedCategory === 'all') {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
+
+
+    <!-- العرض الخاص بمشروع الأعمال -->
+  
+
+
+<div class="container">
+  <div class="row">
+    {% for project in projects %}
+      <div class="col-lg-6">
+        <div class="project-item" data-category="{{ project.category.category }}">
+          <!-- تفاصيل المشروع -->
+          <div class="item">
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="image" style="background-image: url('{{ project.image.url }}'); background-size: 290px 384px;
+                        background-position: center center;
+                        height: 100%;
+                       "></div>
+              </div>
+
+              <div class="col-lg-6 align-self-center">
+                <div class="content">
+                  <span class="info">اسم المشروع: {{ project.title }}</span>
+                  <h4>التكلفة المقدرة: {{ project.cost }}</h4>
+
+                  <div class="row">
+                    <div class="col-6">
+                      <i class="fa fa-clock"></i>
+                      <span class="list">تصنيف المشروع</span>
+                      <div class="value" style="text-align: center; font-size: large;">{{ project.category }}</div>
+                    </div>
+                    <div class="col-6">
+                      <i class="fa fa-map"></i>
+                      <span class="list">موقع المشروع</span>
+                      <div class="value" style="text-align: center; font-size: large;">{{ project.address }}</div>
+                    </div>
+                  </div>
+
+                  <p>
+                    <span class="list">وصف المشروع </span> {{ project.details }}
+                  </p>
+
+                  <div class="main-button">
+                    <a href="{% url 'invreq' %}">الاستثمار في المشروع</a>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-{% endblock %}  
+          </div>            </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+</div>
+
+<style>
+  /* تنسيق الصف الرئيسي */
+  .row.justify-content-center.mb-3 {
+    margin-bottom: 3rem;
+  }
+
+  /* تنسيق قائمة التصنيفات */
+  ul.nav {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  /* تنسيق العناصر في قائمة التصنيفات */
+  ul.nav .nav-item {
+    margin-bottom: 10px;
+  }
+
+  /* تنسيق الروابط في قائمة التصنيفات */
+  ul.nav .nav-link {
+    
+    margin-left: 10px;
+    margin-right: 10px;
+ 
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    background-color: #4e73df;
+    /* لون الخلفية */
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+
+  /* تنسيق الروابط عند التحويل (هوفر) */
+  ul.nav .nav-link:hover {
+    background-color: #2e59d9;
+    /* لون الخلفية عند التحويل */
+  }
+  .images {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  /* .image img {
+    width: 100%;
+    height: 100%;
+    height: -webkit-fill-available;
+
+    object-fit: cover;
+} */
+
+  /* تنسيق الديف الرئيسي */
+  .main-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    /* يوضع المحتوى في المنتصف على محور التوزيع الرأسي */
+    padding: 20px;
+    background-color: #ffffff;
+    /* لون الخلفية */
+  }
+
+  .info-text:focus {
+    background: rgb(208, 143, 58);
+    transform: scale(1.1);
+  }
+
+  /* تنسيق القطعة */
+  .info-blockk {
+    text-align: center;
+    padding: 20px;
+    border: 2px solid #f7f7f7;
+    /* لون الحدود */
+    border-radius: 10px;
+    width: 300px;
+    /* عرض القطعة */
+    height: 250px;
+    /* ارتفاع القطعة */
+    background-color: #f7f7f7;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  /* تنسيق النصوص */
+  .info-text {
+    font-size: 22px;
+    margin-bottom: 10px;
+    color: #000000;
+    /* لون النص */
+  }
+
+  /* تنسيق الروابط */
+  .info-linkk {
+    text-decoration: none;
+    background-color: #22b3c1;
+    /* لون الخلفية */
+    color: #fff;
+    /* لون النص */
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+
+  .info-linkk:hover {
+    background-color: #afafaf;
+    /* لون الخلفية عند التحويل */
+  }
+</style>
+
+<div class="my-5 text-center"><button class="bg-Primary hover:bg-Primary/90 border-2 border-Primary text-StaticWhite focus:outline-Primary-300 transition-colors ease-in-out duration-300 rounded-lg p-2 outline-offset-2 text-center w-2/3 max-w-xs md:py-3" type="button"><div class="text-lg md:text-xl " style="background-color: #22b3c1; font-size: 14px;
+            color: #22b3c1;
+            background-color: #eee;
+            border: 1px solid #22b3c1;
+            padding: 12px 30px;
+            display: inline-block;
+            border-radius: 25px;
+            font-weight: 500;
+            text-transform: capitalize;
+            letter-spacing: 0.5px;
+            transition: all .3s;
+            position: relative;
+            overflow: hidden;"  >عرض المزيد</div>
+</button></div>
+
+<div class="call-to-action">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <h2>هل تبحث عن مشاريع للاستثمار فيها وربح المال من خلال المساهمة في المشاريع؟</h2>
+        <h1>قم بالاعلان عن مشروعك لايجاد المستثمرين -> </h1>
+      </div>
+      <div class="col-lg-4">
+        <div class="border-button">
+          <a href="reservation.html">اسعار باقات</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
