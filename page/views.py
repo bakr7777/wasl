@@ -1,9 +1,8 @@
 from django.shortcuts import render
-from The_Owner.models import Project
+from The_Owner.models import *
 from .models import *
-from The_Owner.models import ProjectCategory
-
-from FM.models import PromoRequest
+from The_Investor.models import * 
+from FM.models import *
 
 def index(request):
     projects = Project.objects.all()
@@ -57,4 +56,9 @@ def project(request):
     return render(request, 'pages/project.html')
 
 def prodesc(request):
-    return render(request, 'pages/prodesc.html')
+    project = Project.objects.all()
+    investment_request = InvestmentRequest.objects.all()
+    return render(request, 'pages/prodesc.html', {'project': project,'investment_request': investment_request})
+
+
+

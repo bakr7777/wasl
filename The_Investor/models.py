@@ -1,7 +1,7 @@
 from django.db import models
 from datetime import datetime
 from django.conf import settings
-from The_Owner.models import *
+from The_Owner.models import * 
 
 
 ###################################investor#######################
