@@ -1,8 +1,21 @@
 from django.shortcuts import render
+from The_Owner.models import Project
+from .models import *
+from The_Owner.models import ProjectCategory
 
+from FM.models import PromoRequest
 
 def index(request):
-    return render(request, 'pages/index.html')
+    projects = Project.objects.all()
+    categories = ProjectCategory.objects.all()
+    promo_requests = PromoRequest.objects.all()  # قم بتحميل طلبات الترويج
+    return render(request, 'pages/index.html', {'projects': projects, 'categories': categories, 'promo_requests': promo_requests})
+
+
+# def index(request):
+#     # استرجاع كائنات Project وإرسالها إلى القالب
+#     projects = Project.objects.all()
+#     return render(request, 'pages/index.html', {'projects': projects} ,)
 
 
 def about(request):

@@ -943,7 +943,20 @@ Banner Style
     margin-left: 0;
   }
 }
+.main-containerr {
 
+
+  direction: rtl;
+
+
+  background-image: url(../images/_03d3f79b-4096-41bb-a9d3-6d9e6d5edb95.jpeg);
+  
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center center;
+  padding:50%;
+
+}
 
 /* 
 ---------------------------------------------
@@ -1882,6 +1895,16 @@ body .options .option .label .info .sub {
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+.containerrr {
+  display: flex; /* يجعل الـ divs تظهر جنبًا إلى جنب */
+  justify-content: space-between; /* يوزع المسافة بين الـ divs بالتساوي */
+  max-width: 1100px;
+  margin: 50px auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
 
 .box11, .box22 {
   flex: 1; /* يحصل كل div على نصف المساحة */
@@ -1893,7 +1916,7 @@ body .options .option .label .info .sub {
 
 .box11 {
   background-color: #22b3c1;
-  font: #000000;
+  font-c: #000000;
 }
 
 .box22 {
@@ -2000,10 +2023,11 @@ Deals Page Style
 }
 
 .amazing-deals {
-  margin-top: 120px;
+  margin-top: 40px;
 }
 
 .amazing-deals .item .image {
+  
   
   overflow: hidden;
 }
@@ -2180,11 +2204,13 @@ Reservation Page Style
 }
 
 .more-info .info-item h4 {
-  font-size: 20px;
-  font-weight: 700;
-  margin-bottom: 10px;
-  border-radius: 50px;
-    background: #22b3c1;
+  font-size: 14px;
+  color: #fff;
+  background-color: #22b3c1;
+  border: 1px solid #22b3c1;
+  padding: 12px 30px;
+  border-radius: 25px;
+
   
 }
 

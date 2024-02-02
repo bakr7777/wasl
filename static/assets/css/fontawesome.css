@@ -1544,7 +1544,7 @@ readers do not read off random characters that represent icons */
   content: "\f46d"; }
 
 .fa-clock::before {
-  content: "\f017"; }
+  content: "\f5fd"; }
 
 .fa-clock-four::before {
   content: "\f017"; }
@@ -3245,7 +3245,7 @@ readers do not read off random characters that represent icons */
   content: "\e1d5"; }
 
 .fa-map::before {
-  content: "\f279"; }
+  content: "\f041"; }
 
 .fa-map-location::before {
   content: "\f59f"; }
