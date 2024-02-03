@@ -1,10 +1,20 @@
 from django.shortcuts import render
 from The_Owner.models import *
 from .models import *
-
+from The_Investor.models import * 
+from FM.models import *
 
 def index(request):
-    return render(request, 'pages/index.html')
+    projects = Project.objects.all()
+    categories = ProjectCategory.objects.all()
+    promo_requests = PromoRequest.objects.all()  # قم بتحميل طلبات الترويج
+    return render(request, 'pages/index.html', {'projects': projects, 'categories': categories, 'promo_requests': promo_requests})
+
+
+# def index(request):
+#     # استرجاع كائنات Project وإرسالها إلى القالب
+#     projects = Project.objects.all()
+#     return render(request, 'pages/index.html', {'projects': projects} ,)
 
 
 def about(request):
@@ -43,10 +53,4 @@ def ownpro(request):
     return render(request, 'pages/ownpro.html')
 
 def project(request):
-        projects = Project.objects.all()
-        Categories = ProjectCategory.objects.all()
-        return render(request, 'pages/project.html', {'project': projects, 'categories': Categories,})
-
-
-
-
+    return render(request, 'pages/project.html')
