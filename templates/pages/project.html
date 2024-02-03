@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-reservation
+project
 {% endblock %}
 
 {% block content %}
@@ -196,6 +196,7 @@ reservation
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12469.776493332698!2d-80.14036379941481!3d25.907788681148624!2m3!1f357.26927939317244!2f20.870722720054623!3f0!3m2!1i1024!2i768!4f35!3m3!1m2!1s0x88d9add4b4ac788f%3A0xe77469d09480fcdb!2sSunny%20Isles%20Beach!5e1!3m2!1sen!2sth!4v1642869952544!5m2!1sen!2sth" width="100%" height="450px" frameborder="0" style="border:0; border-top-left-radius: 23px; border-top-right-radius: 23px;" allowfullscreen=""></iframe>
           </div>
         </div> -->
+        {% for project in project %}
         <div class="col-lg-6 col-sm-6" style="border: #043f44; background-color: #ddd6d6; margin: auto;width: 1000px;">
             <div class="item">
               <div class="row">
@@ -206,22 +207,22 @@ reservation
                 </div>
                 <div class="col-lg-6 align-self-center">
                   <div class="content" style="direction: rtl;padding-bottom: 5%;">
-                    <span class="info" style="color: #0094f7;direction: rtl;font-size: 30px;">سوقي للتجارة الالكترونية </span>
-                    <h4 style="padding-top: 20%;font-size: 30px;">سعر المشروع</h4>
+                    <span class="info" style="color: #0094f7;direction: rtl;font-size: 30px;">{{project.title}}</span>
+                    <h4 style="padding-top: 20%;font-size: 30px;">سعر المشروع: {{project.cost}}</h4>
                     <div class="row" style="color: #0077ff;">
                       <div class="col-6">
                         <i class="fa fa-clock" style="padding-top: 70px;font-size: 30px;"></i>
-                        <span class="list" style="font-size: 30px;">تصنيف المشروع</span>
+                        <span class="list" style="font-size: 30px;">وصف المشروع: {{project.category}}</span>
                       </div>
                       <div class="col-6">
                         <i class="fa fa-map" style="padding-top: 70px;font-size: 30px;"></i>
-                        <span class="list" style="font-size: 30px;">موقع المشروع</span>
+                        <span class="list" style="font-size: 30px;">عنوان المشروع: {{project.address}}</span>
                       </div>
                       <div class="col-6">
                         <i class="fa fa-map" style="padding-top: 70px;font-size: 30px;"></i>
-                        <span class="list" style="font-size: 30px;">معلومات المشروع</span>
+                        <span class="list" style="font-size: 30px;">موقع المشروع: {{project.details}}</span>
                     </div>
-                    <p style="font-size: 20px;padding-top: 40px;">سوقي هو عباره عن شركة تجارة الكترونية قائمة علا الاستيراد من الصين والبيع في عدة بلدان</p>
+                    <p style="font-size: 20px;padding-top: 40px;">معلومات المشروع: {{project.discripe}}</p>
                     <div class="main-button" style="padding-top: 100px;">
                       <a href="{% url 'invreq' %}">الاستثمار في المشروع</a>
                       <div class="main-button">
@@ -234,6 +235,7 @@ reservation
           </div>
       </div>
     </div>
+    {% endfor %}
 
   </div>
    

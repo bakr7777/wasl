@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from The_Owner.models import *
+from .models import *
 
 
 def index(request):
@@ -41,4 +43,10 @@ def ownpro(request):
     return render(request, 'pages/ownpro.html')
 
 def project(request):
-    return render(request, 'pages/project.html')
+        projects = Project.objects.all()
+        Categories = ProjectCategory.objects.all()
+        return render(request, 'pages/project.html', {'project': projects, 'categories': Categories,})
+
+
+
+
