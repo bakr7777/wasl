@@ -51,6 +51,12 @@ def invreq(request):
     return render(request, 'pages/invreq.html')
 def ownpro(request):
     return render(request, 'pages/ownpro.html')
+def prodesc(request):
+    project = Project.objects.all()
+    investment_request = InvestmentRequest.objects.all()
+    return render(request, 'pages/prodesc.html', {'project': project,'investment_request': investment_request})
 
 def project(request):
-    return render(request, 'pages/project.html')
+    project = Project.objects.all()
+    categories = ProjectCategory.objects.all()
+    return render(request, 'pages/project.html', {'project': project, 'categories': categories})

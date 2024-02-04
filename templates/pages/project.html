@@ -7,13 +7,6 @@ project
 
 {% block content %}
 <div class="second-page-heading">
-  <input type="button" value="اختر اللغه" style="border: #000000;width: 10%;margin-left: 50%;position: absolute;top: 100px;right: 10px;padding: 4px;">
-
-  <select id="my-dropdown" style="margin-left: 50%;position: absolute;top: 100px;right: 145px;padding:  3px;">
-    <option value="ar">العربية</option>
-    <option value="en">الإنجليزية</option>
-    <option value="fr">الفرنسية</option>
-  </select>
     <div class="container">
       <div class="row">
         <!-- <div class="col-lg-12">
@@ -199,15 +192,18 @@ project
         {% for project in project %}
         <div class="col-lg-6 col-sm-6" style="border: #043f44; background-color: #ddd6d6; margin: auto;width: 1000px;">
             <div class="item">
-              <div class="row">
+              <div class="row" style="padding: 10px;">
                 <div class="col-lg-6">
-                  <div class="image">
-                    <img src="{% static  'assets/images/deals-02.jpg' %}" >
+                  <div class="image" style="background-image: url('{{ project.image.url }}'); background-size: 460px 560px;
+                   background-position: center center;
+                   height: 555px;
+                   ">
+                    
                   </div>
                 </div>
                 <div class="col-lg-6 align-self-center">
                   <div class="content" style="direction: rtl;padding-bottom: 5%;">
-                    <span class="info" style="color: #0094f7;direction: rtl;font-size: 30px;">{{project.title}}</span>
+                    <span class="info" style="color: #0094f7;direction: rtl;font-size: 30px;"> اسم المشروع: {{project.title}}</span>
                     <h4 style="padding-top: 20%;font-size: 30px;">سعر المشروع: {{project.cost}}</h4>
                     <div class="row" style="color: #0077ff;">
                       <div class="col-6">
@@ -223,11 +219,8 @@ project
                         <span class="list" style="font-size: 30px;">موقع المشروع: {{project.details}}</span>
                     </div>
                     <p style="font-size: 20px;padding-top: 40px;">معلومات المشروع: {{project.discripe}}</p>
-                    <div class="main-button" style="padding-top: 100px;">
-                      <a href="{% url 'invreq' %}">الاستثمار في المشروع</a>
-                      <div class="main-button">
-                        <a href="{% url 'invreq' %}">المفضلة</a>
-                    </div>
+                    <div class="main-button" style="padding-top: 100px;padding-right: 300px;">
+                      <a href="{% url 'invreq' %}">الاعلان على المشروع</a>
                   </div>
                 </div>
               </div>
@@ -235,6 +228,25 @@ project
           </div>
       </div>
     </div>
+    <hr>
+    <hr>
+    <hr>
+    <hr>
+    <hr>
+    <hr>
+    <hr>
+    <hr>
+    <hr>
+    <hr>
+    <hr>
+    <hr>
+    <hr>
+    <hr>
+    <hr>
+    <hr>
+    <hr>
+    <hr>
+    <hr>
     {% endfor %}
 
   </div>
