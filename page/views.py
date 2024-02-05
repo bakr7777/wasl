@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from The_Owner.models import Project
+from The_Owner.models import *
 from .models import *
 from The_Owner.models import ProjectCategory
 from FM.models import PromoRequest
@@ -10,6 +10,7 @@ from The_Owner.forms import ProjectForm
 from FM.models import PromoRequest
 from The_Owner.forms import Message
 from The_Owner.forms import MessageForm
+from The_Investor.models import *
 
 def index(request):
     projects = Project.objects.all()
@@ -75,17 +76,12 @@ def project(request):
     return render(request, 'pages/project.html')
 
 def prodesc(request):
-    return render(request, 'pages/prodesc.html')
+    project = Project.objects.all()
+    investment_request = InvestmentRequest.objects.all()
+    return render(request, 'pages/prodesc.html', {'project': project,'investment_request': investment_request})
 
 def twsl(request):
     if request.method == 'POST':
         add_Message =MessageForm(request.POST, request.FILES)
         if  add_Message .is_valid():
             add_Message.save()
-
-
-    context1 ={
-        'Messages': Message.objects.all(),
-        'form': MessageForm(),
-    }
-    return render(request, 'pages/twsl.html', context1)
