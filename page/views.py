@@ -81,7 +81,17 @@ def prodesc(request):
     return render(request, 'pages/prodesc.html', {'project': project,'investment_request': investment_request})
 
 def twsl(request):
+
+    context1 ={
+        'Messages': Message.objects.all(),
+        'form': MessageForm(),
+    }
+
     if request.method == 'POST':
         add_Message =MessageForm(request.POST, request.FILES)
         if  add_Message .is_valid():
             add_Message.save()
+
+        
+    return render(request, 'pages/twsl.html', context1)
+    
