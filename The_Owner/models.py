@@ -25,20 +25,35 @@ class ProjectCategory(models.Model):
 ##############################Project##################################################
 
 class Project(models.Model):
-    owner = models.ForeignKey(Owner, on_delete=models.CASCADE,null=True , blank=True )
-    category = models.ForeignKey(ProjectCategory, on_delete=models.CASCADE,null=True , blank=True )
+    owner = models.ForeignKey(Owner, on_delete=models.CASCADE, null=True, blank=True)
+    category = models.ForeignKey(ProjectCategory, on_delete=models.CASCADE, null=True, blank=True)
     title = models.CharField(max_length=100)
     discripe = models.TextField(max_length=200)
     cost = models.DecimalField(max_digits=5, decimal_places=2)
     details = models.TextField(max_length=1000)
     address = models.CharField(max_length=30)
+    image = models.ImageField(upload_to='project_images/', null=True, blank=True)
     active = models.BooleanField(default=True)
     created = models.DateTimeField(default=datetime.now)
+
     def __str__(self):
         return self.title
+
 
 ##############################Photo##################################################
 
 class Photo(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE,null=True , blank=True )
     photo_path = models.TextField(max_length=200)
+
+########################
+    
+class Message(models.Model):
+    #sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sent_messages')
+    #receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name='received_messages')
+    name = models.CharField(max_length=255 , blank=True , null=True)
+    email = models.EmailField(blank=True , null=True)
+    body = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return self.name
