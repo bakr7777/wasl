@@ -1,8 +1,16 @@
 from django.shortcuts import render
 from The_Owner.models import *
 from .models import *
-from The_Investor.models import * 
-from FM.models import *
+from The_Owner.models import ProjectCategory
+from FM.models import PromoRequest
+from The_Owner.models import Project
+from .models import *
+from The_Owner.models import ProjectCategory
+from The_Owner.forms import ProjectForm
+from FM.models import PromoRequest
+from The_Owner.forms import Message
+from The_Owner.forms import MessageForm
+from The_Investor.models import *
 
 def index(request):
     projects = Project.objects.all()
@@ -24,7 +32,19 @@ def deals(request):
     return render(request, 'pages/deals.html')
 
 def reservation(request):
-    return render(request, 'pages/reservation.html')
+    if request.method == 'POST':
+        add_project =ProjectForm(request.POST, request.FILES)
+        if  add_project .is_valid():
+            add_project.save()
+
+
+    context ={
+        'projects': Project.objects.all(),
+        'form': ProjectForm(),
+
+    }
+    return render(request, 'pages/reservation.html' ,context)
+
 
 def login(request):
     return render(request, 'pages/login.html')    
@@ -60,5 +80,8 @@ def prodesc(request):
     investment_request = InvestmentRequest.objects.all()
     return render(request, 'pages/prodesc.html', {'project': project,'investment_request': investment_request})
 
-
-
+def twsl(request):
+    if request.method == 'POST':
+        add_Message =MessageForm(request.POST, request.FILES)
+        if  add_Message .is_valid():
+            add_Message.save()
