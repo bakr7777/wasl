@@ -1,0 +1,266 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+reservation
+{% endblock %}
+
+{% block content %}
+<div class="second-page-heading">
+  <input type="button" value="اختر اللغه" style="border: #000000;width: 10%;margin-left: 50%;position: absolute;top: 100px;right: 10px;padding: 4px;">
+
+  <select id="my-dropdown" style="margin-left: 50%;position: absolute;top: 100px;right: 145px;padding:  3px;">
+    <option value="ar">العربية</option>
+    <option value="en">الإنجليزية</option>
+    <option value="fr">الفرنسية</option>
+  </select>
+    <div class="container">
+      <div class="row">
+        <!-- <div class="col-lg-12">
+          <h4>Book Prefered Deal Here</h4>
+          <h2>Make Your Reservation</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt uttersi labore et dolore magna aliqua is ipsum suspendisse ultrices gravida</p>
+          <div class="main-button"><a href="about.html">Discover More</a></div>
+        </div> -->
+      </div>
+    </div>
+  </div>
+
+  <div class="more-info reservation-info">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-sm-6">
+          <div class="info-item">
+            <i class="fa fa-phone"></i>
+            <h4>قم بالتواصل معناء </h4>
+            <a href="#"></a>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+          <div class="info-item">
+            <i class="fa fa-envelope"></i>
+            <h4>احصل على تمويل ومساهمين لمشروعك</h4>
+            <a href="#"></a>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+          <div class="info-item">
+            <i class="fa fa-map-marker"></i>
+            <h4>قم برفع مشروعك من اي مكان </h4>
+            <a href="#"></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="weekly-offers">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+          <div class="section-heading text-center">
+            <h2>اسعار باقات الاعلان عن مشروعك</h2>
+            <p style="font-size: larger;">قم بالاشتراك في الباقات للترويج لمشروعك لوصولة لاكبر عدد من المستثمرين </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="owl-weekly-offers owl-carousel">
+            <div class="item">
+              <div class="thumb">
+                <img src="assets/images/offers-01.jpg" alt="">
+                <div class="text">
+                  <h4>Havana<br><span><i class="fa fa-users"></i> 234 Check Ins</span></h4>
+                  <h6>$420<br><span>/person</span></h6>
+                  <div class="line-dec"></div>
+                  <ul>
+                    <li>Deal Includes:</li>
+                    <li><i class="fa fa-taxi"></i> 5 Days Trip > Hotel Included</li>
+                    <li><i class="fa fa-plane"></i> Airplane Bill Included</li>
+                    <li><i class="fa fa-building"></i> Daily Places Visit</li>
+                  </ul>
+                  <div class="main-button">
+                    <a href="reservation.html">Make a Reservation</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="thumb">
+                <img src="assets/images/offers-02.jpg" alt="">
+                <div class="text">
+                  <h4>Kingston<br><span><i class="fa fa-users"></i> 234 Check Ins</span></h4>
+                  <h6>$420<br><span>/person</span></h6>
+                  <div class="line-dec"></div>
+                  <ul>
+                    <li>Deal Includes:</li>
+                    <li><i class="fa fa-taxi"></i> 5 Days Trip > Hotel Included</li>
+                    <li><i class="fa fa-plane"></i> Airplane Bill Included</li>
+                    <li><i class="fa fa-building"></i> Daily Places Visit</li>
+                  </ul>
+                  <div class="main-button">
+                    <a href="project.html">Make a project</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="thumb">
+                <img src="assets/images/offers-03.jpg" alt="">
+                <div class="text">
+                  <h4>الباقة الذهبية <br><span><i class="fa fa-users"></i> 234 Check Ins</span></h4>
+                  <h6>$420<br><span>/النوع</span></h6>
+                  <div class="line-dec"></div>
+                  <ul>
+                    <li>Deal Includes:</li>
+                    <li><i class="fa fa-taxi"></i> 5 Days Trip > Hotel Included</li>
+                    <li><i class="fa fa-plane"></i> Airplane Bill Included</li>
+                    <li><i class="fa fa-building"></i> Daily Places Visit</li>
+                  </ul>
+                  <div class="main-button">
+                    <a href="project.html">Make a project</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="thumb">
+                <img src="assets/images/offers-01.jpg" alt="">
+                <div class="text">
+                  <h4>Havana<br><span><i class="fa fa-users"></i> 234 Check Ins</span></h4>
+                  <h6>$420<br><span>/person</span></h6>
+                  <div class="line-dec"></div>
+                  <ul>
+                    <li>Deal Includes:</li>
+                    <li><i class="fa fa-taxi"></i> 5 Days Trip > Hotel Included</li>
+                    <li><i class="fa fa-plane"></i> Airplane Bill Included</li>
+                    <li><i class="fa fa-building"></i> Daily Places Visit</li>
+                  </ul>
+                  <div class="main-button">
+                    <a href="project.html">Make a project</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="thumb">
+                <img src="assets/images/offers-02.jpg" alt="">
+                <div class="text">
+                  <h4>Kingston<br><span><i class="fa fa-users"></i> 234 Check Ins</span></h4>
+                  <h6>$420<br><span>/person</span></h6>
+                  <div class="line-dec"></div>
+                  <ul>
+                    <li>Deal Includes:</li>
+                    <li><i class="fa fa-taxi"></i> 5 Days Trip > Hotel Included</li>
+                    <li><i class="fa fa-plane"></i> Airplane Bill Included</li>
+                    <li><i class="fa fa-building"></i> Daily Places Visit</li>
+                  </ul>
+                  <div class="main-button">
+                    <a href="project.html">Make a project</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="thumb">
+                <img src="assets/images/offers-03.jpg" alt="">
+                <div class="text">
+                  <h4>George Town<br><span><i class="fa fa-users"></i> 234 Check Ins</span></h4>
+                  <h6>$420<br><span>/person</span></h6>
+                  <div class="line-dec"></div>
+                  <ul>
+                    <li>Deal Includes:</li>
+                    <li><i class="fa fa-taxi"></i> 5 Days Trip > Hotel Included</li>
+                    <li><i class="fa fa-plane"></i> Airplane Bill Included</li>
+                    <li><i class="fa fa-building"></i> Daily Places Visit</li>
+                  </ul>
+                  <div class="main-button">
+                    <a href="project.html">Make a project</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="reservation-form">
+    <div class="container">
+      <div class="row">
+        <!-- <div class="col-lg-12">
+          <div id="map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12469.776493332698!2d-80.14036379941481!3d25.907788681148624!2m3!1f357.26927939317244!2f20.870722720054623!3f0!3m2!1i1024!2i768!4f35!3m3!1m2!1s0x88d9add4b4ac788f%3A0xe77469d09480fcdb!2sSunny%20Isles%20Beach!5e1!3m2!1sen!2sth!4v1642869952544!5m2!1sen!2sth" width="100%" height="450px" frameborder="0" style="border:0; border-top-left-radius: 23px; border-top-right-radius: 23px;" allowfullscreen=""></iframe>
+          </div>
+        </div> -->
+        <div class="col-lg-6 col-sm-6" style="border: #043f44; background-color: #ddd6d6; margin: auto;width: 1000px;">
+            <div class="item">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="image">
+                    <img src="{% static  'assets/images/deals-02.jpg' %}" >
+                  </div>
+                </div>
+                <div class="col-lg-6 align-self-center">
+                  <div class="content" style="direction: rtl;padding-bottom: 5%;">
+                    <span class="info" style="color: #0094f7;direction: rtl;font-size: 30px;">سوقي للتجارة الالكترونية </span>
+                    <h4 style="padding-top: 20%;font-size: 30px;">سعر المشروع</h4>
+                    <div class="row" style="color: #0077ff;">
+                      <div class="col-6">
+                        <i class="fa fa-clock" style="padding-top: 70px;font-size: 30px;"></i>
+                        <span class="list" style="font-size: 30px;">تصنيف المشروع</span>
+                      </div>
+                      <div class="col-6">
+                        <i class="fa fa-map" style="padding-top: 70px;font-size: 30px;"></i>
+                        <span class="list" style="font-size: 30px;">موقع المشروع</span>
+                      </div>
+                      <div class="col-6">
+                        <i class="fa fa-map" style="padding-top: 70px;font-size: 30px;"></i>
+                        <span class="list" style="font-size: 30px;">معلومات المشروع</span>
+                    </div>
+                    <p style="font-size: 20px;padding-top: 40px;">سوقي هو عباره عن شركة تجارة الكترونية قائمة علا الاستيراد من الصين والبيع في عدة بلدان</p>
+                    <div class="main-button" style="padding-top: 100px;">
+                      <a href="{% url 'invreq' %}">الاستثمار في المشروع</a>
+                      <div class="main-button">
+                        <a href="{% url 'invreq' %}">المفضلة</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+
+  </div>
+   
+    <style>
+      /* تنسيق الديف */
+      .my-container {
+        text-align: center; /* لتوسيط الزر داخل الديف */
+      }
+  
+      /* تنسيق زر البوتون */
+      
+
+
+
+
+      
+  
+      /* تغيير لون الخلفية والحدود عند التحويل */
+      .my-button:hover {
+        background-color: #cccaca; /* لون الخلفية (أحمر غامق) عند التحويل */
+        border-color: #000000; /* لون الحدود (أحمر غامق) عند التحويل */
+      }
+    </style>
+  
+    <!-- الديف الذي يحتوي على الزر -->
+    <br> <br> <br>
+   
+    
+
+  {% endblock %}

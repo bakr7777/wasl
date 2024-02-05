@@ -14,5 +14,8 @@ urlpatterns = [
     path('update', views.update, name='update'),
     path('invreq', views.invreq, name='invreq'),
     path('condations', views.condations, name='condations'),
+    path('ownpro', views.ownpro, name='ownpro'),
+    path('project', views.project, name='project'),
+    path('prodesc', views.prodesc, name='prodesc'),
     path('twsl', views.twsl, name='twsl'),
 ]

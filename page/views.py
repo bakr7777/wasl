@@ -2,6 +2,10 @@ from django.shortcuts import render
 from The_Owner.models import Project
 from .models import *
 from The_Owner.models import ProjectCategory
+from FM.models import PromoRequest
+from The_Owner.models import Project
+from .models import *
+from The_Owner.models import ProjectCategory
 from The_Owner.forms import ProjectForm
 from FM.models import PromoRequest
 from The_Owner.forms import Message
@@ -58,12 +62,20 @@ def promoreq(request):
 
 def update(request):
     return render(request, 'pages/update.html')
+
 def condations(request):
     return render(request, 'pages/condations.html')
 
-
 def invreq(request):
     return render(request, 'pages/invreq.html')
+def ownpro(request):
+    return render(request, 'pages/ownpro.html')
+
+def project(request):
+    return render(request, 'pages/project.html')
+
+def prodesc(request):
+    return render(request, 'pages/prodesc.html')
 
 def twsl(request):
     if request.method == 'POST':
