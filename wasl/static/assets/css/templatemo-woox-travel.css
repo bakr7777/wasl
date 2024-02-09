@@ -2028,16 +2028,21 @@ Deals Page Style
 }
 
 .amazing-deals .item .image {
-  
-  
+  background-size: 100% 100%;
+  background-position: center center;
+  height: 100%;
+  background-repeat: no-repeat;
   overflow: hidden;
 }
+
+
 
 .amazing-deals .item {
   background-color: #f7f7f7;
   border-radius: 23px;
   padding-right: 30px;
   margin-bottom: 30px;
+  
 }
 
 .amazing-deals .item span.info {
@@ -2071,16 +2076,16 @@ Deals Page Style
 
   padding: 30px 0px;
 }
-
 .amazing-deals .item p {
-    color: #111;
-    direction: rtl;
-
-  padding-top: 25px;
+  color: #111;
+  direction: rtl;
+  padding-top: 10px;
   margin-top: 10px;
   border-top: 1px solid #ddd;
   margin-bottom: 30px;
+  height: 132px; /* تحديد ارتفاع ثابت بوحدة البكسل */
 }
+
 
 
 .amazing-deals ul.page-numbers {
