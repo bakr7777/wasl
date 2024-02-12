@@ -32,9 +32,6 @@ class ProjectCategory(models.Model):
 ##############################Project##################################################
 
 
-from django.db import models
-from multiupload.fields import MultiFileField
-
 class Project(models.Model):
     owner = models.ForeignKey(Owner, on_delete=models.CASCADE, null=True, blank=True)
     category = models.ForeignKey(ProjectCategory, on_delete=models.CASCADE, null=True, blank=True)
@@ -46,12 +43,9 @@ class Project(models.Model):
     image = models.ImageField(upload_to='project_images/', null=True, blank=True)
     active = models.BooleanField(default=True)
     created = models.DateTimeField(default=datetime.now)
-    total_projects = models.IntegerField(default=0)
 
     def __str__(self):
         return self.title
-    def __str__(self):
-        return f"Total Projects: {self.total_projects}"
 
 
       
