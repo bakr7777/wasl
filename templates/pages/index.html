@@ -206,10 +206,12 @@
           <div class="item">
             <div class="row">
               <div class="col-lg-6">
+                {% if project.photo_project %}
                 <div class="image" style="background-image: url('{{ project.image.url }}'); background-size: 290px 384px;
                         background-position: center center;
                         height: 100%;
                        "></div>
+                {% endif %}       
               </div>
 
               <div class="col-lg-6 align-self-center">

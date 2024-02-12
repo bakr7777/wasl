@@ -194,12 +194,14 @@ project
             <div class="item">
               <div class="row" style="padding: 10px;">
                 <div class="col-lg-6">
+                  {% if project.photo_project %}
                   <div class="image" style="background-image: url('{{ project.image.url }}'); background-size: 460px 560px;
                    background-position: center center;
                    height: 555px;
                    ">
                     
                   </div>
+                  {% endif %}
                 </div>
                 <div class="col-lg-6 align-self-center">
                   <div class="content" style="direction: rtl;padding-bottom: 5%;">
@@ -221,6 +223,7 @@ project
                     <p style="font-size: 20px;padding-top: 40px;">معلومات المشروع: {{project.discripe}}</p>
                     <div class="main-button" style="padding-top: 100px;padding-right: 300px;">
                       <a href="{% url 'invreq' %}">الاعلان على المشروع</a>
+                      <a href="{% url 'edit' project.id %}">تعديل</a>
                   </div>
                 </div>
               </div>
