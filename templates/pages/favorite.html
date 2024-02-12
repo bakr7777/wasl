@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="amazing-deals">
+    <div class="container">
+      <div class="row">
+        {% for favorite in favorite %} 
+
+
+
+
+
+        
+        <div class="col-lg-6 col-sm-6">
+          <div class="item">
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="image" style="background-image: url('{{ favorite.project.image.url }}'); background-size: 453px 600px;
+                background-repeat: no-repeat;margin-left: -35px;
+                background-position: center center; overflow: hidden;
+                height: 605px;">
+                  
+                </div>
+              </div>
+              <div class="col-lg-6 align-self-center">
+                <div class="content">
+                  <span class="info"> اسم المشروع:{{ favorite.project.title }}  </span>
+                  <h4> تكلفة المشروع: {{ favorite.project.cost }} </h4>                 
+
+                  <div class="row">
+                    <div class="col-6">
+                      <i class="fa fa-clock"></i>
+                      <span class="list">تصيف المشروع</span>
+                      <div class="value" style="text-align: center; font-size: large;">  {{ favorite.project.category }} </div>
+                    </div>
+                    <div class="col-6">
+                      <i class="fa fa-map"></i>
+                      <span class="list">موقع المشروع  </span>
+                      <div class="value" style="text-align: center ; font-size: large;"> {{ favorite.project.address }} </div>
+
+                    </div>
+                  </div>
+                  
+                  <p>  <span class="list">وصف المشروع  </span> {{ favorite.project.discripe }}  </p>
+                  <div class="main-button">
+                    <a href="{% url 'invreq' %}">الاستثمار في المشروع</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {%endfor %}
+{% endblock %}

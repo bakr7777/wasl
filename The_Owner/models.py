@@ -12,8 +12,13 @@ class Owner(models.Model):
     photo = models.ImageField(upload_to='usersphoto/%Y/%m/%d/',blank=True)
     address = models.CharField(max_length=25,null=True)
     phone = models.CharField(max_length=9)
+    total_owners =  models.IntegerField(default=0)
+    
     def __str__(self):
         return f'Profile of {self.user.username}'
+    
+    def __str__(self):
+        return f"Total Owners: {self.total_owners}"
 
 
 ##############################Category##################################################
@@ -41,9 +46,12 @@ class Project(models.Model):
     image = models.ImageField(upload_to='project_images/', null=True, blank=True)
     active = models.BooleanField(default=True)
     created = models.DateTimeField(default=datetime.now)
+    total_projects = models.IntegerField(default=0)
 
     def __str__(self):
         return self.title
+    def __str__(self):
+        return f"Total Projects: {self.total_projects}"
 
 
       

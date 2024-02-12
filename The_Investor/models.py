@@ -1,7 +1,8 @@
 from django.db import models
 from datetime import datetime
 from django.conf import settings
-from The_Owner.models import * 
+from The_Owner.models import *
+from django.contrib.auth.models import User 
 
 
 ###################################investor#######################
@@ -11,8 +12,12 @@ class Investor(models.Model):
     photo = models.ImageField(upload_to='usersphoto/%Y/%m/%d/',blank=True)
     phone = models.CharField(max_length=9)
     address = models.CharField(max_length=25)
+    total_investor = models.IntegerField(default=0)
     def __str__(self):
         return f'Profile of {self.user.username}'
+    
+    def __str__(self):
+        return f"Total investor: {self.total_investor}"
 
 
 ###################################investor#######################
@@ -20,6 +25,8 @@ class Investor(models.Model):
 class Favorite(models.Model):
     investor = models.ForeignKey(Investor, on_delete=models.CASCADE,null=True , blank=True )
     project = models.ForeignKey(Project, on_delete=models.CASCADE,null=True , blank=True)
+
+  
 
 ########################################invrequest#######################
 

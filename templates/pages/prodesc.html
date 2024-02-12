@@ -48,62 +48,80 @@ reservation
     </div>
   </div>
 
-
-  <div class="amazing-deals">
+  <div class="reservation-form">
     <div class="container">
       <div class="row">
-        {% for investment_request in investment_request %}
-
-          <center>
-          <div class="col-lg-6 col-sm-6" >
-              <div class="item" style="width: 600px;">
-                  
-                  <div class="image"  >
-                          
-                          
-                      <center>
-                          
-                      <img src="{% static 'assets/images/deals-04.jpg' %}" height="650px" style="width: 100%;" alt="">
-                  
-                  
-                  
-                  </center>
-              </div>
+        {% for investment_request in investment_request %} 
+          <div class="col-lg-6 col-sm-6" style="border: #043f44; background-color: #ddd6d6; margin: auto;width: 1000px;">
+              <div class="item">
                 <div class="row">
                   <div class="col-lg-6">
-                    
-                      
+                    <div class="image" style="background-image: url('{{ investment_request.project.image.url }}'); background-size: 453px 600px;
+                      background-repeat: no-repeat;margin-left: -35px;
+                      background-position: center center; overflow: hidden;
+                      height: 605px;">
+                    </div>
+                    <form method="POST" action="{% url 'prodesc' %}">
+                      {% csrf_token %}
+                      <input type="hidden" name = "investor" value="{{investment_request.investor.id}}"/>
+                      <input type="hidden" name = "project" value="{{investment_request.project.id}}"/>
+                      <div class="main-button" style="padding-top: 100px; padding-left: 170px;">
+                          <button type="submit"  style="font-size: 14px;
+                          color: #fff;
+                          background-color: #22b3c1;
+                          border: 1px solid #22b3c1;
+                          display: inline-block;
+                          border-radius: 25px;
+                          padding-left: 0px; width: 100px; height:40px" > المفضلة </button>
+                      </div>
+                    </form>
                     
                   </div>
                   <div class="col-lg-6 align-self-center">
                     <div class="content" style="direction: rtl;padding-bottom: 5%;">
-                      <span class="info" style="color: #0094f7;direction: rtl;font-size: 30px;"> اسم المشروع:{{investment_request.project.title}}</span>
-                      <h4 style="padding-top: 20%;font-size: 30px;">تكلفة المشروع: {{investment_request.project.cost }}</h4>
+                      <span class="info" style="color: #0094f7;direction: rtl;font-size: 30px;"> اسم المشروع:{{investment_request.project.title}} </span>
+                      <h4 style="padding-top: 20%;font-size: 30px;"> تكلفة المشروع: {{investment_request.project.cost }} </h4>
                       <div class="row" style="color: #0077ff;">
                         <div class="col-6">
                           <i class="fa fa-clock" style="padding-top: 70px;font-size: 30px;"></i>
-                          <span class="list" style="font-size: 30px;"> وصف المشروع:  {{investment_request.project.discripe }}</span>
+                          <span class="list" style="font-size: 30px;"> تصنيف المشروع : {{ investment_request.project.category }} </span>
                         </div>
                         <div class="col-6">
                           <i class="fa fa-map" style="padding-top: 70px;font-size: 30px;"></i>
-                          <span class="list" style="font-size: 30px;"> عنوان المشروع: {{ investment_request.project.address }}</span>
+                          <span class="list" style="font-size: 30px;"> عنوان المشروع: {{ investment_request.project.address }} </span>
                         </div>
                         <div class="col-6">
-                          <i class="fa fa-map" style="padding-top: 70px;font-size: 30px;"></i>
-                          <span class="list" style="font-size: 30px;"> تفاصيل المشروع: {{ investment_request.project.details }} </span>
+                          <i class="fa fa-ma" style="padding-top: 70px;font-size: 30px;"></i>
+                          <span class="list" style="font-size: 30px;">  وصف المشروع:  {{investment_request.project.discripe }} </span>
                       </div>
+                      <p style="font-size: 20px;padding-top: 40px;"> تفاصيل المشروع: {{ investment_request.project.details }} </p>
                      
-                      <div class="main-button" style="padding-top: 100px;">
-                        <a href="{% url 'invreq' %}"> المفضلة </a>  
                     </div>
                   </div>
                 </div>
               </div>
+            </form>
             </div>
          </div>
+         <hr style="color: white;">
+         <hr style="color: white;">
+         <hr style="color: white;">
+         <hr style="color: white;">
+         <hr style="color: white;">
+         <hr style="color: white;">
+         <hr style="color: white;">
+         <hr style="color: white;">
+         <hr style="color: white;">
+         <hr style="color: white;">
+         <hr style="color: white;">
+         <hr style="color: white;">
+         <hr style="color: white;">
+         <hr style="color: white;">
+         <hr style="color: white;">
+         <hr style="color: white;">
        {% endfor %}
       </div>
-        </center>
+
   </div>
    
     <style>
@@ -128,6 +146,7 @@ reservation
         image {
             width: 100%;
             height: 700;
+           
         }
 
 
