@@ -1,3 +1,4 @@
+from django.shortcuts import redirect, render
 from django.shortcuts import render
 from The_Owner.models import *
 from .models import *
@@ -69,7 +70,20 @@ def reservation(request):
 
 
 def login(request):
-    return render(request, 'pages/login.html')    
+    return render(request, 'pages/login.html')
+
+def edit(request, id):
+    categories = ProjectCategory.objects.all()
+    project_id = Project.objects.get(id=id)
+    if request.method == 'POST':
+        project_save = ProjectForm(request.POST, request.FILES, instance=project_id)
+        if  project_save.is_valid():
+            project_save.save()
+            return redirect('/')
+    else:
+        project_save = ProjectForm(instance=project_id)
+    context ={'form': project_save,}
+    return render(request, 'pages/edit.html' ,context)    
 
 def signIn(request):
     return render(request, 'pages/signIn.html')
@@ -93,14 +107,16 @@ def invreq(request):
     return render(request, 'pages/invreq.html')
 def ownpro(request):
     return render(request, 'pages/ownpro.html')
-
-def project(request):
-    return render(request, 'pages/project.html')
-
 def prodesc(request):
     project = Project.objects.all()
     investment_request = InvestmentRequest.objects.all()
     return render(request, 'pages/prodesc.html', {'project': project,'investment_request': investment_request})
+
+
+def project(request):
+    project = Project.objects.all()
+    categories = ProjectCategory.objects.all()
+    return render(request, 'pages/project.html', {'project': project, 'categories': categories})
 
 def twsl(request):
 
@@ -117,3 +133,4 @@ def twsl(request):
         
     return render(request, 'pages/twsl.html', context1)
     
+
