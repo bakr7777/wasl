@@ -2436,3 +2436,16 @@ body {
     padding: 0px;
   }
 }
+
+
+
+.call-to-action2 {
+  direction: rtl;
+
+  margin-top: 120px;
+  background-image: url(../images/asayt.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  padding: 75px 0px;
+}
