@@ -45,6 +45,17 @@ SECRET_KEY = 'django-insecure-tzk#pg6@@voz+am_@pqz85(cl!k6-+f1=w625z*+fe7$5&km!0
 DEBUG = True
 
 
+
+
+
+# إعدادات محلية (يمكن تغييرها في التطوير)
+try:
+    from .local_settings import DATABASES
+except ImportError:
+    pass
+
+
+
 ALLOWED_HOSTS = []
 
 
@@ -150,6 +161,7 @@ DATABASES = {
 
         'NAME': BASE_DIR / 'db.sqlite3',
 
+
     }
 
 }
@@ -225,7 +237,6 @@ STATICFILES_DIRS = [
 
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # MEDIA_URL = '/media/'
-# في ملف إعدادات Django الخاص بك
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
