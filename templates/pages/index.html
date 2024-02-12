@@ -10,10 +10,9 @@
       {% endfor %}
       <div class="slider">
         {% for promo_request in promo_requests %}
-          <div id="top-banner-{{ forloop.counter }}" class="banner" style="background-image: url('{{ promo_request.project.image.url }}');
-                  background-position: center center;
-                  height: 100%;
-                 ">
+          <div id="top-banner-{{ forloop.counter }}" class="banner" style="background-image: url('{{ promo_request.project.image.url }}'); background-position: center center; height: 100%;">
+                
+                  
             <div class="banner-inner-wrapper header-text">
               <div class="main-caption">
                 <h1>{{ promo_request.project.title }}</h1>
@@ -68,10 +67,10 @@
           {% endfor %}
         </div>
       </nav>
-    </div>
+   </div>
   </section>
-</div>
-<div class="amazing-deals">
+  </div>
+  <div class="amazing-deals">
   <div class="container">
     <div class="row">
     
@@ -149,104 +148,114 @@
         </div>
         
       
-<!-- إضافة قسم التصنيف حسب الفئة -->
 
-<div class="row justify-content-center mb-3">
-  <div class="col-4">
-    
-    <ul class="nav" style="direction: rtl ; width:max-content ;  ">
-        <a class="nav-link bg-primary category-link"  data-category="all" href="#" style="height: 40px;">الكل</a>
-      
-      {% for category in categories %}
-        <li class="nav-item">
-          <a class="nav-link bg-primary category-link" data-category="{{ category.category }}" href="#">{{ category.category }}</a>
-        </li>
+        <div class="row justify-content-center mb-3">
+          <div class="col-4">
+            <ul class="nav" style="direction: rtl; width:max-content;">
+              <a class="nav-link bg-primary category-link" data-category="all" href="#" style="height: 40px;">الكل</a>
+              {% for category in categories %}
+                <li class="nav-item">
+                  <a class="nav-link bg-primary category-link" data-category="{{ category.category }}" href="#">{{ category.category }}</a>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+
         
-      {% endfor %}
-
-      
-
-
-    </ul>
-  </div>
+        <div class="container">
+          <div class="row">
+            {% for project in projects %}
+              <div class="col-lg-6 project-item" data-category="{% if project.category %}{{ project.category.category }}{% else %}none{% endif %}">
+                <!-- تفاصيل المشروع -->
+                <div class="item">
+                  <div class="row">
+                    <div class="col-lg-6">
+                      {% if project.image %}
+                        <div class="image" style="background-image: url('{{ project.image.url }}');  "></div>
+                      {% else %}
+                        <div class="image" style="background-color: #881782; height: 100%;"></div>
+                      {% endif %}
+                    </div>
+        
+                    <div class="col-lg-6 align-self-center">
+                      <div class="content">
+                        <span class="info">اسم المشروع: {{ project.title }}</span>
+                        <h4>التكلفة المقدرة: {{ project.cost }}</h4>
+        
+                        <div class="row">
+                          <div class="col-6">
+                            <i class="fa fa-clock"></i>
+                            <span class="list">تصنيف المشروع</span>
+                            <div class="value" style="text-align: center; font-size: large;">{{ project.category }}</div>
+                          </div>
+                          <div class="col-6">
+                            <i class="fa fa-map"></i>
+                            <span class="list">موقع المشروع</span>
+                            <div class="value" style="text-align: center; font-size: large;">{{ project.address }}</div>
+                          </div>
+                        </div>
+        
+                        <p >
+                          <span class="list">وصف المشروع</span>
+                       
+                          {{ project.discripe|safe }}
+                      </p>
+                      
+                       
+        
+                        <div class="main-button">
+                          <a href="{% url 'invreq' %}">الاستثمار في المشروع</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+        
+        
 </div>
-
-<!-- البرمجة النصية لتحديد الفئة المختارة -->
+</div>
+</div>
 <script>
   const categoryLinks = document.querySelectorAll('.category-link');
+  const projectItems = document.querySelectorAll('.project-item');
+
   categoryLinks.forEach(link => {
     link.addEventListener('click', (event) => {
       event.preventDefault();
       const selectedCategory = link.dataset.category;
 
-      const projectItems = document.querySelectorAll('.project-item');
       projectItems.forEach(item => {
         const itemCategory = item.dataset.category;
+
         if (itemCategory === selectedCategory || selectedCategory === 'all') {
           item.style.display = 'block';
         } else {
           item.style.display = 'none';
         }
       });
+
+      // إظهار المشروعات غير المصنفة
+      if (selectedCategory === 'all') {
+        projectItems.forEach(item => {
+          item.style.display = 'block';
+        });
+      } else {
+        // إظهار المشروعات غير المصنفة للتصنيف المحدد
+        projectItems.forEach(item => {
+          const itemCategory = item.dataset.category;
+          if (!itemCategory) {
+            item.style.display = 'block';
+          }
+        });
+      }
     });
   });
 </script>
-
-
-    <!-- العرض الخاص بمشروع الأعمال -->
-  
-
-
-<div class="container">
-  <div class="row">
-    {% for project in projects %}
-      <div class="col-lg-6">
-        <div class="project-item" data-category="{{ project.category.category }}">
-          <!-- تفاصيل المشروع -->
-          <div class="item">
-            <div class="row">
-              <div class="col-lg-6">
-                <div class="image" style="background-image: url('{{ project.image.url }}'); background-size: 290px 384px;
-                        background-position: center center;
-                        height: 100%;
-                       "></div>
-              </div>
-
-              <div class="col-lg-6 align-self-center">
-                <div class="content">
-                  <span class="info">اسم المشروع: {{ project.title }}</span>
-                  <h4>التكلفة المقدرة: {{ project.cost }}</h4>
-
-                  <div class="row">
-                    <div class="col-6">
-                      <i class="fa fa-clock"></i>
-                      <span class="list">تصنيف المشروع</span>
-                      <div class="value" style="text-align: center; font-size: large;">{{ project.category }}</div>
-                    </div>
-                    <div class="col-6">
-                      <i class="fa fa-map"></i>
-                      <span class="list">موقع المشروع</span>
-                      <div class="value" style="text-align: center; font-size: large;">{{ project.address }}</div>
-                    </div>
-                  </div>
-
-                  <p>
-                    <span class="list">وصف المشروع </span> {{ project.details }}
-                  </p>
-
-                  <div class="main-button">
-                    <a href="{% url 'invreq' %}">الاستثمار في المشروع</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>            </div>
-      </div>
-    {% endfor %}
-  </div>
-</div>
-
-</div>
 
 <style>
   /* تنسيق الصف الرئيسي */
@@ -292,7 +301,7 @@
   }
 
   /* .image img {
-    width: 100%;
+    width: 100%;j
     height: 100%;
     height: -webkit-fill-available;
 
