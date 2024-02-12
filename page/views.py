@@ -6,14 +6,11 @@ from The_Owner.models import ProjectCategory
 from FM.models import PromoRequest
 from The_Owner.models import Project
 from .models import *
-from The_Owner.models import ProjectCategory
 from The_Owner.forms import ProjectForm
 from FM.models import PromoRequest
 from The_Owner.forms import Message
 from The_Owner.forms import MessageForm
 from The_Investor.models import *
-from django.shortcuts import render
-from .models import *
 from The_Owner.forms import ProjectForm
 
 def index(request):
@@ -33,7 +30,11 @@ def about(request):
     return render(request, 'pages/about.html')
 
 def deals(request):
-    return render(request, 'pages/deals.html')
+    projects = Project.objects.all()
+    categories = ProjectCategory.objects.all()
+    promo_requests = PromoRequest.objects.all()  # قم بتحميل طلبات الترويج
+    return  render(request, 'pages/deals.html' , {'projects': projects, 'categories': categories, 'promo_requests': promo_requests})
+
 
 # def reservation(request):
 #     if request.method == 'POST':

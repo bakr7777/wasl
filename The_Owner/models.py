@@ -27,9 +27,6 @@ class ProjectCategory(models.Model):
 ##############################Project##################################################
 
 
-from django.db import models
-from multiupload.fields import MultiFileField
-
 class Project(models.Model):
     owner = models.ForeignKey(Owner, on_delete=models.CASCADE, null=True, blank=True)
     category = models.ForeignKey(ProjectCategory, on_delete=models.CASCADE, null=True, blank=True)
@@ -42,8 +39,12 @@ class Project(models.Model):
     active = models.BooleanField(default=True)
     created = models.DateTimeField(default=datetime.now)
 
+
+
     def __str__(self):
         return self.title
+# models.py
+
 
 
       
