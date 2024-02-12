@@ -10,10 +10,9 @@
       {% endfor %}
       <div class="slider">
         {% for promo_request in promo_requests %}
-          <div id="top-banner-{{ forloop.counter }}" class="banner" style="background-image: url('{{ promo_request.project.image.url }}');
-                  background-position: center center;
-                  height: 100%;
-                 ">
+          <div id="top-banner-{{ forloop.counter }}" class="banner" style="background-image: url('{{ promo_request.project.image.url }}'); background-position: center center; height: 100%;">
+                
+                  
             <div class="banner-inner-wrapper header-text">
               <div class="main-caption">
                 <h1>{{ promo_request.project.title }}</h1>

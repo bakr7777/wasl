@@ -11,6 +11,9 @@ from FM.models import PromoRequest
 from The_Owner.forms import Message
 from The_Owner.forms import MessageForm
 from The_Investor.models import *
+from django.shortcuts import render
+from .models import *
+from The_Owner.forms import ProjectForm
 
 def index(request):
     projects = Project.objects.all()
@@ -31,19 +34,38 @@ def about(request):
 def deals(request):
     return render(request, 'pages/deals.html')
 
+# def reservation(request):
+#     if request.method == 'POST':
+#         add_project =ProjectForm(request.POST, request.FILES)
+#         if  add_project .is_valid():
+#             add_project.save()
+
+
+#     context ={
+#         'projects': Project.objects.all(),
+#         'form': ProjectForm(),
+
+#     }
+#     return render(request, 'pages/reservation.html' ,context)
+# views.py
+
+
 def reservation(request):
     if request.method == 'POST':
-        add_project =ProjectForm(request.POST, request.FILES)
-        if  add_project .is_valid():
-            add_project.save()
+        add_project = ProjectForm(request.POST, request.FILES)
+        if add_project.is_valid():
+            project_instance = add_project.save()
 
+            # حفظ الصور في ProjectImages
+            for uploaded_file in request.FILES.getlist('images'):
+                ProjectImages.objects.create(project=project_instance, image=uploaded_file)
 
-    context ={
+    context = {
         'projects': Project.objects.all(),
         'form': ProjectForm(),
-
     }
-    return render(request, 'pages/reservation.html' ,context)
+    return render(request, 'pages/reservation.html', context)
+
 
 
 def login(request):

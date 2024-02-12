@@ -1,6 +1,8 @@
 from django.db import models
 from datetime import datetime
 from django.conf import settings
+from multiupload.fields import MultiFileField
+
 
 ##############################OWner##################################################
 
@@ -24,6 +26,10 @@ class ProjectCategory(models.Model):
 
 ##############################Project##################################################
 
+
+from django.db import models
+from multiupload.fields import MultiFileField
+
 class Project(models.Model):
     owner = models.ForeignKey(Owner, on_delete=models.CASCADE, null=True, blank=True)
     category = models.ForeignKey(ProjectCategory, on_delete=models.CASCADE, null=True, blank=True)
@@ -40,7 +46,21 @@ class Project(models.Model):
         return self.title
 
 
+      
 ##############################Photo##################################################
+
+class ProjectImages(models.Model):
+    project = models.ForeignKey(Project, on_delete=models.CASCADE , related_name='images')
+    image = models.ImageField(upload_to='project_images/' , null=True, blank=True)
+    upload_folder = models.CharField(max_length=255)  # استخدم لتحديد المجلد
+
+    def save(self, *args, **kwargs):
+        # قم بتحديد المجلد المستهدف لرفع الصور إليه
+        upload_folder = self.upload_folder
+
+        # حفظ الصور في المجلد المستهدف
+        super().save(*args, **kwargs)
+
 
 class Photo(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE,null=True , blank=True )
