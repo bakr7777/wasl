@@ -6,18 +6,25 @@ from The_Owner.models import ProjectCategory
 from FM.models import PromoRequest
 from The_Owner.models import Project
 from .models import *
+from The_Owner.models import ProjectCategory
 from The_Owner.forms import ProjectForm
 from FM.models import PromoRequest
 from The_Owner.forms import Message
 from The_Owner.forms import MessageForm
 from The_Investor.models import *
+from django.shortcuts import render
+from .models import *
 from The_Owner.forms import ProjectForm
 
 def index(request):
     projects = Project.objects.all()
     categories = ProjectCategory.objects.all()
     promo_requests = PromoRequest.objects.all()  # قم بتحميل طلبات الترويج
-    return render(request, 'pages/index.html', {'projects': projects, 'categories': categories, 'promo_requests': promo_requests})
+    total_projects = Project.objects.count()
+    total_investor = Investor.objects.count()
+    total_owners = Owner.objects.count()
+
+    return render(request, 'pages/index.html', {'projects': projects, 'categories': categories, 'promo_requests': promo_requests, 'total_projects': total_projects ,'total_investor': total_investor, 'total_owners': total_owners})
 
 
 # def index(request):
@@ -109,29 +116,20 @@ def invreq(request):
 def ownpro(request):
     return render(request, 'pages/ownpro.html')
 def prodesc(request):
+    if request.method == 'POST':
+        projectid = request.POST.get('project')
+        investorid = request.POST.get('investor')
+
+        project = Project.objects.get(id = projectid)
+        investor =  Investor.objects.get(id = investorid)
+
+
+        Favorite.objects.get_or_create(investor=investor , project=project)
+        return redirect('favorite')
+       
     project = Project.objects.all()
     investment_request = InvestmentRequest.objects.all()
     return render(request, 'pages/prodesc.html', {'project': project,'investment_request': investment_request})
 
 
-def project(request):
-    project = Project.objects.all()
-    categories = ProjectCategory.objects.all()
-    return render(request, 'pages/project.html', {'project': project, 'categories': categories})
-
-def twsl(request):
-
-    context1 ={
-        'Messages': Message.objects.all(),
-        'form': MessageForm(),
-    }
-
-    if request.method == 'POST':
-        add_Message =MessageForm(request.POST, request.FILES)
-        if  add_Message .is_valid():
-            add_Message.save()
-
-        
-    return render(request, 'pages/twsl.html', context1)
-    
 
