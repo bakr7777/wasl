@@ -18,4 +18,5 @@ urlpatterns = [
     path('project', views.project, name='project'),
     path('prodesc', views.prodesc, name='prodesc'),
     path('twsl', views.twsl, name='twsl'),
+    path('<int:id>', views.edit, name='edit'),
 ]
