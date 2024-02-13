@@ -17,4 +17,6 @@ urlpatterns = [
     path('ownpro', views.ownpro, name='ownpro'),
     path('project', views.project, name='project'),
     path('prodesc', views.prodesc, name='prodesc'),
+    path('favorite', views.favorite, name='favorite'),
+     
 ]

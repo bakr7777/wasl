@@ -15,6 +15,8 @@ from The_Investor.models import *
 from django.shortcuts import render
 from .models import *
 from The_Owner.forms import ProjectForm
+from django.shortcuts import render, redirect
+from django.contrib import messages
 
 def index(request):
     projects = Project.objects.all()
@@ -131,5 +133,10 @@ def prodesc(request):
     investment_request = InvestmentRequest.objects.all()
     return render(request, 'pages/prodesc.html', {'project': project,'investment_request': investment_request})
 
+
+def favorite(request):
+     project = Project.objects.all()
+     favorite = Favorite.objects.all()
+     return render(request, 'pages/favorite.html', {'project': project,'favorite': favorite}) 
 
 
