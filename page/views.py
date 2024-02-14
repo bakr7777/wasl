@@ -14,11 +14,17 @@ from The_Owner.forms import MessageForm
 from The_Investor.models import *
 from django.shortcuts import render
 from .models import *
+<<<<<<< HEAD
 from django.shortcuts import render, redirect
 from django.contrib import messages
 
 
 
+=======
+from The_Owner.forms import ProjectForm
+from django.shortcuts import render, redirect
+from django.contrib import messages
+>>>>>>> 596c01875630f7d4f16b639044f873eba282b30e
 
 def index(request):
     projects = Project.objects.all()

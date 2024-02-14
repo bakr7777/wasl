@@ -52,6 +52,10 @@ class Project(models.Model):
     
     def __str__(self):
         return self.title
+    
+    def __str__(self):
+        return f"Total Projects: {self.total_projects}"
+
 
 
       
