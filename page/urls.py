@@ -17,13 +17,7 @@ urlpatterns = [
     path('ownpro', views.ownpro, name='ownpro'),
     path('project', views.project, name='project'),
     path('prodesc', views.prodesc, name='prodesc'),
-<<<<<<< HEAD
     path('twsl', views.twsl, name='twsl'),
     path('<int:id>', views.edit, name='edit'),
     path('favorite', views.favorite, name='favorite'),
-
-=======
-    path('favorite', views.favorite, name='favorite'),
-     
->>>>>>> 596c01875630f7d4f16b639044f873eba282b30e
 ]
