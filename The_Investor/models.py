@@ -13,11 +13,12 @@ class Investor(models.Model):
     phone = models.CharField(max_length=9)
     address = models.CharField(max_length=25)
     total_investor = models.IntegerField(default=0)
-    def __str__(self):
-        return f'Profile of {self.user.username}'
+    
     
     def __str__(self):
         return f"Total investor: {self.total_investor}"
+    def __str__(self):
+        return f'Profile of {self.user.username}'
 
 
 ###################################investor#######################

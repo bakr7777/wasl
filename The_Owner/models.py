@@ -1,7 +1,7 @@
 from django.db import models
 from datetime import datetime
 from django.conf import settings
-from multiupload.fields import MultiFileField
+# from multiupload.fields import MultiFileField
 
 
 ##############################OWner##################################################
@@ -14,12 +14,12 @@ class Owner(models.Model):
     phone = models.CharField(max_length=9)
     total_owners =  models.IntegerField(default=0)
     
-    def __str__(self):
-        return f'Profile of {self.user.username}'
+    
     
     def __str__(self):
         return f"Total Owners: {self.total_owners}"
-
+    def __str__(self):
+        return f'Profile of {self.user.username}'
 
 ##############################Category##################################################
 
@@ -30,6 +30,7 @@ class ProjectCategory(models.Model):
 
 
 ##############################Project##################################################
+
 
 
 class Project(models.Model):
@@ -43,7 +44,12 @@ class Project(models.Model):
     image = models.ImageField(upload_to='project_images/', null=True, blank=True)
     active = models.BooleanField(default=True)
     created = models.DateTimeField(default=datetime.now)
+    total_projects = models.IntegerField(default=0)
 
+   
+    def __str__(self):
+        return f"Total Projects: {self.total_projects}"
+    
     def __str__(self):
         return self.title
 
@@ -51,17 +57,17 @@ class Project(models.Model):
       
 ##############################Photo##################################################
 
-class ProjectImages(models.Model):
-    project = models.ForeignKey(Project, on_delete=models.CASCADE , related_name='images')
-    image = models.ImageField(upload_to='project_images/' , null=True, blank=True)
-    upload_folder = models.CharField(max_length=255)  # استخدم لتحديد المجلد
+# class ProjectImages(models.Model):
+#     project = models.ForeignKey(Project, on_delete=models.CASCADE , related_name='images')
+#     image = models.ImageField(upload_to='project_images/' , null=True, blank=True)
+#     upload_folder = models.CharField(max_length=255)  # استخدم لتحديد المجلد
 
-    def save(self, *args, **kwargs):
-        # قم بتحديد المجلد المستهدف لرفع الصور إليه
-        upload_folder = self.upload_folder
+#     def save(self, *args, **kwargs):
+#         # قم بتحديد المجلد المستهدف لرفع الصور إليه
+#         upload_folder = self.upload_folder
 
-        # حفظ الصور في المجلد المستهدف
-        super().save(*args, **kwargs)
+#         # حفظ الصور في المجلد المستهدف
+#         super().save(*args, **kwargs)
 
 
 class Photo(models.Model):
@@ -79,3 +85,4 @@ class Message(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return self.name
+

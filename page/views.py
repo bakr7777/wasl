@@ -14,7 +14,11 @@ from The_Owner.forms import MessageForm
 from The_Investor.models import *
 from django.shortcuts import render
 from .models import *
-from The_Owner.forms import ProjectForm
+from django.shortcuts import render, redirect
+from django.contrib import messages
+
+
+
 
 def index(request):
     projects = Project.objects.all()
@@ -41,7 +45,6 @@ def deals(request):
     categories = ProjectCategory.objects.all()
     promo_requests = PromoRequest.objects.all()  # قم بتحميل طلبات الترويج
     return  render(request, 'pages/deals.html' , {'projects': projects, 'categories': categories, 'promo_requests': promo_requests})
-
 
 # def reservation(request):
 #     if request.method == 'POST':
@@ -115,6 +118,28 @@ def invreq(request):
     return render(request, 'pages/invreq.html')
 def ownpro(request):
     return render(request, 'pages/ownpro.html')
+
+
+def project(request):
+    project = Project.objects.all()
+    categories = ProjectCategory.objects.all()
+    return render(request, 'pages/project.html', {'project': project, 'categories': categories})
+
+def twsl(request):
+
+    context1 ={
+        'Messages': Message.objects.all(),
+        'form': MessageForm(),
+    }
+
+    if request.method == 'POST':
+        add_Message =MessageForm(request.POST, request.FILES)
+        if  add_Message .is_valid():
+            add_Message.save()
+
+        
+    return render(request, 'pages/twsl.html', context1)
+    
 def prodesc(request):
     if request.method == 'POST':
         projectid = request.POST.get('project')
@@ -131,5 +156,10 @@ def prodesc(request):
     investment_request = InvestmentRequest.objects.all()
     return render(request, 'pages/prodesc.html', {'project': project,'investment_request': investment_request})
 
+
+def favorite(request):
+     project = Project.objects.all()
+     favorite = Favorite.objects.all()
+     return render(request, 'pages/favorite.html', {'project': project,'favorite': favorite}) 
 
 
