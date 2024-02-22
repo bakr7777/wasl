@@ -16,9 +16,15 @@
                         <li><a href="{% url 'about' %}" class=" {% if request.resolver_match.url_name == 'about' %}active{% endif %} ">عن وصل</a></li>
                         <li><a href="{% url 'deals' %}" class=" {% if request.resolver_match.url_name == 'deals' %}active{% endif %} ">استثمر</a></li>
                         <li><a href="{% url 'reservation' %}" class=" {% if request.resolver_match.url_name == 'reservation' %}active{% endif %} ">اضف مشروع</a></li>
+
+                        {% if request.user.is_authenticated %}
+                        <li><a href="{% url 'profile' %}" class=" {% if request.resolver_match.url_name == 'profile' %}active{% endif %} "> حسابي</a></li>
+                        <li><a href="{% url 'logout' %}">تسجيل خروج</a></li>
+
+                        {% else %}                     
                         <li><a href="{% url 'login' %}" class=" {% if request.resolver_match.url_name == 'login' %}active{% endif %} ">تسجيل دخول</a></li>
-                        <li><a href="{% url 'promoreq' %}">Book Yours</a></li>
-                        <li><a href="{% url 'twsl' %}" class=" {% if request.resolver_match.url_name == 'twsl' %}active{% endif %} "> تواصل</a></li>
+                        <li><a href="{% url 'signup' %}">انشاء حساب</a></li>
+                        {% endif %}
                     </ul>   
                     <a class='menu-trigger'>
                         <span>Menu</span>
