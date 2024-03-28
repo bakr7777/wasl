@@ -6,7 +6,7 @@ reservation
 {% endblock %}
 
 {% block content %}
-<div class="second-page-heading">
+<div class="second-page-headingg">
   
     <div class="container">
       <div class="row">
@@ -26,22 +26,19 @@ reservation
         <div class="col-lg-4 col-sm-6">
           <div class="info-item">
             <i class="fa fa-phone"></i>
-            <h4>قم بالتواصل معناء </h4>
-            <a href="#"></a>
+            <a href="{% url 'twsl' %}"><h4>قم بالتواصل معناء </h4></a>
           </div>
         </div>
         <div class="col-lg-4 col-sm-6">
           <div class="info-item">
             <i class="fa fa-envelope"></i>
-            <h4>المشاريع </h4>
-            <a href="#"></a>
+            <a href="{% url 'index' %}"> <h4>المشاريع </h4></a>
           </div>
         </div>
         <div class="col-lg-4 col-sm-6">
           <div class="info-item">
             <i class="fa fa-map-marker"></i>
-            <h4> المزيد من المشاريع</h4>
-            <a href="#"></a>
+            <a href="#prodesc"> <h4> المزيد من المشاريع</h4></a>
           </div>
         </div>
       </div>
@@ -55,7 +52,7 @@ reservation
           <div class="col-lg-6 col-sm-6" style="border: #043f44; background-color: #ddd6d6; margin: auto;width: 1000px;">
               <div class="item">
                 <div class="row">
-                  <div class="col-lg-6">
+                  <div class="col-lg-6" id="prodesc">
                     <div class="image" style="background-image: url('{{ investment_request.project.image.url }}'); background-size: 453px 600px;
                       background-repeat: no-repeat;margin-left: -35px;
                       background-position: center center; overflow: hidden;

@@ -77,6 +77,8 @@ def reservation(request):
 
 
 
+def login(request):
+    return render(request, 'pages/login.html')
 
 def edit(request, id):
     categories = ProjectCategory.objects.all()
@@ -91,7 +93,8 @@ def edit(request, id):
     context ={'form': project_save,}
     return render(request, 'pages/edit.html' ,context)    
 
-
+def signIn(request):
+    return render(request, 'pages/signIn.html')
 
 def vir(request):
     return render(request, 'pages/vir.html')
