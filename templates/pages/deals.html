@@ -88,59 +88,88 @@ deals
     </div>
   </div> -->
   <div class="amazing-deals">
-    <div class="container">
-      <div class="row">
-        <!-- <div class="col-lg-6 offset-lg-3">
-          <div class="section-heading text-center">
-            <h2><p1 style="color:darkblue; width: 20px;">أهدافنا</p1><br>
-              تهدف منصة وصل إلى خلق بيئة رقمية آمنة وجذابة وسهلة الاستخدام دون شروط وقيود معقدة للاستثمار. بالإضافة إلى تقديم حلول متكاملة لأصحاب المشاريع والمستثمرين تحت ملجأ واحد لإتاحة الفرصة لأصحاب المشاريع لعرض مشاريعهم وتقديم مجموعة متنوعة من الفرص الاستثمارية للمستثمرين</h2>
-            <p></p>
+    <div class="container" style="direction: rtl;">
+      {% for project in projects %}
+    {% if project.ratings.all %}
+        <div class="col-lg-6 project-item" data-category="{% if project.category %}{{ project.category.category }}{% else %}none{% endif %}">
+            <!-- تفاصيل المشروع -->
+            <div class="item">
+                <div class="row">
+                    <div class="col-lg-6">
+                        {% if project.image %}
+                            <div class="image" style="background-image: url('{{ project.image.url }}');  "></div>
+                        {% else %}
+                            <div class="image" style="background-color: #881782; height: 100%;"></div>
+                        {% endif %}
+                    </div>
+                    <div class="col-lg-6 align-self-center">
+                        <div class="content">
+                            <span class="info">اسم المشروع: {{ project.title }}  
+                                &nbsp;&nbsp;
+                                التقييم: {{ project.average_rating }} ★
+                            </span>
+                            <h4>التكلفة المقدرة: {{ project.cost }}</h4>
+                            <div class="row">
+                                <div class="col-6">
+                                    <i class="fa fa-clock"></i>
+                                    <span class="list">تصنيف المشروع</span>
+                                    <div class="value" style="text-align: center; font-size: large;">{{ project.category }}</div>
+                                </div>
+                                <div class="col-6">
+                                    <i class="fa fa-map"></i>
+                                    <span class="list">موقع المشروع</span>
+                                    <div class="value" style="text-align: center; font-size: large;">{{ project.address }}</div>
+                                </div>
+                            </div>
+                            <p>
+                                <span class="list">وصف المشروع</span>
+                                {{ project.discripe|safe }}
+                            </p>
+                            <!-- عرض التقييم والتعليق -->
+                            
+                            <div class="main-button">
+                                <a href="{% url 'invreq' %}">الاستثمار في المشروع</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="rating-section">
+              <h4>تقييم المستخدمين</h4>
+              <ul class="ratings-list">
+                  <li>
+                      <div class="rating-info">
+                          <p>متوسط التقييم: {{ project.average_rating }} ★</p>
+                      </div>
+                  </li>
+                  {% for rating in project.ratings.all %}
+                  <li>
+                      <div class="rating-info">
+                          <p>التقييم: {{ rating.rating }}</p>
+                          <p>بواسطة: {{ rating.user.username }}</p>
+                          {% if rating.comment %}
+                      <div class="comment">
+                          <p>التعليق: {{ rating.comment }}</p>
+                      </div>
+                      {% endif %}
+                      </div>
+                      
+                  </li>
+                  {% endfor %}
+              </ul>
           </div>
-        </div> -->
+        </div>
+        
+    {% endif %}
+{% endfor %}
 
-
-
+</div>
+</div>
 
 
 
         
-        <div class="col-lg-6 col-sm-6">
-          <div class="item">
-            <div class="row">
-              <div class="col-lg-6">
-                <div class="image">
-                  <img src="{% static  'assets/images/deals-02.jpg' %}" >
-                </div>
-              </div>
-              <div class="col-lg-6 align-self-center">
-                <div class="content">
-                  <span class="info"> اسم المشروع : سوقي للتجارة الالكترونية </span>
-                  <h4>التكلفة المقدرة  : 4000</h4>                 
-
-                  <div class="row">
-                    <div class="col-6">
-                      <i class="fa fa-clock"></i>
-                      <span class="list">تصيف المشروع</span>
-                      <div class="value" style="text-align: center; font-size: large;">عقاري     </div>
-                    </div>
-                    <div class="col-6">
-                      <i class="fa fa-map"></i>
-                      <span class="list">موقع المشروع  </span>
-                      <div class="value" style="text-align: center ; font-size: large;"> صنعاء     </div>
-
-                    </div>
-                  </div>
-                  
-                  <p>  <span class="list">وصف المشروع  </span> سوقي هو عباره عن شركة تجارة الكترونية قائمة علا الاستيراد من الصين والبيع في عدة بلدان </p>
-                  <div class="main-button">
-                    <a href="{% url 'invreq' %}">الاستثمار في المشروع</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
+       
 
 
 
@@ -149,186 +178,6 @@ deals
 
 
        
-        <div class="col-lg-6 col-sm-6">
-          <div class="item">
-            <div class="row">
-              <div class="col-lg-6">
-                <div class="image">
-                  <img src="{% static  'assets/images/deals-02.jpg' %}" >
-                </div>
-              </div>
-              <div class="col-lg-6 align-self-center">
-                <div class="content">
-                  <span class="info"> اسم المشروع : سوقي للتجارة الالكترونية </span>
-                  <h4>التكلفة المقدرة  : 4000</h4>                 
-
-                  <div class="row">
-                    <div class="col-6">
-                      <i class="fa fa-clock"></i>
-                      <span class="list">تصيف المشروع</span>
-                      <div class="value" style="text-align: center; font-size: large;">عقاري     </div>
-                    </div>
-                    <div class="col-6">
-                      <i class="fa fa-map"></i>
-                      <span class="list">موقع المشروع  </span>
-                      <div class="value" style="text-align: center ; font-size: large;"> صنعاء     </div>
-
-                    </div>
-                  </div>
-                  
-                  <p>  <span class="list">وصف المشروع  </span> سوقي هو عباره عن شركة تجارة الكترونية قائمة علا الاستيراد من الصين والبيع في عدة بلدان </p>
-                  <div class="main-button">
-                    <a href="{% url 'invreq' %}">الاستثمار في المشروع</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-6 col-sm-6">
-          <div class="item">
-            <div class="row">
-              <div class="col-lg-6">
-                <div class="image">
-                  <img src="{% static  'assets/images/deals-02.jpg' %}" >
-                </div>
-              </div>
-              <div class="col-lg-6 align-self-center">
-                <div class="content">
-                  <span class="info"> اسم المشروع : سوقي للتجارة الالكترونية </span>
-                  <h4>التكلفة المقدرة  : 4000</h4>                 
-
-                  <div class="row">
-                    <div class="col-6">
-                      <i class="fa fa-clock"></i>
-                      <span class="list">تصيف المشروع</span>
-                      <div class="value" style="text-align: center; font-size: large;">عقاري     </div>
-                    </div>
-                    <div class="col-6">
-                      <i class="fa fa-map"></i>
-                      <span class="list">موقع المشروع  </span>
-                      <div class="value" style="text-align: center ; font-size: large;"> صنعاء     </div>
-
-                    </div>
-                  </div>
-                  
-                  <p>  <span class="list">وصف المشروع  </span> سوقي هو عباره عن شركة تجارة الكترونية قائمة علا الاستيراد من الصين والبيع في عدة بلدان </p>
-                  <div class="main-button">
-                    <a href="{% url 'invreq' %}">الاستثمار في المشروع</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-6 col-sm-6">
-          <div class="item">
-            <div class="row">
-              <div class="col-lg-6">
-                <div class="image">
-                  <img src="{% static  'assets/images/deals-02.jpg' %}" >
-                </div>
-              </div>
-              <div class="col-lg-6 align-self-center">
-                <div class="content">
-                  <span class="info"> اسم المشروع : سوقي للتجارة الالكترونية </span>
-                  <h4>التكلفة المقدرة  : 4000</h4>                 
-
-                  <div class="row">
-                    <div class="col-6">
-                      <i class="fa fa-clock"></i>
-                      <span class="list">تصيف المشروع</span>
-                      <div class="value" style="text-align: center; font-size: large;">عقاري     </div>
-                    </div>
-                    <div class="col-6">
-                      <i class="fa fa-map"></i>
-                      <span class="list">موقع المشروع  </span>
-                      <div class="value" style="text-align: center ; font-size: large;"> صنعاء     </div>
-
-                    </div>
-                  </div>
-                  
-                  <p>  <span class="list">وصف المشروع  </span> سوقي هو عباره عن شركة تجارة الكترونية قائمة علا الاستيراد من الصين والبيع في عدة بلدان </p>
-                  <div class="main-button">
-                    <a href="{% url 'invreq' %}">الاستثمار في المشروع</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-6 col-sm-6">
-          <div class="item">
-            <div class="row">
-              <div class="col-lg-6">
-                <div class="image">
-                  <img src="{% static  'assets/images/deals-02.jpg' %}" >
-                </div>
-              </div>
-              <div class="col-lg-6 align-self-center">
-                <div class="content">
-                  <span class="info"> اسم المشروع : سوقي للتجارة الالكترونية </span>
-                  <h4>التكلفة المقدرة  : 4000</h4>                 
-
-                  <div class="row">
-                    <div class="col-6">
-                      <i class="fa fa-clock"></i>
-                      <span class="list">تصيف المشروع</span>
-                      <div class="value" style="text-align: center; font-size: large;">عقاري     </div>
-                    </div>
-                    <div class="col-6">
-                      <i class="fa fa-map"></i>
-                      <span class="list">موقع المشروع  </span>
-                      <div class="value" style="text-align: center ; font-size: large;"> صنعاء     </div>
-
-                    </div>
-                  </div>
-                  
-                  <p>  <span class="list">وصف المشروع  </span> سوقي هو عباره عن شركة تجارة الكترونية قائمة علا الاستيراد من الصين والبيع في عدة بلدان </p>
-                  <div class="main-button">
-                    <a href="{% url 'invreq' %}">الاستثمار في المشروع</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-6 col-sm-6">
-          <div class="item">
-            <div class="row">
-              <div class="col-lg-6">
-                <div class="image">
-                  <img src="{% static  'assets/images/deals-02.jpg' %}" >
-                </div>
-              </div>
-              <div class="col-lg-6 align-self-center">
-                <div class="content">
-                  <span class="info"> اسم المشروع : سوقي للتجارة الالكترونية </span>
-                  <h4>التكلفة المقدرة  : 4000</h4>                 
-
-                  <div class="row">
-                    <div class="col-6">
-                      <i class="fa fa-clock"></i>
-                      <span class="list">تصيف المشروع</span>
-                      <div class="value" style="text-align: center; font-size: large;">عقاري     </div>
-                    </div>
-                    <div class="col-6">
-                      <i class="fa fa-map"></i>
-                      <span class="list">موقع المشروع  </span>
-                      <div class="value" style="text-align: center ; font-size: large;"> صنعاء     </div>
-
-                    </div>
-                  </div>
-                  
-                  <p>  <span class="list">وصف المشروع  </span> سوقي هو عباره عن شركة تجارة الكترونية قائمة علا الاستيراد من الصين والبيع في عدة بلدان </p>
-                  <div class="main-button">
-                    <a href="{% url 'invreq' %}">الاستثمار في المشروع</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
 
 
 
@@ -340,195 +189,6 @@ deals
 
 
 
-
-
-
-        <div class="col-lg-6 col-sm-6">
-          <div class="item">
-            <div class="row">
-              <div class="col-lg-6">
-                <div class="image">
-                  <img src="{% static  'assets/images/deals-02.jpg' %}" >
-                </div>
-              </div>
-              <div class="col-lg-6 align-self-center">
-                <div class="content">
-                  <span class="info">سوقي للتجارة الالكترونية </span>
-                  <h4>سعر المشروع</h4>
-                  <div class="row">
-                    <div class="col-6">
-                      <i class="fa fa-clock"></i>
-                      <span class="list">تصيف المشروع</span>
-                    </div>
-                    <div class="col-6">
-                      <i class="fa fa-map"></i>
-                      <span class="list">معلومات المشروع</span>
-                    </div>
-                  </div>
-                  <p>سوقي هو عباره عن شركة تجارة الكترونية قائمة علا الاستيراد من الصين والبيع في عدة بلدان</p>
-                  <div class="main-button">
-                    <a href="{% url 'invreq' %}">الاستثمار في المشروع</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-6 col-sm-6">
-          <div class="item">
-            <div class="row">
-              <div class="col-lg-6">
-                <div class="image">
-                  <img src="{% static  'assets/images/deals-04.jpg' %}" >
-                </div>
-              </div>
-              <div class="col-lg-6 align-self-center">
-                <div class="content">
-                  <span class="info">التعاون لادارةالحفلات </span>
-                  <h4>سعر المشروع</h4>
-                  <div class="row">
-                    <div class="col-6">
-                      <i class="fa fa-clock"></i>
-                      <span class="list">تصنيف المشروع</span>
-                    </div>
-                    <div class="col-6">
-                      <i class="fa fa-map"></i>
-                      <span class="list">معلومات المشروع </span>
-                    </div>
-                  </div>
-                  <p>مشروع لادارة الحفلات والمناسبات وتقديم خدمات التنضيم والترتيبات التي تسبق وتلي المناسبات  </p>
-                  <div class="main-button">
-                    <a href="{% url 'invreq' %}">استثمر في المشروع </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-6 col-sm-6">
-          <div class="item">
-            <div class="row">
-              <div class="col-lg-6">
-                <div class="image">
-                  <img src="{% static  'assets/images/deals-04.jpg' %}" >
-                </div>
-              </div>
-              <div class="col-lg-6 align-self-center">
-                <div class="content">
-                  <span class="info">سانتكس فضة وعقيق </span>
-                  <h4>سعر المشروع </h4>
-                  <div class="row">
-                    <div class="col-6">
-                      <i class="fa fa-clock"></i>
-                      <span class="list">تصنيف المشروع </span>
-                    </div>
-                    <div class="col-6">
-                      <i class="fa fa-map"></i>
-                      <span class="list">معلومات المشروع</span>
-                    </div>
-                  </div>
-                  <p>استيراد وبيع الفضة والعقيق في البلاد وخارجها مع توفر خدمة التوصيل    </p>
-                  <div class="main-button">
-                    <a href="{% url 'invreq' %}">الاستثمار في المشروع </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-6 col-sm-6">
-          <div class="item">
-            <div class="row">
-              <div class="col-lg-6">
-                <div class="image">
-                  <img src="{% static  'assets/images/deals-03.jpg' %}" >
-                </div>
-              </div>
-              <div class="col-lg-6 align-self-center">
-                <div class="content">
-                  <span class="info">ماي كار لتنجيد المركبات</span>
-                  <h4>سعر المشروع </h4>
-                  <div class="row">
-                    <div class="col-6">
-                      <i class="fa fa-clock"></i>
-                      <span class="list">تصنيف المشروع</span>
-                    </div>
-                    <div class="col-6">
-                      <i class="fa fa-map"></i>
-                      <span class="list">معلومات المشروع </span>
-                    </div>
-                  </div>
-                  <p>مجمع لتنجيد وزينة المركبات بمختلف انواعها دلع سيارتك  </p>
-                  <div class="main-button">
-                    <a href="{% url 'invreq' %}">Make a Reservation</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-6 col-sm-6">
-          <div class="item">
-            <div class="row">
-              <div class="col-lg-6">
-                <div class="image">
-                  <img src="{% static  'assets/images/deals-02.jpg' %}" >
-                </div>
-              </div>
-              <div class="col-lg-6 align-self-center">
-                <div class="content">
-                  <span class="info">فيكس سوفت </span>
-                  <h4>سعر المشروع </h4>
-                  <div class="row">
-                    <div class="col-6">
-                      <i class="fa fa-clock"></i>
-                      <span class="list">تصنيف المشروع </span>
-                    </div>
-                    <div class="col-6">
-                      <i class="fa fa-map"></i>
-                      <span class="list">معلومات المشروع</span>
-                    </div>
-                  </div>
-                  <p>شركة برمجيات تطبيقات الهاتف والانظمة والمواقع بجودة عالية  </p>
-                  <div class="main-button">
-                    <a href="{% url 'invreq' %}">الاستثمار في المشروع</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-6 col-sm-6">
-          <div class="item">
-            <div class="row">
-              <div class="col-lg-6">
-                <div class="image">
-                  <img src="{% static  'assets/images/deals-01.jpg' %}" >
-                </div>
-              </div>
-              <div class="col-lg-6 align-self-center">
-                <div class="content">
-                  <span class="info">شركة العوبلي لبيع الحديد</span>
-                  <h4>سعر المشروع</h4>
-                  <div class="row">
-                    <div class="col-6">
-                      <i class="fa fa-clock"></i>
-                      <span class="list">تصنيف المشروع</span>
-                    </div>
-                    <div class="col-6">
-                      <i class="fa fa-map"></i>
-                      <span class="list">معلومات المشروع</span>
-                    </div>
-                  </div>
-                  <p>هو مشروع لبيع الحديد بجميع انواعة وهو قائم على  مشروع لبيع الحديد بجميع انواعة </p>
-                  <div class="main-button">
-                    <a href="{% url 'invreq' %}">استثمر الان</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
         <div class="call-to-action">
           <div class="container">
             <div class="row">
@@ -544,4 +204,64 @@ deals
             </div>
           </div>
         </div>
+        <style>
+
+
+.rating-section {
+    margin-top: 20px;
+}
+
+.rating-section h4 {
+    color: #333;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.ratings-list {
+    list-style: none;
+    padding: 0;
+}
+
+.rating-info {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.rating-info p {
+    margin: 0;
+}
+
+.comment {
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.comment p {
+    margin: 0;
+    font-style: italic;
+}
+
+
+/* تمييز كل مستخدم بلون مختلف */
+.rating-info:nth-child(odd) {
+    background-color: #f0f0f0; /* لون خلفية مختلف لكل مستخدم */
+}
+
+.rating-info:nth-child(even) {
+    background-color: #e5e5e5; /* لون خلفية مختلف لكل مستخدم */
+}
+
+/* تمييز التعليقات بلون مختلف */
+.comment:nth-child(odd) {
+    background-color: #d9edf7; /* لون خلفية مختلف لكل تعليق */
+}
+
+.comment:nth-child(even) {
+    background-color: #dff0d8; /* لون خلفية مختلف لكل تعليق */
+}
+
+        </style>
 {% endblock %}  

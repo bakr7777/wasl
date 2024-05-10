@@ -52,8 +52,6 @@ reservation
 </div> {% endcomment %}
 
 
-
-
 <div class="reservation-form">
   <div class="container">
     <div class="row">
@@ -65,7 +63,29 @@ reservation
       <div class="col-lg-12">
         <form id="reservation-form" name="gs" method="POST" enctype="multipart/form-data">
            {% csrf_token %}
-          <div class="row">
+
+           <div class="row">
+            <div class="col-lg-12"  id="dod">
+              <h4>اضافة <em> مشروع </em>أو <em> استثمار </em>:</h4>
+              <h4> <em>خطوات رفع مشروعك للحصول على تمويل من مستثمرين  </em>  </h4>
+              <h5> 1 :قم  باإنشاء حساب من نوع مالك مشروع  وسجل دخولك </h5><br>
+              <h5> 2 :   اضغط زر اضف مشروع  الذي في الاعلى سيتم توجيهك الى صفحة معلومات حول كيفية رفع مشروع</h5>
+              <br>
+              <h5> 3 : بعد قراءة المعلومات قم بضغط زر التالي لتوجيهك الى صفحة ارفاق بيانات المشروع    </h5>
+              <br>    
+              <h5> 4 : بعد ارفاق بيانات المشروع تكون قد انتهيت من رفع المشروع ويتبقى عليك انتظار رسالة منا في حالة ودجود مستثمرين  </h5>
+              <br>
+            </div>
+            {{ form.as_p }}
+            <div class="col-lg-12">                        
+              <fieldset>
+                <button type="submit" class="main-button">أرسال</button>
+              </fieldset>
+            </div>
+          </div>
+          
+
+          <!-- <div class="row">
             <div class="col-lg-12"  id="dod">
               <h4>اضافة <em> مشروع </em>أو <em> استثمار </em>:</h4>
               <h4> <em>خطوات رفع مشروعك للحصول على تمويل من مستثمرين  </em>  </h4>
@@ -86,12 +106,60 @@ reservation
                     <button type="submit" class="main-button">أرسال</button>
                 </fieldset>
             </div>
-          </div>
+          </div> -->
         </form>
       </div>
     </div>
   </div>
 </div>
-</div>
+<style>
 
+
+
+textarea {
+  width: 100%; /* تحديد عرض النص في المربع */
+  height: 150px; /* تحديد ارتفاع المربع */
+  padding: 10px; /* تحديد المسافة الداخلية للنص داخل المربع */
+  box-sizing: border-box; /* تحديد طريقة حساب الحجم ليشمل الحدود والحشو */
+  border: 1px solid #ccc; /* تحديد الحدود للمربع */
+  border-radius: 5px; /* تحديد شكل الزوايا للمربع */
+  resize: vertical; /* السماح بالتغيير في ارتفاع المربع (ولكن لا يمكن تغيير العرض) */
+}
+
+/* تنسيق النص والعناصر المحيطة به */
+label {
+  display: block; /* جعل العلامة تظهر على سطر منفصل */
+  margin-bottom: 5px; /* إضافة مسافة بين العلامة ومربع النص */
+}
+
+
+
+
+
+
+
+
+
+
+/* تنسيق الزر */
+.main-button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-top: 10px; /* إضافة مسافة بين الزر والعناصر الأخرى */
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+/* تنسيق الزر عند التحويل إلى الحالة النشطة (عند الضغط) */
+.main-button:active {
+  background-color: #45a049;
+}
+
+</style>
 {% endblock %}

@@ -26,6 +26,8 @@ class Investor(models.Model):
 class Favorite(models.Model):
     investor = models.ForeignKey(Investor, on_delete=models.CASCADE,null=True , blank=True )
     project = models.ForeignKey(Project, on_delete=models.CASCADE,null=True , blank=True)
+    def __str__(self):
+        return f"investor: {self.investor}"
 
   
 
@@ -35,3 +37,11 @@ class InvestmentRequest(models.Model):
     date = models.DateTimeField(default=datetime.now)
     investor = models.ForeignKey(Investor, on_delete=models.CASCADE,null=True , blank=True )
     project = models.ForeignKey(Project, on_delete=models.CASCADE,null=True , blank=True )
+    is_allowed = models.BooleanField(default=True)  # حقل جديد لتحديد ما إذا كان الطلب مسموحًا بعرضه أم لا
+
+    def __str__(self):
+        return f'InvestmentRequest: {self.investor}'
+
+    
+
+
