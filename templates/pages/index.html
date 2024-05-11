@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 
-<div class="promo-requests">
+
   <section id="section-1">
     <div class="content-slider">
       {% for promo_request in promo_requests %}
@@ -69,7 +69,7 @@
       </nav>
    </div>
   </section>
-  </div>
+  
   <div class="amazing-deals">
   <div class="container">
     <div class="row">
@@ -228,17 +228,18 @@
                                 <div class="value" style="text-align: center; font-size: large;">{{ project.address }}</div>
                             </div>
                         </div>
-                        <p>
-                            <span class="list">وصف المشروع</span>
-                            {{ project.discripe|safe }}
-                        </p>
-                        
-                        
-
+        
+                        <p >
+                          <span class="list">وصف المشروع</span>
+                       
+                          {{ project.discripe|safe }}
+                      </p>
+                      
+                       
+        
                         <div class="main-button1" >
-                          <a href="{% url 'invreq' %}">الاستثمار في المشروع</a>
+                          <a href="{% url 'invreq' project.id %}">الاستثمار في المشروع</a>
                           <a href="{% url 'deals' %}">  تعليقات حول المشروع</a>
-
                         </div>
                         
                     </div>

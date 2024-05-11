@@ -222,7 +222,7 @@ project
                     </div>
                     <p style="font-size: 20px;padding-top: 40px;">معلومات المشروع: {{project.discripe}}</p>
                     <div class="main-button" style="padding-top: 100px;padding-right: 300px;">
-                      <a href="{% url 'invreq' %}">الاعلان على المشروع</a>
+                      <a href="{% url 'promoreq' project.id %}">الاعلان على المشروع</a>
                       <a href="{% url 'edit' project.id %}">تعديل</a>
                   </div>
                 </div>

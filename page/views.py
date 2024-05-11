@@ -117,8 +117,6 @@ def vir(request):
 def addpost(request):
     return render(request, 'pages/addpost.html')
 
-def promoreq(request):
-    return render(request, 'pages/promoreq.html')
 
 def update(request):
     return render(request, 'pages/update.html')
@@ -126,8 +124,7 @@ def update(request):
 def condations(request):
     return render(request, 'pages/condations.html')
 
-def invreq(request):
-    return render(request, 'pages/invreq.html')
+
 def ownpro(request):
     return render(request, 'pages/ownpro.html')
 
