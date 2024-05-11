@@ -192,46 +192,66 @@ project
         {% for project in projects %}
         <div class="col-lg-6 col-sm-6" style="border: #043f44; background-color: #ddd6d6; margin: auto;width: 1000px;">
             <div class="item">
-                <div class="row" style="padding: 10px;">
-                    <div class="col-lg-6">
-                        {% if project.image %}
-                        <div class="image" style="background-image: url('{{ project.image.url }}'); background-size: 460px 560px;
-                        background-position: center center;
-                        height: 555px;">
-                        </div>
-                        {% endif %}
-                    </div>
-                    <div class="col-lg-6 align-self-center">
-                        <div class="content" style="direction: rtl;padding-bottom: 5%;">
-                            <span class="info" style="color: #0094f7;direction: rtl;font-size: 30px;"> اسم المشروع: {{ project.title }}</span>
-                            <h4 style="padding-top: 20%;font-size: 30px;">سعر المشروع: {{ project.cost }}</h4>
-                            <div class="row" style="color: #0077ff;">
-                                <div class="col-6">
-                                    <i class="fa fa-clock" style="padding-top: 70px;font-size: 30px;"></i>
-                                    <span class="list" style="font-size: 30px;">وصف المشروع: {{ project.category }}</span>
-                                </div>
-                                <div class="col-6">
-                                    <i class="fa fa-map" style="padding-top: 70px;font-size: 30px;"></i>
-                                    <span class="list" style="font-size: 30px;">عنوان المشروع: {{ project.address }}</span>
-                                </div>
-                                <div class="col-6">
-                                    <i class="fa fa-map" style="padding-top: 70px;font-size: 30px;"></i>
-                                    <span class="list" style="font-size: 30px;">موقع المشروع: {{ project.details }}</span>
-                                </div>
-                            </div>
-                            <p style="font-size: 20px;padding-top: 40px;">معلومات المشروع: {{ project.discripe }}</p>
-                            <div class="main-button" style="padding-top: 100px;padding-right: 300px;">
-                                <a href="{% url 'invreq' %}">الاعلان على المشروع</a>
-                                <a href="{% url 'edit' project.id %}">تعديل</a>
-                            </div>
-                        </div>
-                    </div>
+              <div class="row" style="padding: 10px;">
+                <div class="col-lg-6">
+                  {% if project.photo_project %}
+                  <div class="image" style="background-image: url('{{ project.image.url }}'); background-size: 460px 560px;
+                   background-position: center center;
+                   height: 555px;
+                   ">
+                    
+                  </div>
+                  {% endif %}
                 </div>
+                <div class="col-lg-6 align-self-center">
+                  <div class="content" style="direction: rtl;padding-bottom: 5%;">
+                    <span class="info" style="color: #0094f7;direction: rtl;font-size: 30px;"> اسم المشروع: {{project.title}}</span>
+                    <h4 style="padding-top: 20%;font-size: 30px;">سعر المشروع: {{project.cost}}</h4>
+                    <div class="row" style="color: #0077ff;">
+                      <div class="col-6">
+                        <i class="fa fa-clock" style="padding-top: 70px;font-size: 30px;"></i>
+                        <span class="list" style="font-size: 30px;">وصف المشروع: {{project.category}}</span>
+                      </div>
+                      <div class="col-6">
+                        <i class="fa fa-map" style="padding-top: 70px;font-size: 30px;"></i>
+                        <span class="list" style="font-size: 30px;">عنوان المشروع: {{project.address}}</span>
+                      </div>
+                      <div class="col-6">
+                        <i class="fa fa-map" style="padding-top: 70px;font-size: 30px;"></i>
+                        <span class="list" style="font-size: 30px;">موقع المشروع: {{project.details}}</span>
+                    </div>
+                    <p style="font-size: 20px;padding-top: 40px;">معلومات المشروع: {{project.discripe}}</p>
+                    <div class="main-button" style="padding-top: 100px;padding-right: 300px;">
+                      <a href="{% url 'invreq' %}">الاعلان على المشروع</a>
+                      <a href="{% url 'edit' project.id %}">تعديل</a>
+                  </div>
+                </div>
+              </div>
             </div>
-        </div>
-        <hr>
-        {% endfor %}
-        
+          </div>
+      </div>
+    </div>
+    <hr>
+    <hr>
+    <hr>
+    <hr>
+    <hr>
+    <hr>
+    <hr>
+    <hr>
+    <hr>
+    <hr>
+    <hr>
+    <hr>
+    <hr>
+    <hr>
+    <hr>
+    <hr>
+    <hr>
+    <hr>
+    <hr>
+    
+    {% endfor %}
 
   </div>
    
@@ -242,15 +262,16 @@ project
       }
   
       /* تنسيق زر البوتون */
-      
-
-
-
-
-      
-  
       /* تغيير لون الخلفية والحدود عند التحويل */
-      .my-button:hover {
+
+
+
+
+
+      
+      
+      
+       .my-button:hover {
         background-color: #cccaca; /* لون الخلفية (أحمر غامق) عند التحويل */
         border-color: #000000; /* لون الحدود (أحمر غامق) عند التحويل */
       }

@@ -16,6 +16,7 @@ from django.shortcuts import render
 from .models import *
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -153,6 +154,7 @@ def project(request):
 # في ملف views.pyfrom django.shortcuts import render, redirect
 from The_Owner.models import Message
 from The_Owner.forms import MessageForm
+
 
 def twsl(request):
     user_messages = None  # يمكنك إعداده لقائمة فارغة أو None، اعتمادًا على ما تفضله
