@@ -16,6 +16,7 @@ from django.shortcuts import render
 from .models import *
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 def index(request):
     projects = Project.objects.all()
@@ -115,6 +116,7 @@ def project(request):
     project = Project.objects.all()
     categories = ProjectCategory.objects.all()
     return render(request, 'pages/project.html', {'project': project, 'categories': categories})
+
 
 def twsl(request):
 
