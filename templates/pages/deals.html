@@ -93,70 +93,87 @@ deals
     {% if project.ratings.all %}
         <div class="col-lg-6 project-item" data-category="{% if project.category %}{{ project.category.category }}{% else %}none{% endif %}">
             <!-- تفاصيل المشروع -->
-            <div class="item">
-                <div class="row">
-                    <div class="col-lg-6">
-                        {% if project.image %}
-                            <div class="image" style="background-image: url('{{ project.image.url }}');  "></div>
-                        {% else %}
+      <div class="row">
+        <!-- <div class="col-lg-6 offset-lg-3">
+          <div class="section-heading text-center">
+            <h2><p1 style="color:darkblue; width: 20px;">أهدافنا</p1><br>
+              تهدف منصة وصل إلى خلق بيئة رقمية آمنة وجذابة وسهلة الاستخدام دون شروط وقيود معقدة للاستثمار. بالإضافة إلى تقديم حلول متكاملة لأصحاب المشاريع والمستثمرين تحت ملجأ واحد لإتاحة الفرصة لأصحاب المشاريع لعرض مشاريعهم وتقديم مجموعة متنوعة من الفرص الاستثمارية للمستثمرين</h2>
+            <p></p>
+          </div>
+        </div> -->
+
+
+
+
+
+
+        
+        <div class="col-lg-6 col-sm-6">
+          <div class="item">
+            <div class="row">
+              <div class="col-lg-6">
+                {% if project.image %}
+                <div class="image" style="background-image: url('{{ project.image.url }}');  "></div>
+                {% else %}
                             <div class="image" style="background-color: #881782; height: 100%;"></div>
-                        {% endif %}
+                {% endif %}
+              </div>
+              <div class="col-lg-6 align-self-center">
+                <div class="content">
+                  <span class="info">اسم المشروع: {{ project.title }}  
+                    &nbsp;&nbsp;
+                    التقييم: {{ project.average_rating }} ★
+                </span>
+                <h4>التكلفة المقدرة: {{ project.cost }}</h4>
+                  <div class="row">
+                    <div class="col-6">
+                      <i class="fa fa-clock"></i>
+                      <span class="list">تصنيف المشروع</span>
+                      <div class="value" style="text-align: center; font-size: large;">{{ project.category }}</div>
                     </div>
-                    <div class="col-lg-6 align-self-center">
-                        <div class="content">
-                            <span class="info">اسم المشروع: {{ project.title }}  
-                                &nbsp;&nbsp;
-                                التقييم: {{ project.average_rating }} ★
-                            </span>
-                            <h4>التكلفة المقدرة: {{ project.cost }}</h4>
-                            <div class="row">
-                                <div class="col-6">
-                                    <i class="fa fa-clock"></i>
-                                    <span class="list">تصنيف المشروع</span>
-                                    <div class="value" style="text-align: center; font-size: large;">{{ project.category }}</div>
-                                </div>
-                                <div class="col-6">
-                                    <i class="fa fa-map"></i>
-                                    <span class="list">موقع المشروع</span>
-                                    <div class="value" style="text-align: center; font-size: large;">{{ project.address }}</div>
-                                </div>
-                            </div>
-                            <p>
-                                <span class="list">وصف المشروع</span>
-                                {{ project.discripe|safe }}
-                            </p>
-                            <!-- عرض التقييم والتعليق -->
-                            
-                            <div class="main-button">
-                                <a href="{% url 'invreq' %}">الاستثمار في المشروع</a>
-                            </div>
-                        </div>
+                    <div class="col-6">
+                      <i class="fa fa-map"></i>
+                      <span class="list">موقع المشروع  </span>
+                      <div class="value" style="text-align: center ; font-size: large;">{{ project.address }}</div>
+
                     </div>
+                  </div>
+                  
+                  <p>
+                    <span class="list">وصف المشروع</span>
+                    {{ project.discripe|safe }}
+                </p>
+                <!-- عرض التقييم والتعليق -->
+                  <div class="main-button">
+                    <a href="{% url 'invreq' %}">الاستثمار في المشروع</a>
+                  </div>
                 </div>
+              </div>
             </div>
-            <div class="rating-section">
-              <h4>تقييم المستخدمين</h4>
-              <ul class="ratings-list">
-                  <li>
-                      <div class="rating-info">
-                          <p>متوسط التقييم: {{ project.average_rating }} ★</p>
-                      </div>
-                  </li>
-                  {% for rating in project.ratings.all %}
-                  <li>
-                      <div class="rating-info">
-                          <p>التقييم: {{ rating.rating }}</p>
-                          <p>بواسطة: {{ rating.user.username }}</p>
-                          {% if rating.comment %}
-                      <div class="comment">
-                          <p>التعليق: {{ rating.comment }}</p>
-                      </div>
-                      {% endif %}
-                      </div>
-                      
-                  </li>
-                  {% endfor %}
-              </ul>
+          </div>
+          <div class="rating-section">
+            <h4>تقييم المستخدمين</h4>
+            <ul class="ratings-list">
+                <li>
+                    <div class="rating-info">
+                        <p>متوسط التقييم: {{ project.average_rating }} ★</p>
+                    </div>
+                </li>
+                {% for rating in project.ratings.all %}
+                <li>
+                    <div class="rating-info">
+                        <p>التقييم: {{ rating.rating }}</p>
+                        <p>بواسطة: {{ rating.user.username }}</p>
+                        {% if rating.comment %}
+                    <div class="comment">
+                        <p>التعليق: {{ rating.comment }}</p>
+                    </div>
+                    {% endif %}
+                    </div>
+                    
+                </li>
+                {% endfor %}
+            </ul>
           </div>
         </div>
         
@@ -198,7 +215,7 @@ deals
               </div>
               <div class="col-lg-4">
                 <div class="border-button">
-                  <a href="{% url 'invreq' %}">اسعار باقات</a>
+                  <a href="{% url 'index' %}">اسعار باقات</a>
                 </div>
               </div>
             </div>
