@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 
-<div class="promo-requests">
+
   <section id="section-1">
     <div class="content-slider">
       {% for promo_request in promo_requests %}
@@ -69,7 +69,7 @@
       </nav>
    </div>
   </section>
-  </div>
+  
   <div class="amazing-deals">
   <div class="container">
     <div class="row">
@@ -205,7 +205,7 @@
                        
         
                         <div class="main-button">
-                          <a href="{% url 'invreq' %}">الاستثمار في المشروع</a>
+                          <a href="{% url 'invreq' project.id %}">الاستثمار في المشروع</a>
                         </div>
                       </div>
                     </div>
@@ -336,6 +336,38 @@
 </script>
 
 <style>
+/* STARTتنسيقات خاصة بالترويجات يونس عملها  */
+
+/* #section-1 .content-slider .slider [id^="top-banner-"] {
+  background: url('../images/') no-repeat center center;
+  background-size: cover;
+}
+
+
+#section-1 .content-slider [id^="banner"]:checked ~ .slider [id^="top-banner-"] {
+  opacity: 1;
+  z-index: 1;
+}
+
+#section-1 .content-slider [id^="banner"]:checked ~ nav label:nth-of-type(n) {
+  cursor: default;
+  color: #fff;
+  transition: all 0.5s;
+}
+
+#section-1 .content-slider [id^="banner"]:checked ~ nav label:nth-of-type(n) .progressbar {
+  background: #fff;
+}
+
+#section-1 .content-slider [id^="banner"]:checked ~ nav label:nth-of-type(n) .progressbar-fill {
+  animation: progressBarFill 5s linear;
+} */
+
+
+/* ENDتنسيقات خاصة بالترويجات يونس عملها  */
+
+
+
   /* تنسيق الصف الرئيسي */
   .row.justify-content-center.mb-3 {
     margin-bottom: 3rem;

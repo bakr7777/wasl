@@ -58,7 +58,7 @@ class Project(models.Model):
 
 
 
-      
+
 ##############################Photo##################################################
 
 # class ProjectImages(models.Model):
