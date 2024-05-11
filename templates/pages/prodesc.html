@@ -7,194 +7,192 @@ reservation
 
 {% block content %}
 <div class="second-page-heading">
-  
     <div class="container">
-      <div class="row">
-        <!-- <div class="col-lg-12">
-          <h4>Book Prefered Deal Here</h4>
-          <h2>Make Your Reservation</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt uttersi labore et dolore magna aliqua is ipsum suspendisse ultrices gravida</p>
-          <div class="main-button"><a href="about.html">Discover More</a></div>
-        </div> -->
-      </div>
+        <div class="row">
+            <!-- <div class="col-lg-12">
+              <h4>Book Prefered Deal Here</h4>
+              <h2>Make Your Reservation</h2>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt uttersi labore et dolore magna aliqua is ipsum suspendisse ultrices gravida</p>
+              <div class="main-button"><a href="about.html">Discover More</a></div>
+            </div> -->
+        </div>
     </div>
-  </div>
+</div>
 
-  <div class="more-info reservation-info">
+<div class="more-info reservation-info">
     <div class="container">
-      <div class="row">
-        <div class="col-lg-4 col-sm-6">
-          <div class="info-item">
-            <i class="fa fa-phone"></i>
-            <h4>قم بالتواصل معناء </h4>
-            <a href="#"></a>
-          </div>
-        </div>
-        <div class="col-lg-4 col-sm-6">
-          <div class="info-item">
-            <i class="fa fa-envelope"></i>
-            <h4>المشاريع </h4>
-            <a href="#"></a>
-          </div>
-        </div>
-        <div class="col-lg-4 col-sm-6">
-          <div class="info-item">
-            <i class="fa fa-map-marker"></i>
-            <h4> المزيد من المشاريع</h4>
-            <a href="#"></a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="reservation-form">
-    <div class="container">
-      <div class="row">
-        {% for investment_request in investment_request %} 
-          <div class="col-lg-6 col-sm-6" style="border: #043f44; background-color: #ddd6d6; margin: auto;width: 1000px;">
-              <div class="item">
-                <div class="row">
-                  <div class="col-lg-6">
-                    <div class="image" style="background-image: url('{{ investment_request.project.image.url }}'); background-size: 453px 600px;
-                      background-repeat: no-repeat;margin-left: -35px;
-                      background-position: center center; overflow: hidden;
-                      height: 605px;">
-                    </div>
-                    <form method="POST" action="{% url 'prodesc' %}">
-                      {% csrf_token %}
-                      <input type="hidden" name = "investor" value="{{investment_request.investor.id}}"/>
-                      <input type="hidden" name = "project" value="{{investment_request.project.id}}"/>
-                      <div class="main-button" style="padding-top: 100px; padding-left: 170px;">
-                          <button type="submit"  style="font-size: 14px;
-                          color: #fff;
-                          background-color: #22b3c1;
-                          border: 1px solid #22b3c1;
-                          display: inline-block;
-                          border-radius: 25px;
-                          padding-left: 0px; width: 100px; height:40px" > المفضلة </button>
-                      </div>
-                    </form>
-                    
-                  </div>
-                  <div class="col-lg-6 align-self-center">
-                    <div class="content" style="direction: rtl;padding-bottom: 5%;">
-                      <span class="info" style="color: #0094f7;direction: rtl;font-size: 30px;"> اسم المشروع:{{investment_request.project.title}} </span>
-                      <h4 style="padding-top: 20%;font-size: 30px;"> تكلفة المشروع: {{investment_request.project.cost }} </h4>
-                      <div class="row" style="color: #0077ff;">
-                        <div class="col-6">
-                          <i class="fa fa-clock" style="padding-top: 70px;font-size: 30px;"></i>
-                          <span class="list" style="font-size: 30px;"> تصنيف المشروع : {{ investment_request.project.category }} </span>
-                        </div>
-                        <div class="col-6">
-                          <i class="fa fa-map" style="padding-top: 70px;font-size: 30px;"></i>
-                          <span class="list" style="font-size: 30px;"> عنوان المشروع: {{ investment_request.project.address }} </span>
-                        </div>
-                        <div class="col-6">
-                          <i class="fa fa-ma" style="padding-top: 70px;font-size: 30px;"></i>
-                          <span class="list" style="font-size: 30px;">  وصف المشروع:  {{investment_request.project.discripe }} </span>
-                      </div>
-                      <p style="font-size: 20px;padding-top: 40px;"> تفاصيل المشروع: {{ investment_request.project.details }} </p>
-                     
-                    </div>
-                  </div>
+        <div class="row">
+            <div class="col-lg-4 col-sm-6">
+                <div class="info-item">
+                    <i class="fa fa-phone"></i>
+                    <h4>قم بالتواصل معناء </h4>
+                    <a href="#"></a>
                 </div>
-              </div>
-            </form>
             </div>
-         </div>
-         <hr style="color: white;">
-         <hr style="color: white;">
-         <hr style="color: white;">
-         <hr style="color: white;">
-         <hr style="color: white;">
-         <hr style="color: white;">
-         <hr style="color: white;">
-         <hr style="color: white;">
-         <hr style="color: white;">
-         <hr style="color: white;">
-         <hr style="color: white;">
-         <hr style="color: white;">
-         <hr style="color: white;">
-         <hr style="color: white;">
-         <hr style="color: white;">
-         <hr style="color: white;">
-       {% endfor %}
-      </div>
+            <div class="col-lg-4 col-sm-6">
+                <div class="info-item">
+                    <i class="fa fa-envelope"></i>
+                    <h4>المشاريع </h4>
+                    <a href="#"></a>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <div class="info-item">
+                    <i class="fa fa-map-marker"></i>
+                    <h4> المزيد من المشاريع</h4>
+                    <a href="#"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-  </div>
-   
-    <style>
-        /* تنسيق تحريك الصور */
+<div class="reservation-form">
+    <div class="container">
+        <div class="row">
+            {% for investment_request in investment_requests %}
+            {% if investment_request.investor.user == request.user and investment_request.is_allowed %}
+            <div class="col-lg-6 col-sm-6" style="border: #043f44; background-color: #ddd6d6; margin: auto;width: 1000px;">
+                <div class="item">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="image" style="background-image: url('{{ investment_request.project.image.url }}'); background-size: 453px 600px; background-repeat: no-repeat;margin-left: -35px; background-position: center center; overflow: hidden; height: 605px;"></div>
+                            <form method="POST" action="{% url 'prodesc' %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="investor" value="{{ investment_request.investor.id }}"/>
+                                <input type="hidden" name="project" value="{{ investment_request.project.id }}"/>
+                                <div class="main-button" style="padding-top: 100px; padding-left: 170px;">
+                                    <button type="submit" style="font-size: 14px; color: #fff; background-color: #22b3c1; border: 1px solid #22b3c1; display: inline-block; border-radius: 25px; padding-left: 0px; width: 100px; height:40px"> المفضلة </button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-lg-6 align-self-center">
+                            <div class="content" style="direction: rtl;padding-bottom: 5%;">
+                                <span class="info" style="color: #0094f7;direction: rtl;font-size: 30px;"> اسم المشروع:{{ investment_request.project.title }} </span>
+                                <h4 style="padding-top: 20%;font-size: 30px;"> تكلفة المشروع: {{ investment_request.project.cost }} </h4>
+                                <div class="row" style="color: #0077ff;">
+                                    <div class="col-6">
+                                        <i class="fa fa-clock" style="padding-top: 70px;font-size: 30px;"></i>
+                                        <span class="list" style="font-size: 30px;"> تصنيف المشروع : {{ investment_request.project.category }} </span>
+                                    </div>
+                                    <div class="col-6">
+                                        <i class="fa fa-map" style="padding-top: 70px;font-size: 30px;"></i>
+                                        <span class="list" style="font-size: 30px;"> عنوان المشروع: {{ investment_request.project.address }} </span>
+                                    </div>
+                                    <div class="col-6">
+                                        <i class="fa fa-ma" style="padding-top: 70px;font-size: 30px;"></i>
+                                        <span class="list" style="font-size: 30px;"> وصف المشروع:  {{ investment_request.project.discripe }} </span>
+                                    </div>
+                                </div>
+                                <p style="font-size: 20px;padding-top: 40px;"> تفاصيل المشروع: {{ investment_request.project.details }} </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr style="color: white;">
+            {% endif %}
+            {% endfor %}
 
-        .slideshow-containere {
-            max-width: 100%;
-            position: relative;
-            margin: auto;
-            height: 400px;
-            
-            
-            
-        }
+            <div class="col-lg-6 col-sm-6">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="id_rating">{{ form.fields.rating.label }}</label>
+                        {{ form.rating }}
+                    </div>
+                    <div class="form-group">
+                        <label for="id_comment">{{ form.fields.comment.label }}</label>
+                        {{ form.comment }}
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
-        .mySlides {
-            display: none;
-            height: 1000px;
-           
-        }
+<style>
+    /* تنسيق تحريك الصور */
+    .slideshow-containere {
+        max-width: 100%;
+        position: relative;
+        margin: auto;
+        height: 400px;
+    }
 
-        image {
-            width: 100%;
-            height: 700;
-           
-        }
+    .mySlides {
+        display: none;
+        height: 1000px;
+    }
 
+    image {
+        width: 100%;
+        height: 700;
+    }
 
-
-
-      /* تنسيق الديف */
-      .my-container {
+    /* تنسيق الديف */
+    .my-container {
         text-align: center; /* لتوسيط الزر داخل الديف */
-      }
-  
-      /* تنسيق زر البوتون */
-      
+    }
 
-
-
-
-      
-  
-      /* تغيير لون الخلفية والحدود عند التحويل */
-      .my-button:hover {
+    /* تنسيق زر البوتون */
+    .my-button:hover {
         background-color: #cccaca; /* لون الخلفية (أحمر غامق) عند التحويل */
         border-color: #000000; /* لون الحدود (أحمر غامق) عند التحويل */
-      }
-    </style>
-  
-    <!-- الديف الذي يحتوي على الزر -->
-    <br> <br> <br>
-   
-    <script>
-        let slideIndex = 0;
-   
-        function showSlides() {
-            let i;
-            const slides = document.getElementsByClassName("mySlides");
-            for (i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
-             }
-              slideIndex++;
-            if (slideIndex > slides.length) {
-                slideIndex = 1;
-             }
-              slides[slideIndex - 1].style.display = "block";
-               setTimeout(showSlides, 2000); // التحول كل 2 ثانية
-          }
-   
-          showSlides();
-    </script>
-    
+    }
 
-  {% endblock %}
-  
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    label {
+        font-weight: bold;
+    }
+
+    input[type="text"],
+    textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+<!-- الديف الذي يحتوي على الزر -->
+<br> <br> <br>
+
+<script>
+    let slideIndex = 0;
+
+    function showSlides() {
+        let i;
+        const slides = document.getElementsByClassName("mySlides");
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) {
+            slideIndex = 1;
+        }
+        slides[slideIndex - 1].style.display = "block";
+        setTimeout(showSlides, 2000); // التحول كل 2 ثانية
+    }
+
+    showSlides();
+</script>
+
+{% endblock %}

@@ -4,6 +4,10 @@ from django.conf import settings
 # from multiupload.fields import MultiFileField
 
 
+from django.db import models
+from django.contrib.auth.models import User
+
+
 ##############################OWner##################################################
 
 class Owner(models.Model):
@@ -14,7 +18,7 @@ class Owner(models.Model):
     phone = models.CharField(max_length=9)
     total_owners =  models.IntegerField(default=0)
     
-    
+
     
     def __str__(self):
         return f"Total Owners: {self.total_owners}"
@@ -46,19 +50,27 @@ class Project(models.Model):
     created = models.DateTimeField(default=datetime.now)
     total_projects = models.IntegerField(default=0)
 
+
+    def average_rating(self):
+        ratings = self.ratings.all()
+        if ratings:
+            total = sum(rating.rating for rating in ratings)
+            return total / len(ratings)
+        return 0
+
    
     def __str__(self):
         return f"Total Projects: {self.total_projects}"
     
     def __str__(self):
-        return self.title
+        return f"Total Projects: {self.total_projects}"
+    
+
+
     
     def __str__(self):
-        return f"Total Projects: {self.total_projects}"
-
-
-
-
+        return self.title
+      
 ##############################Photo##################################################
 
 # class ProjectImages(models.Model):
@@ -79,14 +91,42 @@ class Photo(models.Model):
     photo_path = models.TextField(max_length=200)
 
 ########################
-    
+#sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sent_messages')
+#receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name='received_messages')
+from django.db import models
+from django.db import models
+
 class Message(models.Model):
-    #sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sent_messages')
-    #receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name='received_messages')
-    name = models.CharField(max_length=255 , blank=True , null=True)
-    email = models.EmailField(blank=True , null=True)
+    name = models.CharField(max_length=255)
     body = models.TextField()
+
+    # تحديد الحقول كإلزامية
+    email = models.EmailField(blank=True, null=True)
     timestamp = models.DateTimeField(auto_now_add=True)
+    admin_response = models.TextField(blank=True, null=True)
+
     def __str__(self):
         return self.name
 
+
+
+
+from django.db import models
+from django.conf import settings
+from django.core.validators import MinValueValidator, MaxValueValidator
+from django.db.models.constraints import UniqueConstraint
+from .models import Project
+
+class ProjectRating(models.Model):
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='ratings')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    rating = models.FloatField(validators=[MinValueValidator(1), MaxValueValidator(5)])
+    comment = models.TextField(blank=True, null=True)
+
+    class Meta:
+        constraints = [
+            UniqueConstraint(fields=['project', 'user'], name='unique_project_rating')
+        ]
+
+    def __str__(self):
+        return f"Rating for {self.project.title} by {self.user.username}"

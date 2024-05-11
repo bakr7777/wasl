@@ -1,6 +1,7 @@
 from . import views
 from django.urls import path
 
+
 urlpatterns = [
     path('', views.index, name='index'),
     path('about', views.about, name='about'), 
@@ -16,4 +17,7 @@ urlpatterns = [
     path('twsl', views.twsl, name='twsl'),
     path('<int:id>', views.edit, name='edit'),
     path('favorite', views.favorite, name='favorite'),
+
+
+    
 ]
