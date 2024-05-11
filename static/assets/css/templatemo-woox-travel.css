@@ -835,19 +835,19 @@ Banner Style
   transition: 0.3s;
 }
 #section-1 .content-slider .slider #top-banner-1 {
-  background: url('../images/banner-01.jpg') no-repeat center center;
+  background: url('../images/') no-repeat center center;
   background-size: cover;
 }
 #section-1 .content-slider .slider #top-banner-2 {
-  background: url('../images/project-4086546c9718348e.png') no-repeat center center;
+  background: url('../images/') no-repeat center center;
   background-size: cover;
 }
 #section-1 .content-slider .slider #top-banner-3 {
-  background: url('../images/banner-03.jpg') no-repeat center center;
+  background: url('../images/') no-repeat center center;
   background-size: cover;
 }
 #section-1 .content-slider .slider #top-banner-4 {
-  background: url('../images/banner-04.jpg') no-repeat center center;
+  background: url('../images/') no-repeat center center;
   background-size: cover;
 }
 #section-1 .content-slider nav {
@@ -949,7 +949,7 @@ Banner Style
   direction: rtl;
 
 
-  background-image: url(../images/about-content-mg.jpeg);
+  background-image: url(../images/_03d3f79b-4096-41bb-a9d3-6d9e6d5edb95.jpeg);
   
   background-repeat: no-repeat;
   background-size: contain;
@@ -2028,16 +2028,21 @@ Deals Page Style
 }
 
 .amazing-deals .item .image {
-  
-  
+  background-size: 100% 100%;
+  background-position: center center;
+  height: 100%;
+  background-repeat: no-repeat;
   overflow: hidden;
 }
+
+
 
 .amazing-deals .item {
   background-color: #f7f7f7;
   border-radius: 23px;
   padding-right: 30px;
   margin-bottom: 30px;
+  
 }
 
 .amazing-deals .item span.info {
@@ -2071,16 +2076,16 @@ Deals Page Style
 
   padding: 30px 0px;
 }
-
 .amazing-deals .item p {
-    color: #111;
-    direction: rtl;
-
-  padding-top: 25px;
+  color: #111;
+  direction: rtl;
+  padding-top: 10px;
   margin-top: 10px;
   border-top: 1px solid #ddd;
   margin-bottom: 30px;
+  height: 132px; /* تحديد ارتفاع ثابت بوحدة البكسل */
 }
+
 
 
 .amazing-deals ul.page-numbers {
@@ -2435,4 +2440,24 @@ body {
   .weekly-offers .container-fluid {
     padding: 0px;
   }
+}
+
+
+
+.call-to-action2 {
+  direction: rtl;
+
+  margin-top: 120px;
+  background-image: url(../images/asayt.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  padding: 75px 0px;
+}
+
+.scrollable-text {
+  border: 1px solid #ccc;
+  padding: 10px;
+  overflow: auto;
+  word-wrap: break-word;
 }
