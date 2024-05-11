@@ -108,7 +108,7 @@
           - بناء ثقة المستثمرين وتحفيز مشاركتهم.
        
 
-         
+        
         </p>
         <p style="color: black ;font-size: 18px;">5. دعم رواد الأعمال والمشاريع الناشئة:<br>
           - تقديم الدعم والموارد لرواد الأعمال والمشاريع الناشئة.<br>
@@ -137,7 +137,7 @@
           <div class="info-blockk">
             <div class="info-text">قدم طلبك للحصول على استثمار
               هل تبحث عن تمويل يساعد بنمو شركتك ويحقق أهدافك  </div>
-            <a href="{% url 'addpost' %}" class="info-linkk">ارفع مشروع  </a>
+            <a href="{% url 'reservation' %}" class="info-linkk">ارفع مشروع  </a>
           </div>
       
           <!-- القطعة الثانية -->
@@ -146,96 +146,153 @@
             <a href="/explore_opportunities" class="info-linkk"> استثمر</a>
           </div>
         </div>
-        
-      
+     
+       
 
-        <div class="row justify-content-center mb-3">
-          <div class="col-4">
-            <ul class="nav" style="direction: rtl; width:max-content;">
-              <a class="nav-link bg-primary category-link" data-category="all" href="#" style="height: 40px;">الكل</a>
-              {% for category in categories %}
-                <li class="nav-item">
-                  <a class="nav-link bg-primary category-link" data-category="{{ category.category }}" href="#">{{ category.category }}</a>
-                </li>
-              {% endfor %}
-            </ul>
-          </div>
-        </div>
-
-        
-        <div class="container">
+<div class="search-form">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <form id="new-filter-form" method="get" style="direction: rtl;">
           <div class="row">
-            {% for project in projects %}
-              <div class="col-lg-6 project-item" data-category="{% if project.category %}{{ project.category.category }}{% else %}none{% endif %}">
-                <!-- تفاصيل المشروع -->
-                <div class="item">
-                  <div class="row">
-                    <div class="col-lg-6">
-                      {% if project.image %}
-                        <div class="image" style="background-image: url('{{ project.image.url }}');  "></div>
-                      {% else %}
-                        <div class="image" style="background-color: #881782; height: 100%;"></div>
-                      {% endif %}
-                    </div>
-        
-                    <div class="col-lg-6 align-self-center">
-                      <div class="content">
-                        <span class="info">اسم المشروع: {{ project.title }}</span>
-                        <h4>التكلفة المقدرة: {{ project.cost }}</h4>
-        
-                        <div class="row">
-                          <div class="col-6">
-                            <i class="fa fa-clock"></i>
-                            <span class="list">تصنيف المشروع</span>
-                            <div class="value" style="text-align: center; font-size: large;">{{ project.category }}</div>
-                          </div>
-                          <div class="col-6">
-                            <i class="fa fa-map"></i>
-                            <span class="list">موقع المشروع</span>
-                            <div class="value" style="text-align: center; font-size: large;">{{ project.address }}</div>
-                          </div>
-                        </div>
-        
-                        <p >
-                          <span class="list">وصف المشروع</span>
-                       
-                          {{ project.discripe|safe }}
-                      </p>
+            <div class="col-lg-2">
+              <h4 style="color: #000000;">عرض بواسطة:</h4>
+            </div>
+            <div class="col-lg-4">
+              <select name="category" class="form-select" aria-label="Default select example" id="categories">
+                <option selected>التصنيف</option>
+
+                <option value="all" style=" text-align:center;">الكل</option>
+                {% for category in categories %}
+                  <option value="{{ category.category }}">{{ category.category }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="col-lg-4">
+              <fieldset>
+                <select name="category" class="form-select" aria-label="Default select example" id="categories">
+                  <option selected> التكلفة</option>
+                  <option value="all" style=" text-align:center;">الكل</option>
+                  {% for project in projects %}
+                  <option value="{{ project.cost }}">{{ project.cost }}</option>
+                {% endfor %}
                       
-                       
-        
-                        <div class="main-button">
-                          <a href="{% url 'invreq' %}">الاستثمار في المشروع</a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            {% endfor %}
+                  </select>
+              </fieldset>
           </div>
+
+            <div class="col-lg-2">
+              <button type="submit" class="btn btn-primary">عرض</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    {% for project in projects %}
+    <div class="col-lg-6 project-item" data-category="{% if project.category %}{{ project.category.category }}{% else %}none{% endif %}">
+        <!-- تفاصيل المشروع -->
+        <div class="item">
+            <div class="row">
+                <div class="col-lg-6">
+                    {% if project.image %}
+                    <div class="image" style="background-image: url('{{ project.image.url }}');  "></div>
+                    {% else %}
+                    <div class="image" style="background-color: #881782; height: 100%;"></div>
+                    {% endif %}
+                </div>
+                <div class="col-lg-6 align-self-center">
+                    <div class="content">
+                        <span class="info">اسم المشروع: {{ project.title }}  
+                          &nbsp;&nbsp;
+                           التقييم: {{ project.average_rating }} ★
+                     
+                        </span>
+                        
+
+
+                        <h4>التكلفة المقدرة: {{ project.cost }}</h4>
+                        <div class="row">
+                            <div class="col-6">
+                                <i class="fa fa-clock"></i>
+                                <span class="list">تصنيف المشروع</span>
+                                <div class="value" style="text-align: center; font-size: large;">{{ project.category }}</div>
+                            </div>
+                            <div class="col-6">
+                                <i class="fa fa-map"></i>
+                                <span class="list">موقع المشروع</span>
+                                <div class="value" style="text-align: center; font-size: large;">{{ project.address }}</div>
+                            </div>
+                        </div>
+                        <p>
+                            <span class="list">وصف المشروع</span>
+                            {{ project.discripe|safe }}
+                        </p>
+                        
+                        
+
+                        <div class="main-button1" >
+                          <a href="{% url 'invreq' %}">الاستثمار في المشروع</a>
+                          <a href="{% url 'deals' %}">  تعليقات حول المشروع</a>
+
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
         </div>
-        
-        
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="my-5 text-center">
+    <button id="load-more-btn" class="bg-Primary hover:bg-Primary/90 border-2 border-Primary text-StaticWhite focus:outline-Primary-300 transition-colors ease-in-out duration-300 rounded-lg p-2 outline-offset-2 text-center w-2/3 max-w-xs md:py-3" type="button">
+      <div class="text-lg md:text-xl" style="background-color: #22b3c1; font-size: 14px; color: #22b3c1; background-color: #eee; border: 1px solid #22b3c1; padding: 12px 30px; display: inline-block; border-radius: 25px; font-weight: 500; text-transform: capitalize; letter-spacing: 0.5px; transition: all .3s; position: relative; overflow: hidden;">عرض المزيد</div>
+    </button>
+  </div>
 </div>
-</div>
-</div>
+<script>
+  $(document).ready(function() {
+      $('#load-more-btn').click(function() {
+          // العدد الكلي من المشاريع
+          var totalProjectsCount = $('.project-item').length;
+
+          // العدد من المشاريع المخفية بعد الستة الأولى
+          var hiddenProjectsCount = $('.project-item:hidden').length;
+
+          // العدد الكلي من المشاريع التي سيتم عرضها بعد النقر على الزر
+          var projectsToShow = Math.min(totalProjectsCount, hiddenProjectsCount + 6);
+
+          // إظهار المشاريع التي تحتاج إلى الظهور
+          $('.project-item:hidden').slice(0, projectsToShow - hiddenProjectsCount).slideDown();
+
+          // إخفاء الزر إذا تم عرض جميع المشاريع
+          if (projectsToShow >= totalProjectsCount) {
+              $('#load-more-btn').hide();
+          }
+      });
+
+      // إظهار الزر إذا كانت هناك مشاريع مخفية لعرضها
+      if ($('.project-item:hidden').length > 0) {
+          $('#load-more-btn').show();
+      } else {
+          $('#load-more-btn').hide();
+      }
+  });
+</script>
 
 
-<div class="my-5 text-center"><button class="bg-Primary hover:bg-Primary/90 border-2 border-Primary text-StaticWhite focus:outline-Primary-300 transition-colors ease-in-out duration-300 rounded-lg p-2 outline-offset-2 text-center w-2/3 max-w-xs md:py-3" type="button"><div class="text-lg md:text-xl " style="background-color: #22b3c1; font-size: 14px;
-            color: #22b3c1;
-            background-color: #eee;
-            border: 1px solid #22b3c1;
-            padding: 12px 30px;
-            display: inline-block;
-            border-radius: 25px;
-            font-weight: 500;
-            text-transform: capitalize;
-            letter-spacing: 0.5px;
-            transition: all .3s;
-            position: relative;
-            overflow: hidden;"  >عرض المزيد</div>
-</button></div>
+
+
+
+        
+</div>
+</div></div>
+
 
 <div class="call-to-action2">
   <div class="container">
@@ -244,6 +301,7 @@
         <div class="row">
           <div class="col-lg-12">
             <h2 style="text-align: center;">لدينا</h2>
+            
           </div>
           <div class="col-lg-6">
             <div class="row">
@@ -282,7 +340,6 @@
     </div>
   </div>
 </div>
-
 <div class="call-to-action">
   <div class="container">
     <div class="row">
@@ -298,6 +355,27 @@
     </div>
   </div>
 </div>
+<script>
+
+document.getElementById('new-filter-form').addEventListener('submit', function (event) {
+  event.preventDefault(); // منع السلوك الافتراضي لتقديم النموذج
+
+  const selectedCategory = document.getElementById('categories').value;
+
+  projectItems.forEach(item => {
+    const itemCategory = item.dataset.category;
+
+    if (itemCategory === selectedCategory || selectedCategory === 'all') {
+      item.style.display = 'block';
+    } else {
+      item.style.display = 'none';
+    }
+  });
+});
+
+
+</script>
+
 <script>
   const categoryLinks = document.querySelectorAll('.category-link');
   const projectItems = document.querySelectorAll('.project-item');
@@ -336,42 +414,72 @@
 </script>
 
 <style>
-  /* تنسيق الصف الرئيسي */
-  .row.justify-content-center.mb-3 {
-    margin-bottom: 3rem;
-  }
+  .btn:focus {
+    color: var(--bs-btn-hover-color);
+    background-color: #22b3c1;
+    border-color: #22b3c1;
+    outline: 0;
+    box-shadow: var(--bs-btn-focus-box-shadow);
+}
+.search-form {
+      background-color: #22b3c1;
+      border-bottom-left-radius: 23px;
+      border-bottom-right-radius: 23px;
+      padding: 35px 60px;
+      margin-bottom: 20px;
+    }
 
-  /* تنسيق قائمة التصنيفات */
-  ul.nav {
-    list-style-type: none;
-    padding: 0;
-  }
+    .search-form h4 {
+      color: #fff;
+      font-size: 20px;
+      font-weight: 700;
+      margin-top: 10px;
+      
+    }
 
-  /* تنسيق العناصر في قائمة التصنيفات */
-  ul.nav .nav-item {
-    margin-bottom: 10px;
-  }
+    .search-form select {
+      background-color: transparent;
+      border: none;
+      outline: none;
+      box-shadow: none;
+      border-bottom: 1px solid #fff;
+      border-radius: 0px;
+      color: #fff;
+      font-size: 15px;
+      font-weight: 300;
+      width: 100%;
+      cursor: pointer;
+    }
 
-  /* تنسيق الروابط في قائمة التصنيفات */
-  ul.nav .nav-link {
-    
-    margin-left: 10px;
-    margin-right: 10px;
+    .search-form option {
+      background-color: #1ea0ad;
+    }
+
+    .search-form button {
+      width: 100%;
+      text-align: center;
+      font-size: 14px;
+      color: #fff;
+      background-color: transparent;
+      border: 1px solid #fff;
+      padding: 8px 30px;
+      display: inline-block;
+      border-radius: 25px;
+      font-weight: 500;
+      text-transform: capitalize;
+      letter-spacing: 0.5px;
+      transition: all .3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .search-form button:hover {
+      background-color: #fff;
+      color: #22b3c1;
+    }
+  
  
-    display: block;
-    color: #fff;
-    text-decoration: none;
-    background-color: #4e73df;
-    /* لون الخلفية */
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-  }
-
-  /* تنسيق الروابط عند التحويل (هوفر) */
-  ul.nav .nav-link:hover {
-    background-color: #2e59d9;
-    /* لون الخلفية عند التحويل */
-  }
+  
   .images {
     width: 100%;
     height: 100%;
@@ -525,5 +633,52 @@
   .new-students {
     margin-top: 14px;
   }
+
+
+/* 
+
+  .rating-section {
+    margin-top: 20px;
+}
+
+.ratings-list {
+    list-style: none;
+    padding: 0;
+}
+
+.ratings-list li {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.rating-info {
+    display: flex;
+    align-items: center;
+}
+
+.rating-info p {
+    margin-right: 10px;
+}
+
+.comment {
+    margin-top: 10px;
+} */
+.main-button1 a {
+    font-size: 14px;
+    color: #fff;
+    background-color: #22b3c1;
+    border: 1px solid #22b3c1;
+    padding: 15px 8px;
+    display: inline;
+    border-radius: 25px;
+    font-weight: 500;
+    text-transform: capitalize;
+    letter-spacing: 0.5px;
+    transition: all .3s;
+    position: relative;
+    overflow: hidden;
+}
   </style>   
+  
 {% endblock %}
