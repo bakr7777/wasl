@@ -835,7 +835,7 @@ Banner Style
   transition: 0.3s;
 }
 #section-1 .content-slider .slider #top-banner-1 {
-  background: url('../images/') no-repeat center center;
+  background: url('../images/banner-01.jpg') no-repeat center center;
   background-size: cover;
 }
 #section-1 .content-slider .slider #top-banner-2 {
@@ -847,7 +847,7 @@ Banner Style
   background-size: cover;
 }
 #section-1 .content-slider .slider #top-banner-4 {
-  background: url('../images/') no-repeat center center;
+  background: url('../images/banner-04.jpg') no-repeat center center;
   background-size: cover;
 }
 #section-1 .content-slider nav {
@@ -907,7 +907,7 @@ Banner Style
 #section-1 .content-slider nav .controls label:hover {
   color: #22b3c1;
 }
-#section-1 .content-slider #banner1:checked ~ .slider #top-banner-1,
+/* #section-1 .content-slider #banner1:checked ~ .slider #top-banner-1,
 #section-1 .content-slider #banner2:checked ~ .slider #top-banner-2,
 #section-1 .content-slider #banner3:checked ~ .slider #top-banner-3,
 #section-1 .content-slider #banner4:checked ~ .slider #top-banner-4 {
@@ -932,6 +932,24 @@ Banner Style
 #section-1 .content-slider #banner2:checked ~ nav label:nth-of-type(2) .progressbar-fill,
 #section-1 .content-slider #banner3:checked ~ nav label:nth-of-type(3) .progressbar-fill,
 #section-1 .content-slider #banner4:checked ~ nav label:nth-of-type(4) .progressbar-fill {
+  animation: progressBarFill 5s linear;
+} */
+#section-1 .content-slider [id^="banner"]:checked ~ .slider [id^="top-banner-"] {
+  opacity: 1;
+  z-index: 1;
+}
+
+#section-1 .content-slider [id^="banner"]:checked ~ nav label:nth-of-type(n) {
+  cursor: default;
+  color: #fff;
+  transition: all 0.5s;
+}
+
+#section-1 .content-slider [id^="banner"]:checked ~ nav label:nth-of-type(n) .progressbar {
+  background: #fff;
+}
+
+#section-1 .content-slider [id^="banner"]:checked ~ nav label:nth-of-type(n) .progressbar-fill {
   animation: progressBarFill 5s linear;
 }
 /* Animations */
@@ -2440,24 +2458,4 @@ body {
   .weekly-offers .container-fluid {
     padding: 0px;
   }
-}
-
-
-
-.call-to-action2 {
-  direction: rtl;
-
-  margin-top: 120px;
-  background-image: url(../images/asayt.png);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center center;
-  padding: 75px 0px;
-}
-
-.scrollable-text {
-  border: 1px solid #ccc;
-  padding: 10px;
-  overflow: auto;
-  word-wrap: break-word;
 }

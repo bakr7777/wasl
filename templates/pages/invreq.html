@@ -1,189 +1,133 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 
   <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <title>WoOx Travel Reservation Page</title>
+
+    <!-- Bootstrap core CSS -->
     <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
 
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="{% static 'assets/css/fontawesome.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/templatemo-woox-travel.css' %}">
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        /* This is the CSS file */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+    <link rel="stylesheet" href="{% static 'assets/css/owl.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/animate.css' %}">
+    <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+<!--
 
-.prq {
-    width: 100%;
-    min-height: 100vh;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    padding: 15px;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-}
+TemplateMo 580 Woox Travel
 
-.containerP {
-    background: #fff;
-    max-width: 800px;
-    margin: 0 auto;
-    font-family: Arial, sans-serif;
-    border-radius: 10px;
-    overflow: hidden;
-}
+https://templatemo.com/tm-580-woox-travel
 
-.headerP {
-    background-color: #000000;
-    padding: 20px;
-    text-align: center;
-}
-
-.headerP h1 {
-    font-size: 36px;
-    color: #ffffff;
-}
-
-.content {
-    padding: 20px;
-}
-
-.content h2 {
-    font-size: 24px;
-    color: #333;
-    margin-bottom: 10px;
-    text-align: center;
-}
-
-.content p {
-    font-size: 18px;
-    color: #666;
-    margin-bottom: 20px;
-}
-
-.content form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.content form label {
-    font-size: 18px;
-    color: #333;
-    margin-bottom: 10px;
-}
-
-.content form select {
-    width: 300px;
-    height: 40px;
-    font-size: 18px;
-    border: 1px solid #ccc;
-    margin-bottom: 20px;
-}
-
-.content form span {
-    font-size: 18px;
-    color: #333;
-    margin-bottom: 20px;
-}
-
-body {
-  overflow-x: hidden;
-}
-
-@media (max-width: 575px) {
-
-}
-
-.content form button {
-    width: 200px;
-    height: 40px;
-    font-size: 18px;
-    color: #fff;
-    background-color: #333;
-    border: none;
-    cursor: pointer;
-}
-
-.footer {
-    background-color: #333;
-    padding: 20px;
-    text-align: center;
-}
-
-.footer p {
-    font-size: 18px;
-    color: #fff;
-}
-
-.intext{
-    margin: 7px;
-    background: #e5e5e5;
-    line-height: 50px;
-    border-radius: 5px;
-    color: #555;
-
-}
-
-    </style>
+-->
   </head>
 
-  <body>
- <!-- ***** Header Area Start ***** -->
- <header class="header-area header-sticky">
+<body>
+
+  <!-- ***** Preloader Start ***** -->
+  <div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+      <span class="dot"></span>
+      <div class="dots">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </div>
+  <!-- ***** Preloader End ***** -->
+
+{% include 'parts/nav.html' %}
+
+<div class="reservation-form">
     <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <nav class="main-nav">
-                    <!-- ***** Logo Start ***** -->
-                    <a href="{% url 'index' %}" class="logo">
-                        <img src="{% static 'assets/images/mylogo.png' %}" alt="">
-                    </a>
-                    <!-- ***** Logo End ***** -->
-                    <!-- ***** Menu Start ***** -->
-                    <ul class="nav">
-                        <li><a href="{% url 'index' %}" class=" {% if request.resolver_match.url_name == 'index' %}active{% endif %} ">الصفحة الرئيسية</a></li>
-                        <li><a href="{% url 'about' %}" class=" {% if request.resolver_match.url_name == 'about' %}active{% endif %} ">عن وصل</a></li>
-                        <li><a href="{% url 'deals' %}" class=" {% if request.resolver_match.url_name == 'deals' %}active{% endif %} ">استثمر</a></li>
-                        <li><a href="{% url 'reservation' %}" class=" {% if request.resolver_match.url_name == 'reservation' %}active{% endif %} ">اضف مشروع</a></li>
-                        <li><a href="{% url 'login' %}" class=" {% if request.resolver_match.url_name == 'login' %}active{% endif %} ">تسجيل دخول</a></li>
-                        <li><a href="{% url 'promoreq' %}" class=" {% if request.resolver_match.url_name == 'promoreq' %}active{% endif %} ">Book Yours</a></li>
-                    </ul>   
-                    <a class='menu-trigger'>
-                        <span>Menu</span>
-                    </a>
-                    <!-- ***** Menu End ***** -->
-                </nav>
-            </div>
-        </div>
-    </div>
-  </header>
-  <!-- ***** Header Area End ***** -->
-<div class="prq" style="background-image: url({% static 'assets/images/bg-01.jpg' %});">
-    <div class="containerP">
-        <div class="headerP">
-            <h1> حول المشروع  </h1>
-        </div>
-        <div class="content">
-            <h2>  لمعلومات أكثر   </h2>
-            <p> يمكنك إيداع مبلغ  تأمين لمعرفة التفاصيل حول المشروع  </p>
-            <form id="promotion-form">
+      <div class="row" style="direction: rtl;">
+        <div class="col-lg-12">
+          <center>
+          <div class="col-lg-12" style="background-color: #22b3c1; border-top-left-radius:30px; border-top-right-radius:30px;">
+            <h4>طلب استثمار المشروع</h4>
+          </div>
+        </center>
+          {% if request.user.is_authenticated %}
+
+          <form id="reservation-form" method="POST" enctype="multipart/form-data"> 
+          {% csrf_token %}
+        
+            <div class="row">
               
-                <input class="intext" type="text">
-                <button type="submit">طلب استثمار</button>
-            </form>
+                <div class="col-lg-12">
+                    <fieldset style="padding-bottom: 10px;padding-top: 10px;border-bottom: 1px solid #ddd; border-top: 1px solid #ddd;">
+                     
+                    <h6>- لعرض تفاصيل المشروع بالكامل لك والاستثمار في هذا المشروع يجب عليك دفع مبلغ (10$) مقابل الاطلاع على كل التفاصيل المتعلقة بالمشروع.</h6>
+                    <h6>- بعداتمام عملية الدفع سيتم التواصل معك بعد 1-12 ساعة لاعطائك الصلاحية لاستعراض كل تفاصيل المشروع.</h6>
+                    <h6>- تستطيع إيداع المبلغ الى حسابنا الكريمي هذا (3067457284) مع ادخال اسم المودع وصورة الفاتورة / البيان الخاص بالكريمي.</h6>
+                    
+                    </fieldset>
+                    
+                </div>
+                {{ form.as_p }}
+              <!-- <div class="col-lg-6">
+                  <fieldset>
+                      <label for="Name" class="form-label">اسم المودع</label>
+                      <input type="text" name="payer_name" class="Name" placeholder="ادخل اسم المودع " required>
+                  </fieldset>
+              </div>
+              <div class="col-lg-6">
+                <fieldset>
+                    <label for="Name" class="form-label">صورة الفاتورة / البيان</label>
+                    <input type="file" name="image" class="image" accept="image/*" required>
+                </fieldset>
+                </div> -->
+                                       
+                  <fieldset>
+                      <button type="submit" name="btnsave" class="main-button">ارسال</button>
+                  </fieldset>
+              </div>
+            </div>
+          </form>
+          {% else %}
+          <h4 class="alert alert-danger">
+              يجب عليك 
+              <a href="{% url 'login' %}">
+                  تسجيل الدخول
+              </a>
+          </h4>
+          {% endif %}
         </div>
-    
+      </div>
     </div>
-</div>
+  </div>
+
+{% include 'parts/footer.html' %}
 
 
-</body>
+  <!-- Scripts -->
+  <!-- Bootstrap core JavaScript -->
+  <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+
+  <script src="{% static 'assets/js/isotope.min.js' %}"></script>
+  <script src="{% static 'assets/js/owl-carousel.js' %}"></script>
+  <script src="{% static 'assets/js/wow.js' %}"></script>
+  <script src="{% static 'assets/js/tabs.js' %}"></script>
+  <script src="{% static 'assets/js/popup.js' %}"></script>
+  <script src="{% static 'assets/js/custom.js' %}"></script>
+
+  <script>
+    $(".option").click(function(){
+      $(".option").removeClass("active");
+      $(this).addClass("active"); 
+    });
+  </script>
+
+  </body>
+
+</html>

@@ -189,7 +189,7 @@ project
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12469.776493332698!2d-80.14036379941481!3d25.907788681148624!2m3!1f357.26927939317244!2f20.870722720054623!3f0!3m2!1i1024!2i768!4f35!3m3!1m2!1s0x88d9add4b4ac788f%3A0xe77469d09480fcdb!2sSunny%20Isles%20Beach!5e1!3m2!1sen!2sth!4v1642869952544!5m2!1sen!2sth" width="100%" height="450px" frameborder="0" style="border:0; border-top-left-radius: 23px; border-top-right-radius: 23px;" allowfullscreen=""></iframe>
           </div>
         </div> -->
-        {% for project in project %}
+        {% for project in projects %}
         <div class="col-lg-6 col-sm-6" style="border: #043f44; background-color: #ddd6d6; margin: auto;width: 1000px;">
             <div class="item">
               <div class="row" style="padding: 10px;">
@@ -222,7 +222,7 @@ project
                     </div>
                     <p style="font-size: 20px;padding-top: 40px;">معلومات المشروع: {{project.discripe}}</p>
                     <div class="main-button" style="padding-top: 100px;padding-right: 300px;">
-                      <a href="{% url 'invreq' %}">الاعلان على المشروع</a>
+                      <a href="{% url 'promoreq' project.id %}">الاعلان على المشروع</a>
                       <a href="{% url 'edit' project.id %}">تعديل</a>
                   </div>
                 </div>
@@ -250,6 +250,7 @@ project
     <hr>
     <hr>
     <hr>
+    
     {% endfor %}
 
   </div>
@@ -261,15 +262,16 @@ project
       }
   
       /* تنسيق زر البوتون */
-      
-
-
-
-
-      
-  
       /* تغيير لون الخلفية والحدود عند التحويل */
-      .my-button:hover {
+
+
+
+
+
+      
+      
+      
+       .my-button:hover {
         background-color: #cccaca; /* لون الخلفية (أحمر غامق) عند التحويل */
         border-color: #000000; /* لون الحدود (أحمر غامق) عند التحويل */
       }
