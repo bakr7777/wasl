@@ -834,8 +834,8 @@ Banner Style
   border-color: #22b3c1;
   transition: 0.3s;
 }
-/* #section-1 .content-slider .slider #top-banner-1 {
-  background: url('../images/') no-repeat center center;
+#section-1 .content-slider .slider #top-banner-1 {
+  background: url('../images/banner-01.jpg') no-repeat center center;
   background-size: cover;
 }
 #section-1 .content-slider .slider #top-banner-2 {
@@ -847,11 +847,7 @@ Banner Style
   background-size: cover;
 }
 #section-1 .content-slider .slider #top-banner-4 {
-  background: url('../images/') no-repeat center center;
-  background-size: cover;
-} */
-#section-1 .content-slider .slider [id^="top-banner-"] {
-  background: url('../images/') no-repeat center center;
+  background: url('../images/banner-04.jpg') no-repeat center center;
   background-size: cover;
 }
 #section-1 .content-slider nav {
@@ -2462,17 +2458,4 @@ body {
   .weekly-offers .container-fluid {
     padding: 0px;
   }
-}
-
-
-
-.call-to-action2 {
-  direction: rtl;
-
-  margin-top: 120px;
-  background-image: url(../images/about-1mg.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center center;
-  padding: 75px 0px;
 }
