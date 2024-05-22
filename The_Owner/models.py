@@ -9,19 +9,17 @@ from django.contrib.auth.models import User
 
 
 ##############################OWner##################################################
-
 class Owner(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     date_of_birth = models.DateField(blank=True, null=True)
-    photo = models.ImageField(upload_to='usersphoto/%Y/%m/%d/',blank=True)
-    address = models.CharField(max_length=25,null=True)
+    photo = models.ImageField(upload_to='owners/%Y/%m/%d/', blank=True)
+    address = models.CharField(max_length=25)  # إضافة حقل العنوان
     phone = models.CharField(max_length=9)
-    total_owners =  models.IntegerField(default=0)
-    
+    total_owners = models.IntegerField(default=0)
 
-    
     def __str__(self):
         return f"Total Owners: {self.total_owners}"
+
     def __str__(self):
         return f'Profile of {self.user.username}'
 
@@ -111,22 +109,22 @@ class Message(models.Model):
 
 
 
-from django.db import models
-from django.conf import settings
-from django.core.validators import MinValueValidator, MaxValueValidator
-from django.db.models.constraints import UniqueConstraint
-from .models import Project
+# from django.db import models
+# from django.conf import settings
+# from django.core.validators import MinValueValidator, MaxValueValidator
+# from django.db.models.constraints import UniqueConstraint
+# from .models import Project
 
-class ProjectRating(models.Model):
-    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='ratings')
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    rating = models.FloatField(validators=[MinValueValidator(1), MaxValueValidator(5)])
-    comment = models.TextField(blank=True, null=True)
+# class ProjectRating(models.Model):
+#     project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='ratings')
+#     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+#     rating = models.FloatField(validators=[MinValueValidator(1), MaxValueValidator(5)])
+#     comment = models.TextField(blank=True, null=True)
 
-    class Meta:
-        constraints = [
-            UniqueConstraint(fields=['project', 'user'], name='unique_project_rating')
-        ]
+#     class Meta:
+#         constraints = [
+#             UniqueConstraint(fields=['project', 'user'], name='unique_project_rating')
+#         ]
 
-    def __str__(self):
-        return f"Rating for {self.project.title} by {self.user.username}"
+#     def __str__(self):
+#         return f"Rating for {self.project.title} by {self.user.username}"
