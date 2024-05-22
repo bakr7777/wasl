@@ -194,7 +194,7 @@
 <div class="container">
   <div class="row">
     {% for project in projects %}
-    <div class="col-lg-6 project-item" data-category="{% if project.category %}{{ project.category.category }}{% else %}none{% endif %}">
+    <div class="col-lg-6 project-item" id="project{{ project.id }}" data-category="{% if project.category %}{{ project.category.category }}{% else %}none{% endif %}">
         <!-- تفاصيل المشروع -->
         <div class="item">
             <div class="row">
@@ -412,6 +412,17 @@ document.getElementById('new-filter-form').addEventListener('submit', function (
       }
     });
   });
+  document.addEventListener('DOMContentLoaded', function() {
+  var projectItems = document.querySelectorAll('.project-item');
+  projectItems.forEach(function(projectItem) {
+    projectItem.addEventListener('click', function() {
+      var projectId = this.id.replace('project', ''); // يحصل على معرف المشروع
+      window.location.href = '/project_detail/' + projectId + '/'; // توجيه المستخدم إلى صفحة تفاصيل المشروع
+    });
+  });
+});
+
+
 </script>
 
 <style>
@@ -683,3 +694,5 @@ document.getElementById('new-filter-form').addEventListener('submit', function (
   </style>   
   
 {% endblock %}
+
+<h1>am</h1>

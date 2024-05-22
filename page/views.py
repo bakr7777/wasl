@@ -20,6 +20,7 @@ from django.contrib.auth.decorators import login_required
 
 
 
+from django.shortcuts import render, get_object_or_404
 
 def index(request):
     projects = Project.objects.all()
@@ -118,8 +119,20 @@ def addpost(request):
     return render(request, 'pages/addpost.html')
 
 
-def update(request):
-    return render(request, 'pages/update.html')
+def project_detail(request, project_id):
+   
+    if request.method == 'POST':
+        project_id = request.POST.get('project_id')
+        investor_id = request.POST.get('investor_id')
+        
+        project = Project.objects.get(id=project_id)
+        investor = Investor.objects.get(id=investor_id)
+
+        Favorite.objects.get_or_create(investor=investor, project=project)
+        return redirect('favorite')
+    project = Project.objects.get(id=project_id)
+    return render(request, 'pages/project_detail.html', {'project': project})
+
 
 def condations(request):
     return render(request, 'pages/condations.html')
