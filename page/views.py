@@ -21,6 +21,7 @@ from django.contrib.auth.decorators import login_required
 
 
 from django.shortcuts import render, get_object_or_404
+from django.db.models import Avg
 
 def index(request):
     projects = Project.objects.all()
@@ -30,8 +31,11 @@ def index(request):
     total_investor = Investor.objects.count()
     total_owners = Owner.objects.count()
 
-    return render(request, 'pages/index.html', {'projects': projects, 'categories': categories, 'promo_requests': promo_requests, 'total_projects': total_projects ,'total_investor': total_investor, 'total_owners': total_owners})
+    # حساب متوسط التقييم لكل مشروع
+    for project in projects:
+        project.average_rating = project.investorratingcomment_set.aggregate(Avg('rating'))['rating__avg']
 
+    return render(request, 'pages/index.html', {'projects': projects, 'categories': categories, 'promo_requests': promo_requests, 'total_projects': total_projects ,'total_investor': total_investor, 'total_owners': total_owners})
 
 
 def about(request):
@@ -41,6 +45,7 @@ def deals(request):
     projects = Project.objects.all()
     categories = ProjectCategory.objects.all()
     promo_requests = PromoRequest.objects.all()  # قم بتحميل طلبات الترويج
+   
     return  render(request, 'pages/deals.html' , {'projects': projects, 'categories': categories, 'promo_requests': promo_requests})
 
 # def reservation(request):
@@ -117,10 +122,9 @@ def vir(request):
 
 def addpost(request):
     return render(request, 'pages/addpost.html')
-
+from django.db.models import Avg
 
 def project_detail(request, project_id):
-   
     if request.method == 'POST':
         project_id = request.POST.get('project_id')
         investor_id = request.POST.get('investor_id')
@@ -130,9 +134,11 @@ def project_detail(request, project_id):
 
         Favorite.objects.get_or_create(investor=investor, project=project)
         return redirect('favorite')
+    
     project = Project.objects.get(id=project_id)
-    return render(request, 'pages/project_detail.html', {'project': project})
-
+    # حساب متوسط التقييم
+    average_rating = project.investorratingcomment_set.aggregate(Avg('rating'))['rating__avg']
+    return render(request, 'pages/project_detail.html', {'project': project, 'average_rating': average_rating})
 
 def condations(request):
     return render(request, 'pages/condations.html')
@@ -237,77 +243,67 @@ def twsl(request):
     
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from The_Investor.models import Project, InvestmentRequest
-from The_Owner.models import Project
-from The_Owner.forms import ProjectRatingForm
+from The_Investor.forms import RatingCommentForm
+from The_Investor.models import InvestmentRequest, InvestorRatingComment
 
-
-
-
-
-
-@login_required
-def prodesc(request):
-    investor = request.user.investor
-    
-    if request.method == 'POST':
-        project_id = request.POST.get('project')
-        project = Project.objects.get(id=project_id)
-
-        favorite, created = Favorite.objects.get_or_create(investor=investor, project=project)
-
-        return redirect('favorite')
-
-    investment_requests = InvestmentRequest.objects.filter(investor=investor)
-    
-    # إضافة النموذج لإضافة التعليقات والتقييمات
-    if request.method == 'POST':
-        form = ProjectRatingForm(request.POST)
-        if form.is_valid():
-            rating = form.save(commit=False)
-            rating.user = request.user
-            rating.project = project
-            rating.save()
-            return redirect('prodesc')  # اسم العرض الحالي
-    else:
-        form = ProjectRatingForm()
-        
-    return render(request, 'pages/prodesc.html', {'investment_requests': investment_requests, 'form': form})
-
-
-# from django.contrib.auth.decorators import login_required
-# from django.shortcuts import render, redirect
-# from The_Investor.models import Project, InvestmentRequest
-# from The_Owner.models import Project
-# from The_Owner.forms import ProjectRatingForm
-
-
+from django.shortcuts import get_object_or_404
+from The_Investor.models import InvestorRatingComment
 
 # @login_required
 # def prodesc(request):
 #     investor = request.user.investor
-    
+
 #     if request.method == 'POST':
-#         project_id = request.POST.get('project')
-#         project = Project.objects.get(id=project_id)
-        
-#         # إضافة التعليقات والتقييمات
-#         form = ProjectRatingForm(request.POST)
+#         form = RatingCommentForm(request.POST)
 #         if form.is_valid():
-#             rating = form.save(commit=False)
-#             rating.user = request.user
-#             rating.project = project
-#             rating.save()
-#             return redirect('prodesc')  # اسم العرض الحالي
+#             rating_comment = form.save(commit=False)
+#             rating_comment.investor = investor
+#             project_id = request.POST.get('project_id')
+#             investment_request = InvestmentRequest.objects.get(project_id=project_id, investor=investor)
+#             rating_comment.project = investment_request.project
+#             rating_comment.save()
+#             return redirect('prodesc')
 #     else:
-#         form = ProjectRatingForm()
+#         form = RatingCommentForm()
 
 #     investment_requests = InvestmentRequest.objects.filter(investor=investor)
-    
-#     return render(request, 'pages/prodesc.html', {'investment_requests': investment_requests, 'form': form})
 
+#     return render(request, 'pages/prodesc.html', {'investment_requests': investment_requests, 'form': form}) هذا رقم واحد والي تحته اثنين
 
+@login_required
+def prodesc(request):
+    investor = request.user.investor
 
+    if request.method == 'POST':
+        form = RatingCommentForm(request.POST)
+        if form.is_valid():
+            rating_comment = form.save(commit=False)
+            rating_comment.investor = investor
+            project_id = request.POST.get('project_id')
+            investment_request = InvestmentRequest.objects.get(project_id=project_id, investor=investor)
+            rating_comment.project = investment_request.project
+
+            try:
+                rating_comment.save()
+            except IntegrityError:
+                # يمكن هنا إضافة رسالة للمستخدم توضح أنه قد قام بتقييم هذا المشروع مسبقاً
+                form.add_error(None, "لقد قمت بتقييم هذا المشروع مسبقاً.")
+                return redirect('prodesc')
+
+            return redirect('prodesc')
+    else:
+        form = RatingCommentForm()
+
+    investment_requests = InvestmentRequest.objects.filter(investor=investor)
+    rated_projects = InvestorRatingComment.objects.filter(investor=investor).values_list('project_id', flat=True)
+
+    context = {
+        'investment_requests': investment_requests,
+        'form': form,
+        'rated_projects': rated_projects
+    }
+
+    return render(request, 'pages/prodesc.html', context)
 
 from django.contrib.auth.models import User
 
@@ -323,4 +319,5 @@ def favorite(request):
     else:
         # إذا لم يكن المستخدم مسجل الدخول، يتم توجيهه إلى صفحة تسجيل الدخول أو أي صفحة أخرى حسب التصميم الخاص بك
         return redirect('login')
+
 

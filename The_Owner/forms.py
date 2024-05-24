@@ -80,17 +80,17 @@ class MessageForm(forms.ModelForm):
         return name
 
 
-from django import forms
-from .models import ProjectRating
+# from django import forms
+# from .models import ProjectRating
 
-class ProjectRatingForm(forms.ModelForm):
-    class Meta:
-        model = ProjectRating
-        fields = ['rating', 'comment']  # قم بتضمين حقول التقييم والتعليق من نموذج ProjectRating
-        labels = {
-            'rating': 'التقييم',
-            'comment': 'التعليق',
-        }
+# class ProjectRatingForm(forms.ModelForm):
+#     class Meta:
+#         model = ProjectRating
+#         fields = ['rating', 'comment']  # قم بتضمين حقول التقييم والتعليق من نموذج ProjectRating
+#         labels = {
+#             'rating': 'التقييم',
+#             'comment': 'التعليق',
+#         }
 
 # class MessageForm(forms.ModelForm):
 #     class Meta:

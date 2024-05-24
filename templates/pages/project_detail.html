@@ -91,19 +91,30 @@ twsl
                           <i class="fa fa-map" style="padding-top: 70px;font-size: 30px;"></i>
                           <span class="list" style="font-size: 30px;"> عنوان المشروع: {{ project.address }} </span>
                         </div>
+                        
                         <div class="scrollable-text">
                           <i class="fa fa-ma" style="padding-top: 70px;font-size: 30px;"></i>
                           <span class="list" style="font-size: 30px; word-wrap: break-word;">  وصف المشروع:  {{ project.discripe }} </span>
                       </div>
-                      <div class="scrollable-text">
-                       <span class="list">
-                      <p style="font-size: 20px;padding-top: 40px; word-wrap: break-word;"> تفاصيل المشروع: {{ project.details }} </p>
-                       </span>
-                      </div>
+                     
+<h2 style="color: #22b3c1;">التعليقات</h2>
+{% for comment in project.investorratingcomment_set.all %}
+    <div class="comment-container">
+        <h4 class="comment-user">{{ comment.investor.user.username }}</h4>
+        <p class="comment-text">{{ comment.comment }}</p>
+        <p class="comment-rating">التقييم: {{ comment.rating }}</p>
+    </div>
+{% empty %}
+    <p class="no-comments">لا توجد تعليقات بعد.</p>
+{% endfor %}
+<!-- عرض متوسط التقييم -->
+<span class="average-rating">متوسط التقييم: {{ average_rating }}</span>
+
                     </div>
                   </div>
                 </div>
               </div>
+              
             </form>
             </div>
          </div>
@@ -124,10 +135,77 @@ twsl
          <hr style="color: white;">
          <hr style="color: white;">
       </div>
+      
     </div>
 
+<style>
+    .comment-container {
+      margin-bottom: 20px;
+      border: 1px solid #ddd;
+      padding: 10px;
+      border-radius: 5px;
+  }
 
+  .comment-user {
+      color: #22b3c1;
+      font-size: 20px;
+  }
 
+  .comment-text {
+      font-size: 18px;
+  }
 
+  .comment-rating {
+      font-size: 16px;
+      color: #22b3c1;
+  }
+
+  .no-comments {
+      font-size: 16px;
+  }
+
+  .average-rating {
+      font-size: 20px;
+      color: #22b3c1;
+  }
+</style>
+<style>
+  .comment-container {
+      margin-bottom: 20px;
+      border: 1px solid #ddd;
+      padding: 15px;
+      border-radius: 10px;
+      background-color: #f9f9f9;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .comment-user {
+      color: #22b3c1;
+      font-size: 22px;
+      margin-bottom: 5px;
+  }
+
+  .comment-text {
+      font-size: 18px;
+      margin-bottom: 10px;
+  }
+
+  .comment-rating {
+      font-size: 16px;
+      color: #22b3c1;
+  }
+
+  .no-comments {
+      font-size: 18px;
+      color: #666;
+  }
+
+  .average-rating {
+      font-size: 22px;
+      color: #22b3c1;
+      margin-top: 20px;
+      display: block;
+  }
+</style>
 
 {% endblock %}
