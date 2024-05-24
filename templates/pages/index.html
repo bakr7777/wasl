@@ -133,18 +133,20 @@
       
         <!-- الديف الرئيسي -->
         <div class="main-container">
+          {% if request.user.owner %}
           <!-- القطعة الأولى -->
           <div class="info-blockk">
             <div class="info-text">قدم طلبك للحصول على استثمار
               هل تبحث عن تمويل يساعد بنمو شركتك ويحقق أهدافك  </div>
             <a href="{% url 'reservation' %}" class="info-linkk">ارفع مشروع  </a>
           </div>
-      
+          {% elif request.user.investor %}
           <!-- القطعة الثانية -->
           <div class="info-blockk">
             <div class="info-text"> قم بااستكشاف افضل واخر الفرص الاستثمارية المتاحة وكن جزءًا من إحدى الشركات الواعدة</div>
             <a href="/explore_opportunities" class="info-linkk"> استثمر</a>
           </div>
+          {% endif %}
         </div>
      
        

@@ -104,6 +104,8 @@ class Message(models.Model):
     email = models.EmailField(blank=True, null=True)
     timestamp = models.DateTimeField(auto_now_add=True)
     admin_response = models.TextField(blank=True, null=True)
+    is_read = models.BooleanField(default=False)  # الحقل الجديد
+
 
     def __str__(self):
         return self.name

@@ -18,6 +18,9 @@ class ProjectForm(forms.ModelForm):
 
 
         }
+        widgets = {
+            'image': forms.FileInput(attrs={'class': 'form-control'})
+        }
 
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user', None)  # استخراج المستخدم من الوسائط إذا تم تمريره
