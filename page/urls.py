@@ -15,6 +15,7 @@ urlpatterns = [
     path('project', views.project, name='project'),
     path('prodesc', views.prodesc, name='prodesc'),
     path('twsl', views.twsl, name='twsl'),
+    #path('update_messages/', views.update_messages, name='update_messages'),
     path('<int:id>', views.edit, name='edit'),
     path('favorite', views.favorite, name='favorite'),
     path('project_detail/<int:project_id>/', views.project_detail, name='project_detail'),

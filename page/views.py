@@ -172,13 +172,38 @@ from The_Owner.models import Message
 from The_Owner.forms import MessageForm
 
 
+# def twsl(request):
+#     user_messages = None  # يمكنك إعداده لقائمة فارغة أو None، اعتمادًا على ما تفضله
+
+#     if request.method == 'POST':
+#         add_Message = MessageForm(request.POST, request.FILES)
+#         if add_Message.is_valid():
+#             message_instance = add_Message.save(commit=False)
+#             if request.user.is_authenticated:
+#                 message_instance.name = request.user
+#             message_instance.save()
+#             return redirect('twsl')  # بعد إرسال الرسالة بنجاح، قم بتوجيه المستخدم مباشرة إلى صفحة twsl
+
+#     if request.user.is_authenticated:
+#         user_messages = Message.objects.filter(name=request.user)
+
+#     context = {
+#         'Messages': user_messages,
+#         'form': MessageForm(user=request.user if request.user.is_authenticated else None),
+#     }
+
+#     return render(request, 'pages/twsl.html', context)
+
+
+
+@login_required
 def twsl(request):
-    user_messages = None  # يمكنك إعداده لقائمة فارغة أو None، اعتمادًا على ما تفضله
+    user_messages = None
 
     if request.method == 'POST':
-        add_Message = MessageForm(request.POST, request.FILES)
-        if add_Message.is_valid():
-            message_instance = add_Message.save(commit=False)
+        form = MessageForm(request.POST, request.FILES)
+        if form.is_valid():
+            message_instance = form.save(commit=False)
             if request.user.is_authenticated:
                 message_instance.name = request.user
             message_instance.save()
@@ -186,6 +211,9 @@ def twsl(request):
 
     if request.user.is_authenticated:
         user_messages = Message.objects.filter(name=request.user)
+        # تحديد جميع الرسائل غير المقروءة وتحديثها عند عرض صفحة الرسائل
+        unread_messages = user_messages.filter(is_read=False)
+        unread_messages.update(is_read=True)
 
     context = {
         'Messages': user_messages,
@@ -194,6 +222,25 @@ def twsl(request):
 
     return render(request, 'pages/twsl.html', context)
 
+# ######تحديث صفحة المراسلة :-
+
+# @login_required
+# def update_messages(request):
+#     if request.method == 'GET' and request.user.is_authenticated:
+#         # احصل على الرسائل الجديدة من قاعدة البيانات
+#         user_messages = Message.objects.filter(name=request.user)
+#         unread_messages = user_messages.filter(is_read=False)
+#         unread_messages.update(is_read=True)
+
+#         # إرجاع الرد بنجاح
+#         return JsonResponse({'success': True})
+#     else:
+#         # في حالة عدم توفر صلاحيات أو طلب غير صحيح
+#         return JsonResponse({'success': False}, status=400)
+
+
+
+    
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from The_Investor.forms import RatingCommentForm
@@ -272,4 +319,5 @@ def favorite(request):
     else:
         # إذا لم يكن المستخدم مسجل الدخول، يتم توجيهه إلى صفحة تسجيل الدخول أو أي صفحة أخرى حسب التصميم الخاص بك
         return redirect('login')
+
 

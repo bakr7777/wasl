@@ -63,7 +63,7 @@ def signup(request):
         if 'lname' in request.POST: lname = request.POST['lname']
         else: messages.error(request, 'Error in last name')
 
-        if 'user' in request.POST: username = request.POST['user']
+        if 'usern' in request.POST: username = request.POST['usern']
         else: messages.error(request, 'Error in username')
 
         if 'email' in request.POST: email = request.POST['email']
@@ -139,7 +139,7 @@ def signup(request):
         return render(request, 'accounts/signup.html',{
             'fname':fname,
             'lname':lname,
-            'user':username,
+            'usern':username,
             'email':email,
             'phone':phone,
             'pass':password,
