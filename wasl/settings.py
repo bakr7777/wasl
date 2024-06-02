@@ -137,6 +137,8 @@ TEMPLATES = [
 
                 'django.contrib.messages.context_processors.messages',
 
+                'The_Owner.context_processors.unread_messages_count',
+
             ],
 
         },
