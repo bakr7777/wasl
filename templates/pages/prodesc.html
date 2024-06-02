@@ -25,14 +25,12 @@ reservation
         <div class="col-lg-4 col-sm-6">
           <div class="info-item">
             <i class="fa fa-phone"></i>
-            <h4>قم بالتواصل معناء </h4>
-            <a href="#"></a>
+            <a href="#775999573"> <h4>قم بالتواصل معناء : 775999573</h4></a>
           </div>
         </div>
         <div class="col-lg-4 col-sm-6">
           <div class="info-item">
             <i class="fa fa-envelope"></i>
-
             <a href="{% url 'twsl' %}"><h4>مراسلتنا</h4></a>
           </div>
         </div>
@@ -46,61 +44,82 @@ reservation
     </div>
 </div>
 <div class="reservation-form">
-    <div class="container" style="direction: rtl;">
+    <div class="container">
         {% for investment_request in investment_requests %}
             {% if investment_request.investor.user == request.user and investment_request.is_allowed %}
-                <div class="col-lg-6 col-sm-6" style="border: #043f44; background-color: #ddd6d6; margin: auto;width: 1000px;">
+                <div class="col-lg-6 col-sm-6" style="border: 2px solid #043f44; background-color: #f8f9fa; margin: 20px auto; padding: 20px; border-radius: 10px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);">
                     <div class="item">
                         <div class="row">
-                            <div class="col-lg-6">
-                                <div class="image" style="background-image: url('{{ investment_request.project.image.url }}'); background-size: 453px 600px; background-repeat: no-repeat; margin-left: -35px; background-position: center center; overflow: hidden; height: 605px;"></div>
+                            <div class="col-lg-6" style="padding: 0;">
+                                <div class="image" style="background-image: url('{{ investment_request.project.image.url }}'); background-size: cover; background-position: center; height: 200px; border-radius: 10px;"></div>
                             </div>
-                            <div class="col-lg-6 align-self-center">
-                                <div class="content" style="direction: rtl; padding-bottom: 5%;">
-                                    <span class="info" style="color: #0094f7; direction: rtl; font-size: 30px;"> اسم المشروع:{{ investment_request.project.title }} </span>
-                                    <h4 style="padding-top: 20%; font-size: 30px;"> تكلفة المشروع: {{ investment_request.project.cost }} </h4>
-                                    <div class="row" style="color: #0077ff;">
+                            <div class="col-lg-6 align-self-center" style="padding: 20px;">
+                                <div class="content" style="direction: rtl;">
+                                    <form method="POST" action="{% url 'prodesc' %}">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="investor" value="{{investment_request.investor.id}}"/>
+                                        <input type="hidden" name="project" value="{{investment_request.project.id}}"/>
+                                        <div style="text-align: center; margin-bottom: 20px;">
+                                            <button type="submit" style="font-size: 14px; color: #fff; background-color: #22b3c1; border: none; border-radius: 25px; padding: 10px 20px;">المفضلة</button>
+                                        </div>
+                                    </form>
+                                    <span class="info" style="color: #0094f7; font-size: 20px; display: block; margin-bottom: 10px;">اسم المشروع: {{ investment_request.project.title }}</span>
+                                    <h4 style="font-size: 16px; margin-bottom: 10px;">تكلفة المشروع: {{ investment_request.project.cost }}</h4>
+                                    <div class="row" style="color: #0077ff; margin-bottom: 10px;">
                                         <div class="col-6">
-                                            <i class="fa fa-clock" style="padding-top: 70px; font-size: 30px;"></i>
-                                            <span class="list" style="font-size: 30px;"> تصنيف المشروع : {{ investment_request.project.category }} </span>
+                                            <i class="fa fa-clock" style="font-size: 16px; margin-right: 5px;"></i>
+                                            <span class="list" style="font-size: 14px;">تصنيف المشروع: {{ investment_request.project.category }}</span>
                                         </div>
                                         <div class="col-6">
-                                            <i class="fa fa-map" style="padding-top: 70px; font-size: 30px;"></i>
-                                            <span class="list" style="font-size: 30px;"> عنوان المشروع: {{ investment_request.project.address }} </span>
-                                        </div>
-                                        <div class="col-6">
-                                            <i class="fa fa-ma" style="padding-top: 70px; font-size: 30px;"></i>
-                                            <span class="list" style="font-size: 30px;"> وصف المشروع: {{ investment_request.project.discripe }} </span>
-                                            
+                                            <i class="fa fa-map" style="font-size: 16px; margin-right: 5px;"></i>
+                                            <span class="list" style="font-size: 14px;">عنوان المشروع: {{ investment_request.project.address }}</span>
                                         </div>
                                     </div>
-                                    <p style="font-size: 20px; padding-top: 40px;"> تفاصيل المشروع: {{ investment_request.project.details }} </p>
-
-
-                                    <!-- إضافة النموذج لاستقبال التعليق والتقييم -->
+                                    <div style="margin-bottom: 10px;">
+                                        <i class="fa fa-info-circle" style="font-size: 16px; margin-right: 5px;"></i>
+                                        <span class="list" style="font-size: 14px; word-wrap: break-word;">وصف المشروع: {{ investment_request.project.discripe }}</span>
+                                    </div>
+                                    <div>
+                                        <span class="list">
+                                            <p style="font-size: 14px; word-wrap: break-word; margin-bottom: 10px;">تفاصيل المشروع: {{ investment_request.project.details }}</p>
+                                        </span>
+                                    </div>
+                                    <div style="margin-bottom: 20px; padding: 15px; background-color: #f1f1f1; border-radius: 10px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);">
+                                        <p style="font-size: 16px; font-weight: bold; color: #333; margin-bottom: 10px;">تفاصيل مالك المشروع</p>
+                                        <p style="font-size: 14px; margin-bottom: 8px;">
+                                            <strong style="color: #555;">اسم مالك المشروع:</strong> 
+                                            <span style="color: #000;">{{ investment_request.project.owner.user }}</span>
+                                        </p>
+                                        <p style="font-size: 14px; margin-bottom: 8px;">
+                                            <strong style="color: #555;">رقم الهاتف:</strong> 
+                                            <a href="tel:{{ investment_request.project.owner.phone }}" style="color: #007bff; text-decoration: none;">{{ investment_request.project.owner.phone }}</a>
+                                        </p>
+                                        <p style="font-size: 14px; margin-bottom: 0;">
+                                            <strong style="color: #555;">البريد الإلكتروني:</strong> 
+                                            <a href="mailto:{{ investment_request.project.owner.email }}" style="color: #007bff; text-decoration: none;">{{ investment_request.project.owner.email }}</a>
+                                        </p>
+                                    </div>
+                                    
                                     <form method="POST" action="{% url 'prodesc' %}">
                                         {% csrf_token %}
                                         <input type="hidden" name="project_id" value="{{ investment_request.project.id }}">
-
                                         <div style="margin-bottom: 10px;">
                                             <label for="rating" style="font-weight: bold;">التقييم:</label><br>
-                                            <input type="number" id="rating" name="rating" min="1" max="5" required style="padding: 5px; width: 100px;" {% if investment_request.project.id in rated_projects %}disabled{% endif %}>
+                                            <input type="number" id="rating" name="rating" min="1" max="5" required style="padding: 5px; width: 50px;" {% if investment_request.project.id in rated_projects %}disabled{% endif %}>
                                         </div>
-
                                         <div style="margin-bottom: 10px;">
                                             <label for="comment" style="font-weight: bold;">التعليق:</label><br>
-                                            <textarea id="comment" name="comment" rows="4" cols="50" required style="padding: 5px;"></textarea>
+                                            <textarea id="comment" name="comment" rows="4" cols="50" required style="padding: 10px; width: 100%; border-radius: 5px; border: 1px solid #ccc;"></textarea>
                                         </div>
-
-                                        <button type="submit" style="padding: 10px 20px; background-color: #007bff; color: #fff; border: none; cursor: pointer;">حفظ</button>
+                                        <div style="text-align: center;">
+                                            <button type="submit" style="padding: 10px 20px; background-color: #007bff; color: #fff; border: none; border-radius: 5px; cursor: pointer;">حفظ</button>
+                                        </div>
                                     </form>
-                                    
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <hr style="color: white;">
             {% endif %}
         {% endfor %}
     </div>
