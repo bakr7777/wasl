@@ -52,49 +52,42 @@ twsl
 
     <div class="container">
       <div class="row">
-          <div class="col-lg-6 col-sm-6" style="border: #043f44; background-color: #f7f7f7; margin: auto;width: 1000px;">
+          <div class="col-lg-6 col-sm-6" style="border: #043f44; background-color: #ddd6d6; margin: auto;width: 1000px;">
               <div class="item">
                 <div class="row">
-                  <div class="col-lg-6">
-                    <div class="image" style="background-image: url('{{ project.image.url }}'); background-size: 453px 600px;
-                      background-repeat: no-repeat;margin-left: -35px;
-                      background-position: center center; overflow: hidden;
-                      height: 605px;">
-                    </div>
-                    
+                  <div class="col-lg-6" style="padding: 0;">
+                    {% if project.image %}
+                    <div class="image" style="background-image: url('{{ project.image.url }}'); background-size: cover; background-position: center; height: 200px; border-radius: 10px;"></div>
+                    {% else %}
+                    <div class="image" style="background-color: #881782; height: 100%;"></div>
+                    {% endif %}
                     
                   </div>
-                  <div class="col-lg-6 align-self-center">
-                    <div class="content" style="direction: rtl;padding-bottom: 5%;">
-                      <form method="POST" action="{% url 'project_detail' project.id %}">
+                  <div class="col-lg-6 align-self-center" style="padding: 0;">
+                    <div class="content" style="direction: rtl;">
+                      <form   method="POST" action="{% url 'project_detail' project.id %}">
                         {% csrf_token %}
-                        <input type="hidden" name = "investor_id" value="{{ investor.id }}"/>
-                        <input type="hidden" name = "project_id" value="{{ project.id }}"/>
-                        <div class="main-button" style="padding-top: 20px; padding-left: 170px; padding-right: 340px; margin-bottom: -40px;">
-                            <button type="submit"  style="font-size: 14px;
-                            color: #fff;
-                            background-color: #22b3c1;
-                            border: 1px solid #22b3c1;
-                            display: inline-block;
-                            border-radius: 25px;
-                            padding-left: 0px; width: 100px; height:40px" > المفضلة </button>
+                        <input type="hidden" name="investor" value="{{ request.user.investor.id }}">
+                        <input type="hidden" name="project" value="{{ project.id }}">
+                        <div style="text-align: center; margin-bottom: 20px;">
+                          <button type="submit" style="font-size: 14px; color: #fff; background-color: #22b3c1; border: none; border-radius: 25px; padding: 10px 20px;">المفضلة</button>
                         </div>
                       </form>
-                      <span class="info" style="color: #0094f7;direction: rtl;font-size: 30px;"> اسم المشروع:{{project.title}} </span>
-                      <h4 style="padding-top: 20%;font-size: 30px;"> تكلفة المشروع: {{project.cost}} </h4>
-                      <div class="row" style="color: #0077ff;">
+                      <span class="info" style="color: #0094f7; font-size: 20px; display: block; margin-bottom: 10px;"> اسم المشروع:{{project.title}} </span>
+                      <h4 style="font-size: 16px; margin-bottom: 10px;"> تكلفة المشروع: {{project.cost}} </h4>
+                      <div class="row" style="color: #0077ff; margin-bottom: 10px;">
                         <div class="col-6">
-                          <i class="fa fa-clock" style="padding-top: 70px;font-size: 30px;"></i>
-                          <span class="list" style="font-size: 30px;"> تصنيف المشروع : {{ project.category }} </span>
+                          <i class="fa fa-clock" style="font-size: 16px; margin-right: 5px;"></i>
+                          <span class="list" style="font-size: 14px;"> تصنيف المشروع : {{ project.category }} </span>
                         </div>
                         <div class="col-6">
-                          <i class="fa fa-map" style="padding-top: 70px;font-size: 30px;"></i>
-                          <span class="list" style="font-size: 30px;"> عنوان المشروع: {{ project.address }} </span>
+                          <i class="fa fa-map" style="font-size: 16px; margin-right: 5px;"></i>
+                          <span class="list" style="font-size: 14px;"> عنوان المشروع: {{ project.address }} </span>
                         </div>
                         
-                        <div class="scrollable-text">
-                          <i class="fa fa-ma" style="padding-top: 70px;font-size: 30px;"></i>
-                          <span class="list" style="font-size: 30px; word-wrap: break-word;">  وصف المشروع:  {{ project.discripe }} </span>
+                        <div class="margin-bottom: 10px;">
+                          <i class="fa fa-info-circle" style="color: #000; font-size: 16px; margin-right: 5px;"></i>
+                          <span class="list" style="color: #000; font-size: 14px; word-wrap: break-word;">  وصف المشروع:  {{ project.discripe }} </span>
                       </div>
                      
 <h2 style="color: #22b3c1;">التعليقات</h2>
@@ -137,6 +130,26 @@ twsl
       </div>
       
     </div>
+    <script>
+      function project_detail() {
+          var projectId = "{{ project.id }}";
+          var investorId = "{{ investor.id }}";
+          
+          var xhr = new XMLHttpRequest();
+          xhr.open("POST", "/project_detail/", true);
+          xhr.setRequestHeader("Content-Type", "application/json");
+          xhr.onreadystatechange = function () {
+              if (xhr.readyState === 4 && xhr.status === 200) {
+                  // تمت العملية بنجاح
+                  window.location.href = "/favorite/";
+              }
+          };
+          var data = JSON.stringify({"project_id": projectId, "investor_id": investorId});
+          xhr.send(data);
+      }
+      </script>
+      
+
 
 <style>
     .comment-container {
