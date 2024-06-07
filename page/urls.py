@@ -1,5 +1,10 @@
 from . import views
 from django.urls import path
+from .views import feasibility_study, confirmation_page
+from page.views import feasibility_study
+from .views import services
+from .views import chat_list, send_message
+
 
 
 urlpatterns = [
@@ -18,4 +23,12 @@ urlpatterns = [
     path('<int:id>', views.edit, name='edit'),
     path('favorite', views.favorite, name='favorite'),
     path('project_detail/<int:project_id>/', views.project_detail, name='project_detail'),
+    path('feasibility_study', views.feasibility_study, name='feasibility_study'),
+    path('confirmation/', views.confirmation_page, name='confirmation_page'),
+    path('services', views.services, name='services'),
+    path('chat/<int:feasibility_study_id>/', chat_list, name='chat_list'),
+    path('chat/<int:feasibility_study_id>/send/', send_message, name='send_message'),
+
 ]
+
+

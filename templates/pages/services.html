@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+الخدمات
+{% endblock %}
+
+{% block content %}
+<div class="services-page container">
+    <h2 class="page-title">خدماتك</h2>
+    
+    <h3 class="section-title">دراسات الجدوى المتاحة:</h3>
+    {% if user_feasibility_studies %}
+        <div class="feasibility-studies-list">
+            {% for study in user_feasibility_studies %}
+                <div class="study-item">
+                    <h4 class="item-title">{{ study.project_name }}</h4>
+                    <p><strong>الوصف:</strong> {{ study.description }}</p>
+                    <p><strong>تحليل السوق:</strong> {{ study.market_analysis }}</p>
+                    <p><strong>التحليل المالي:</strong> {{ study.financial_analysis }}</p>
+                    <p><strong>تقييم المخاطر:</strong> {{ study.risk_assessment }}</p>
+                    <p><strong>التوصيات:</strong> {{ study.recommendations }}</p>
+                    <!-- يمكنك إضافة المزيد من الحقول هنا -->
+                    <p><a class="chat-link" href="{% url 'chat_list' study.id %}">عرض الدردشة</a></p> <!-- إضافة رابط الدردشة هنا -->
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="no-data">لا توجد دراسات متاحة حاليًا لهذا المستخدم.</p>
+    {% endif %}
+
+    <h3 class="section-title">طلبات دراسة الجدوى الخاصة بك:</h3>
+    {% if user_requests %}
+        <div class="feasibility-requests-list">
+            {% for request in user_requests %}
+                <div class="request-item">
+                    <h4 class="item-title">{{ request.project_name }}</h4>
+                    <p><strong>الوصف:</strong> {{ request.description }}</p>
+                    <p><strong>الأهداف:</strong> {{ request.goals }}</p>
+                    <p><strong>الجمهور المستهدف:</strong> {{ request.target_audience }}</p>
+                    <p><strong>المنافسين:</strong> {{ request.competitors }}</p>
+                    <p><strong>الموارد:</strong> {{ request.resources }}</p>
+                    <p><strong>معلومات إضافية:</strong> {{ request.additional_info }}</p>
+                    <p><strong>نوع الدراسة:</strong> {{ request.get_study_type_display }}</p>
+                    <p><strong>الوثائق الداعمة:</strong> 
+                        {% if request.supporting_documents %}
+                            <a href="{{ request.supporting_documents.url }}">عرض الوثائق</a>
+                        {% else %}
+                            لا توجد وثائق داعمة
+                        {% endif %}
+                    </p>
+                    <p><strong>اسم الدفع:</strong> {{ request.pay_name }}</p>
+                    <p><strong>صورة الدفع:</strong> 
+                        {% if request.image %}
+                            <img src="{{ request.image.url }}" alt="صورة الدفع" class="payment-image">
+                        {% else %}
+                            لا توجد صورة دفع
+                        {% endif %}
+                    </p>
+                    <p><strong>رد الإدارة:</strong> {{ request.admin_response }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="no-data">لا توجد طلبات دراسة جدوى حالياً.</p>
+    {% endif %}
+</div>
+
+
+<style>
+
+
+body {
+    background-color: #fff;
+}
+.services-page {
+    background: #fff;
+    padding: 70px;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+}
+
+.page-title {
+    text-align: center;
+    color: #007bff;
+    margin-bottom: 30px;
+}
+
+.section-title {
+    margin-bottom: 20px;
+    color: #007bff;
+}
+
+.feasibility-studies-list,
+.feasibility-requests-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.study-item,
+.request-item {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+.item-title {
+    margin-top: 0;
+    color: #007bff;
+}
+
+.study-item p,
+.request-item p {
+    margin: 5px 0;
+    color: #333;
+}
+
+.no-data {
+    color: #666;
+}
+
+.chat-link {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.payment-image {
+    max-width: 100px;
+    display: block;
+    margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+    .services-page {
+        padding: 10px;
+    }
+
+    .feasibility-studies-list,
+    .feasibility-requests-list {
+        gap: 15px;
+    }
+
+    .study-item,
+    .request-item {
+        padding: 15px;
+    }
+
+    .payment-image {
+        max-width: 80px;
+    }
+}
+</style>
+{% endblock %}

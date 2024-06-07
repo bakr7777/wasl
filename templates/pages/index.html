@@ -1,54 +1,63 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-
-
-  <section id="section-1">
-    <div class="content-slider">
+<section id="section-1">
+  <div class="content-slider">
+    {% if promo_requests %}
       {% for promo_request in promo_requests %}
-        <input type="radio" id="banner{{ forloop.counter }}" class="sec-1-input" name="banner" {% if forloop.first %}checked{% endif %}>
+        {% if promo_request.active %}
+          <input type="radio" id="banner{{ forloop.counter }}" class="sec-1-input" name="banner" {% if forloop.first %}checked{% endif %}>
+        {% endif %}
       {% endfor %}
       <div class="slider">
         {% for promo_request in promo_requests %}
-          <div id="top-banner-{{ forloop.counter }}" class="banner" style="background-image: url('{{ promo_request.project.image.url }}'); background-position: center center; height: 100%;">
-                
-                  
-            <div class="banner-inner-wrapper header-text">
-              <div class="main-caption">
-                <h1>{{ promo_request.project.title }}</h1>
-                <h1>{{ promo_request.project.discripe }}</h1>
-                <div class="border-button"><a href="{% url 'deals' %}">الاستثمار في المشروع</a></div>
-              </div>
-              <div class="container">
-                <div class="row">
-                  <div class="col-lg-12">
-                    <div class="more-info">
-                      <div class="row">
-
-                        <div class="col-lg-3 col-sm-6 col-6" style="flex: 0 0 auto;
-                                              width: 20%;" >
-                          <i class="fa fa-map"></i>
-                          <h4><span>  موقع المشروع:</span><br>{{ promo_request.project.address }}<em></em></h4>
-                        </div>
-                        <div class="col-lg-3 col-sm-6 col-6" style="flex: 0 0 auto;
-                                              width: 20%;" >
-                          <i class="fa fa-globe"></i>
-                          <h4><span> تصنيف المشروع :</span><br>{{ promo_request.project.category }}<em></em></h4>
-                        </div>
-                        <div class="col-lg-3 col-sm-6 col-6" style="flex: 0 0 auto;
-                                              width: 20%;" >
-                          <i class="fa fa-home"></i>
-                          <h4><span>  التكلفة المقدرة :</span><br>{{ promo_request.project.cost }}</h4>
-                        </div>
-                        <div class="col-lg-3 col-sm-6 col-6" style="flex: 0 0 auto;
-                                              width: 20%;">
-                          <i class="fa fa-user"></i>
-                          <h4><span>  اسم المشروع:</span><br>{{ promo_request.project.title }}</h4>
-                        </div>
-                        <div class="col-lg-3 col-sm-6 col-6" style="flex: 0 0 auto;
-                                              width: 20%;" >
-                          <div class="main-button">
-                            <a href="{% url 'deals' %}">قراءة المزيد</a>
+          {% if promo_request.active %}
+            <div id="top-banner-{{ forloop.counter }}" class="banner">
+              <div class="banner-inner-wrapper header-text">
+                <div class="main-caption" style="position: relative; padding: 40px; color: #fff; text-align: center; border-radius: 15px; overflow: hidden;">
+                  {% if promo_request.project.image %}
+                    <img src="{{ promo_request.project.image.url }}" alt="{{ promo_request.project.title }}" class="promo-image">
+                  {% else %}
+                    <img src="{% static 'assets/images/myp.png' %}" alt="Default Image" class="promo-image">
+                  {% endif %}
+                  <div class="caption-overlay">
+                    <h1>{{ promo_request.project.title }}</h1>
+                    <p>{{ promo_request.project.discripe }}</p>
+                    <p class="investment-opportunity">فرصة استثمارية لا تُفوَّت! انضم إلى مشروعنا وكن جزءًا من نجاح مبهر. استثمر الآن وحقق أرباحًا مجزية.</p>
+                    <div class="border-button">
+                      <a href="{% url 'deals' %}">الاستثمار في المشروع</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="container">
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <div class="more-info">
+                        <div class="row">
+                          <div class="col-lg-3 col-sm-6 col-6" style="flex: 0 0 auto; width: 20%;">
+                            <i class="fa fa-map"></i>
+                            <h4><span>موقع المشروع:</span><br>{{ promo_request.project.address }}<em></em></h4>
+                          </div>
+                          <div class="col-lg-3 col-sm-6 col-6" style="flex: 0 0 auto; width: 20%;">
+                            <i class="fa fa-globe"></i>
+                            <h4><span>تصنيف المشروع:</span><br>{{ promo_request.project.category }}<em></em></h4>
+                          </div>
+                          <div class="col-lg-3 col-sm-6 col-6" style="flex: 0 0 auto; width: 20%;">
+                            <i class="fa fa-home"></i>
+                            <h4><span>التكلفة المقدرة:</span><br>{{ promo_request.project.cost }}</h4>
+                          </div>
+                          <div class="col-lg-3 col-sm-6 col-6" style="flex: 0 0 auto; width: 20%;">
+                            <i class="fa fa-user"></i>
+                            {% if promo_request.title_length > 13 %}
+                              <h4 style="font-size: 10px;"><span>اسم المشروع:</span><br>{{ promo_request.project.title }}</h4>
+                            {% else %}
+                              <h4><span>اسم المشروع:</span><br>{{ promo_request.project.title }}</h4>
+                            {% endif %}
+                          </div>
+                          <div class="col-lg-3 col-sm-6 col-6" style="flex: 0 0 auto; width: 20%;">
+                            <div class="main-button">
+                              <a href="{% url 'deals' %}">قراءة المزيد</a>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -57,97 +66,96 @@
                 </div>
               </div>
             </div>
-          </div>
+          {% endif %}
         {% endfor %}
       </div>
       <nav>
         <div class="controls">
           {% for promo_request in promo_requests %}
-            <label for="banner{{ forloop.counter }}"><span class="progressbar"><span class="progressbar-fill"></span></span><span class="text">{{ forloop.counter }}</span></label>
+            {% if promo_request.active %}
+              <label for="banner{{ forloop.counter }}"><span class="progressbar"><span class="progressbar-fill"></span></span><span class="text">{{ forloop.counter }}</span></label>
+            {% endif %}
           {% endfor %}
         </div>
       </nav>
-   </div>
-  </section>
+    {% else %}
+      <div class="no-promo-requests" style="text-align: center; padding: 50px;">
+        <img src="{% static 'assets/images/myp.png' %}" alt="No Promo Requests" class="promo-image">
+        <!-- <h2 style="color: #333; margin-top: 20px;">لا توجد طلبات ترويج حالياً</h2> -->
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+<div><br><br><br><br></div>
+
+
   
   <div class="amazing-deals">
   <div class="container">
     <div class="row">
+      <div class="containerrr"  style="direction: rtl;">
+        <div class="text-box">
+            <h2>لماذا منصة وصل؟</h2>
+            <p>1. توفير فرص استثمارية مبتكرة وواعدة:</p>
+            <ul>
+                <li>- توفير فرص استثمارية متنوعة للمستثمرين.</li>
+                <li>- تعزيز تنويع محفظة الاستثمارات وزيادة الفرص لتحقيق عوائد مجزية.</li>
+            </ul>
+            <p>2. تسهيل عملية الاستثمار وتحسين نتائجها:</p>
+            <ul>
+                <li>- استخدام التكنولوجيا لتسهيل عمليات الاستثمار.</li>
+                <li>- تحسين تجربة المستثمر وفعالية استخدام المنصة.</li>
+            </ul>
+            <p>3. تعزيز التواصل بين المستثمرين وأصحاب المشاريع:</p>
+            <ul>
+                <li>- إنشاء بيئة تواصل فعالة بين المستثمرين ورواد الأعمال.</li>
+                <li>- تعزيز التفاعل والتعاون لتحقيق المشاريع.</li>
+            </ul>
+            <p>4. تحسين مستوى الشفافية والثقة:</p>
+            <ul>
+                <li>- رفع مستوى الشفافية في عمليات الاستثمار.</li>
+                <li>- بناء ثقة المستثمرين وتحفيز مشاركتهم.</li>
+            </ul>
+            <p>5. دعم رواد الأعمال والمشاريع الناشئة:</p>
+            <ul>
+                <li>- تقديم الدعم والموارد لرواد الأعمال والمشاريع الناشئة.</li>
+                <li>- تعزيز نجاحها وتطوير أعمالها على المدى الطويل.</li>
+            </ul>
+        </div>
     
-      <div class="containerrr">
-        <div class="box11">  
-          <h2> لماذا منصة وصل ؟</h2>
-        <p style="color: black ;font-size: 18px;">1.      توفير فرص استثمارية مبتكرة وواعدة:
-
-          <br>
-          - توفير فرص استثمارية متنوعة للمستثمرين.
-          <br>
- - تعزيز تنويع محفظة الاستثمارات وزيادة الفرص لتحقيق عوائد مجزية.
-
-
-          
-
-
-          
-        </p>
-        <p style="color: black ;font-size: 18px;"> 2. تسهيل عملية الاستثمار وتحسين نتائجها:<br>
-          - استخدام التكنولوجيا لتسهيل عمليات الاستثمار.<br>
-          - تحسين تجربة المستثمر وفعالية استخدام المنصة
-       
-
-          .
-        </p>
-        <p style="color: black ;font-size: 18px;">3. تعزيز التواصل بين المستثمرين وأصحاب المشاريع:<br>
-          - إنشاء بيئة تواصل فعالة بين المستثمرين ورواد الأعمال.<br>
-          - تعزيز التفاعل والتعاون لتحقيق المشاريع.
-
-          .
-        </p>
-        <p style="color: black ;font-size: 18px;">4. تحسين مستوى الشفافية والثقة:<br>
-          - رفع مستوى الشفافية في عمليات الاستثمار.<br>
-          - بناء ثقة المستثمرين وتحفيز مشاركتهم.
-       
-
-        
-        </p>
-        <p style="color: black ;font-size: 18px;">5. دعم رواد الأعمال والمشاريع الناشئة:<br>
-          - تقديم الدعم والموارد لرواد الأعمال والمشاريع الناشئة.<br>
-          - تعزيز نجاحها وتطوير أعمالها على المدى الطويل.
-       
-          .
-        </p>
-        
-          </div>
-          
-        <div class="box22">  
-           <!-- الديف الرئيسي -->
-      <div class="main-containerrrr">
-      
-      </div>
-         
+        <div class="image-box">
+            <div class="main-container-image">
+                <!-- هنا يمكنك إضافة الصور أو أي محتوى آخر -->
+            </div>
         </div>
-  
+    </div>
+    
+      
+    <div class="main-container">
+      <!-- القطعة الأولى -->
+      <div class="info-blockk">
+        <div class="info-text">قدم طلبك للحصول على استثمار
+          هل تبحث عن تمويل يساعد بنمو شركتك ويحقق أهدافك</div>
+        <a href="{% url 'reservation' %}" class="info-linkk">ارفع مشروع</a>
       </div>
-      
+    
+ <!-- القطعة الثالثة -->
+ <div class="info-blockk">
+  <div class="info-text">طلب خدمة دراسة جدوى للمشاريع. سواء كنت مستثمرًا أو مالك مشروع، احصل على دراسة جدوى متكاملة.</div>
+  <a href="{% url 'feasibility_study' %}" class="info-linkk">طلب دراسة جدوى</a>
+</div>
+
+
+      <!-- القطعة الثانية -->
+      <div class="info-blockk">
+        <div class="info-text">قم بااستكشاف افضل &nbsp; و &nbsp; اخر الفرص الاستثمارية المتاحة و كن جزءًا&nbsp; من &nbsp;إحدى الشركات الواعدة</div>
+        <a href="{% url 'deals' %}" class="info-linkk">استثمر</a>
+      </div>
+    
      
-      
-        <!-- الديف الرئيسي -->
-        <div class="main-container">
-          <!-- القطعة الأولى -->
-          <div class="info-blockk">
-            <div class="info-text">قدم طلبك للحصول على استثمار
-              هل تبحث عن تمويل يساعد بنمو شركتك ويحقق أهدافك  </div>
-            <a href="{% url 'reservation' %}" class="info-linkk">ارفع مشروع  </a>
-          </div>
-      
-          <!-- القطعة الثانية -->
-          <div class="info-blockk">
-            <div class="info-text"> قم بااستكشاف افضل واخر الفرص الاستثمارية المتاحة وكن جزءًا من إحدى الشركات الواعدة</div>
-            <a href="/explore_opportunities" class="info-linkk"> استثمر</a>
-          </div>
-        </div>
-     
-       
+    </div>
+    
 
 <div class="search-form">
   <div class="container">
@@ -189,7 +197,9 @@
       </div>
     </div>
   </div>
+  
 </div>
+
 
 <div class="container">
   <div class="row">
@@ -197,93 +207,54 @@
     <div class="col-lg-6 project-item" id="project{{ project.id }}" data-category="{% if project.category %}{{ project.category.category }}{% else %}none{% endif %}">
         <!-- تفاصيل المشروع -->
         <div class="item">
-            <div class="row">
-                <div class="col-lg-6">
-                    {% if project.image %}
-                    <div class="image" style="background-image: url('{{ project.image.url }}');  "></div>
-                    {% else %}
-                    <div class="image" style="background-color: #881782; height: 100%;"></div>
-                    {% endif %}
-                </div>
-                <div class="col-lg-6 align-self-center">
-                    <div class="content">
-                      <span class="info">اسم المشروع: {{ project.title }}         &nbsp;   &nbsp;        التقييم: {{ project.average_rating }}</span>
-                      <!-- شرط للتحقق من وجود متوسط التقييم -->
-                      
-                      
-                      
-
-
-                        <h4>التكلفة المقدرة: {{ project.cost }}</h4>
-                        <div class="row">
-                            <div class="col-6">
-                                <i class="fa fa-clock"></i>
-                                <span class="list">تصنيف المشروع</span>
-                                <div class="value" style="text-align: center; font-size: large;">{{ project.category }}</div>
-                            </div>
-                            <div class="col-6">
-                                <i class="fa fa-map"></i>
-                                <span class="list">موقع المشروع</span>
-                                <div class="value" style="text-align: center; font-size: large;">{{ project.address }}</div>
-                            </div>
-                        </div>
-        
-                        <p >
-                          <span class="list">وصف المشروع</span>
-                       
-                          {{ project.discripe|safe }}
-                      </p>
-                      
-                       
-        
-                        <div class="main-button1" >
-                          <a href="{% url 'invreq' project.id %}">الاستثمار في المشروع</a>
-                          <a href="{% url 'project_detail' project.id %}">  تعليقات حول المشروع</a>
-                        </div>
-                        
-                    </div>
-                </div>
+          <div class="row">
+            <div class="col-lg-6 col-md-12">
+              {% if project.image %}
+              <div class="project-image" style="background-image: url('{{ project.image.url }}');"></div>
+              {% else %}
+              <div class="project-image" style="background-image: url('{% static 'assets/images/default-image.jpeg' %}');"></div>
+              {% endif %}
             </div>
+            <div class="col-lg-6 col-md-12 align-self-center">
+              <div class="content">
+                <span class="info">اسم المشروع: {{ project.title }} &nbsp;&nbsp; التقييم: {{ project.average_rating }}</span>
+                <h4>التكلفة المقدرة: {{ project.cost }}</h4>
+                <div class="row">
+                  <div class="col-6">
+                    <i class="fa fa-clock"></i>
+                    <span class="list">تصنيف المشروع</span>
+                    <div class="value" style="text-align: center; font-size: large;">{{ project.category }}</div>
+                  </div>
+                  <div class="col-6">
+                    <i class="fa fa-map"></i>
+                    <span class="list">موقع المشروع</span>
+                    <div class="value" style="text-align: center; font-size: large;">{{ project.address }}</div>
+                  </div>
+                </div>
+                <p>
+                  <span class="list">وصف المشروع</span>
+                  {{ project.discripe|safe }}
+                </p>
+                <div class="main-button1">
+                  <a href="{% url 'invreq' project.id %}">الاستثمار في المشروع</a>
+                  <a href="{% url 'project_detail' project.id %}">تعليقات حول المشروع</a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+                      
+    
     </div>
     {% endfor %}
   </div>
-
   <div class="my-5 text-center">
     <button id="load-more-btn" class="bg-Primary hover:bg-Primary/90 border-2 border-Primary text-StaticWhite focus:outline-Primary-300 transition-colors ease-in-out duration-300 rounded-lg p-2 outline-offset-2 text-center w-2/3 max-w-xs md:py-3" type="button">
       <div class="text-lg md:text-xl" style="background-color: #22b3c1; font-size: 14px; color: #22b3c1; background-color: #eee; border: 1px solid #22b3c1; padding: 12px 30px; display: inline-block; border-radius: 25px; font-weight: 500; text-transform: capitalize; letter-spacing: 0.5px; transition: all .3s; position: relative; overflow: hidden;">عرض المزيد</div>
     </button>
   </div>
 </div>
-<script>
-  $(document).ready(function() {
-      $('#load-more-btn').click(function() {
-          // العدد الكلي من المشاريع
-          var totalProjectsCount = $('.project-item').length;
 
-          // العدد من المشاريع المخفية بعد الستة الأولى
-          var hiddenProjectsCount = $('.project-item:hidden').length;
-
-          // العدد الكلي من المشاريع التي سيتم عرضها بعد النقر على الزر
-          var projectsToShow = Math.min(totalProjectsCount, hiddenProjectsCount + 6);
-
-          // إظهار المشاريع التي تحتاج إلى الظهور
-          $('.project-item:hidden').slice(0, projectsToShow - hiddenProjectsCount).slideDown();
-
-          // إخفاء الزر إذا تم عرض جميع المشاريع
-          if (projectsToShow >= totalProjectsCount) {
-              $('#load-more-btn').hide();
-          }
-      });
-
-      // إظهار الزر إذا كانت هناك مشاريع مخفية لعرضها
-      if ($('.project-item:hidden').length > 0) {
-          $('#load-more-btn').show();
-      } else {
-          $('#load-more-btn').hide();
-      }
-  });
-</script>
 
 
 
@@ -345,7 +316,7 @@
     <div class="row">
       <div class="col-lg-8">
         <h2>هل تبحث عن مشاريع للاستثمار فيها وربح المال من خلال المساهمة في المشاريع؟</h2>
-        <h1>قم بالاعلان عن مشروعك لايجاد المستثمرين -> </h1>
+        <h1>قم بالاعلان عن مشروعك لايجاد المستثمرين  </h1>
       </div>
       <div class="col-lg-4">
         <div class="border-button">
@@ -424,7 +395,102 @@ document.getElementById('new-filter-form').addEventListener('submit', function (
 
 </script>
 
+
+
 <style>
+  .promo-image {
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+  }
+
+  .banner .caption-overlay {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 30px;
+    border-radius: 15px;
+    margin-top: -40%;
+    position: relative;
+    z-index: 1;
+  }
+
+  .caption-overlay h1 {
+    margin: 0;
+    font-size: 36px;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  }
+
+  .caption-overlay p {
+    margin-top: 20px;
+    font-size: 18px;
+    line-height: 1.6;
+    color: #d1d1d1;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  }
+
+  .caption-overlay .investment-opportunity {
+    margin-top: 20px;
+    font-size: 20px;
+    line-height: 1.8;
+    font-weight: bold;
+    color: #ffd700;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+  }
+
+  .caption-overlay .border-button a {
+    padding: 12px 25px;
+    background-color: #22b3c1;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s, transform 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+  element.style {
+    text-align: center;
+    padding: 0px;
+    margin: 69px 50px 50px 50px;
+}
+  .caption-overlay .border-button a:hover {
+    background-color: #1a8a96;
+    transform: translateY(-2px);
+  }
+</style>
+
+<style>
+  .item {
+    margin-bottom: 30px;
+  }
+  
+  .project-image {
+    width: 100%;
+    height: 100%;
+    min-height: 300px; /* Minimum height for larger screens */
+    background-size: cover;
+    background-position: center;
+    border-radius: 15px;
+  }
+  
+  .content {
+    padding: 20px;
+  }
+  
+  @media (max-width: 768px) {
+    .project-image {
+      min-height: 200px; /* Adjusted for smaller screens */
+    }
+  
+    .content {
+      padding: 10px;
+    }
+  }
+
+  .containerrr .text-box p {
+    font-size: large;
+    color: #000000;
+  }
+  
   .btn:focus {
     color: var(--bs-btn-hover-color);
     background-color: #22b3c1;
@@ -505,176 +571,149 @@ document.getElementById('new-filter-form').addEventListener('submit', function (
     object-fit: cover;
 } */
 
-  /* تنسيق الديف الرئيسي */
-  .main-container {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    /* يوضع المحتوى في المنتصف على محور التوزيع الرأسي */
-    padding: 20px;
-    background-color: #ffffff;
-    /* لون الخلفية */
+
+
+
+
+  
+.our-facts h2 {
+    font-size: 38px;
+    color: #fff;
+    line-height: 50px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-bottom: 50px;
+    text-align: center;
+  }
+  
+  .count-area-content {
+    text-align: center;
+    background-color: rgba(250,250,250,0.15);
+    border-radius: 20px;
+    padding: 25px 30px 35px 30px;
+    margin: 15px 0px;
+  }
+  
+  .percentage .count-digit:after {
+    content: '';
+    margin-left: 3px;
+  }
+  
+  .count-digit {
+      margin: 5px 0px;
+      color: #f5a425;
+      font-weight: 700;
+      font-size: 36px;
+  }
+  .count-title {
+      font-size: 18px;
+      font-weight: 500;
+      color: #fff;
+      letter-spacing: 0.5px;
+  }
+  
+  .new-students {
+    margin-top: 14px;
+  }
+  
+  
+  .our-facts h2 {
+    font-size: 38px;
+    color: #fff;
+    line-height: 50px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-bottom: 50px;
+    text-align: center;
+  }
+  
+  .count-area-content {
+    text-align: center;
+    background-color: rgba(250,250,250,0.15);
+    border-radius: 20px;
+    padding: 25px 30px 35px 30px;
+    margin: 15px 0px;
+  }
+  
+  .percentage .count-digit:after {
+    content: '';
+    margin-left: 3px;
+  }
+  
+  .count-digit {
+      margin: 5px 0px;
+      color: #f5a425;
+      font-weight: 700;
+      font-size: 36px;
+  }
+  .count-title {
+      font-size: 18px;
+      font-weight: 500;
+      color: #fff;
+      letter-spacing: 0.5px;
+  }
+  
+  .new-students {
+    margin-top: 14px;
   }
 
-  .info-text:focus {
-    background: rgb(208, 143, 58);
-    transform: scale(1.1);
-  }
 
-  /* تنسيق القطعة */
+
+
+
+
+
+.main-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  padding: 14px;
+  background-color: #ffffff;
+  margin-bottom: 20px;
+}
+
+.info-blockk {
+  text-align: center;
+  padding: 20px;
+  border: 2px solid #f7f7f7;
+  border-radius: 10px;
+  width: 300px;
+  height: 250px;
+  background-color: #f7f7f7;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 10px; /* Space between blocks */
+}
+
+.info-text {
+  font-size: 22px;
+  margin-bottom: 10px;
+  color: #000000;
+}
+
+.info-linkk {
+  text-decoration: none;
+  background-color: #22b3c1;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.info-linkk:hover {
+  background-color: #afafaf;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
   .info-blockk {
-    text-align: center;
-    padding: 20px;
-    border: 2px solid #f7f7f7;
-    /* لون الحدود */
-    border-radius: 10px;
-    width: 300px;
-    /* عرض القطعة */
-    height: 250px;
-    /* ارتفاع القطعة */
-    background-color: #f7f7f7;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    width: 100%;
+    margin: 10px 0; /* Full width and vertical spacing */
   }
-
-  /* تنسيق النصوص */
-  .info-text {
-    font-size: 22px;
-    margin-bottom: 10px;
-    color: #000000;
-    /* لون النص */
-  }
-
-  /* تنسيق الروابط */
-  .info-linkk {
-    text-decoration: none;
-    background-color: #22b3c1;
-    /* لون الخلفية */
-    color: #fff;
-    /* لون النص */
-    padding: 10px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-  }
-
-  .info-linkk:hover {
-    background-color: #afafaf;
-    /* لون الخلفية عند التحويل */
-  }
- 
-  
-  .our-facts h2 {
-    font-size: 38px;
-    color: #fff;
-    line-height: 50px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    margin-bottom: 50px;
-    text-align: center;
-  }
-  
-  .count-area-content {
-    text-align: center;
-    background-color: rgba(250,250,250,0.15);
-    border-radius: 20px;
-    padding: 25px 30px 35px 30px;
-    margin: 15px 0px;
-  }
-  
-  .percentage .count-digit:after {
-    content: '';
-    margin-left: 3px;
-  }
-  
-  .count-digit {
-      margin: 5px 0px;
-      color: #f5a425;
-      font-weight: 700;
-      font-size: 36px;
-  }
-  .count-title {
-      font-size: 18px;
-      font-weight: 500;
-      color: #fff;
-      letter-spacing: 0.5px;
-  }
-  
-  .new-students {
-    margin-top: 14px;
-  }
-  
-  
-  .our-facts h2 {
-    font-size: 38px;
-    color: #fff;
-    line-height: 50px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    margin-bottom: 50px;
-    text-align: center;
-  }
-  
-  .count-area-content {
-    text-align: center;
-    background-color: rgba(250,250,250,0.15);
-    border-radius: 20px;
-    padding: 25px 30px 35px 30px;
-    margin: 15px 0px;
-  }
-  
-  .percentage .count-digit:after {
-    content: '';
-    margin-left: 3px;
-  }
-  
-  .count-digit {
-      margin: 5px 0px;
-      color: #f5a425;
-      font-weight: 700;
-      font-size: 36px;
-  }
-  .count-title {
-      font-size: 18px;
-      font-weight: 500;
-      color: #fff;
-      letter-spacing: 0.5px;
-  }
-  
-  .new-students {
-    margin-top: 14px;
-  }
-
-
-/* 
-
-  .rating-section {
-    margin-top: 20px;
 }
 
-.ratings-list {
-    list-style: none;
-    padding: 0;
-}
-
-.ratings-list li {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
-}
-
-.rating-info {
-    display: flex;
-    align-items: center;
-}
-
-.rating-info p {
-    margin-right: 10px;
-}
-
-.comment {
-    margin-top: 10px;
-} */
 .main-button1 a {
     font-size: 14px;
     color: #fff;
@@ -694,4 +733,3 @@ document.getElementById('new-filter-form').addEventListener('submit', function (
   
 {% endblock %}
 
-<h1>am</h1>

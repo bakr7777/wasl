@@ -18,24 +18,41 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
-
-
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render
 from django.db.models import Avg
+from The_Owner.models import Project, ProjectCategory
+from The_Investor.models import Investor, Owner
+from FM.models import PromoRequest
 
 def index(request):
     projects = Project.objects.all()
     categories = ProjectCategory.objects.all()
-    promo_requests = PromoRequest.objects.all()  # قم بتحميل طلبات الترويج
+    promo_requests = PromoRequest.objects.filter(active=True)
+
+    # تحقق من انتهاء صلاحية جميع طلبات الترويج
+    for promo_request in promo_requests:
+        promo_request.check_expiration()
+
+    promo_requests = PromoRequest.objects.filter(active=True)  # إعادة التصفية بعد التحقق
+
     total_projects = Project.objects.count()
     total_investor = Investor.objects.count()
     total_owners = Owner.objects.count()
 
-    # حساب متوسط التقييم لكل مشروع
     for project in projects:
         project.average_rating = project.investorratingcomment_set.aggregate(Avg('rating'))['rating__avg']
 
-    return render(request, 'pages/index.html', {'projects': projects, 'categories': categories, 'promo_requests': promo_requests, 'total_projects': total_projects ,'total_investor': total_investor, 'total_owners': total_owners})
+    for promo_request in promo_requests:
+        promo_request.title_length = len(promo_request.project.title)
+
+    return render(request, 'pages/index.html', {
+        'projects': projects,
+        'categories': categories,
+        'promo_requests': promo_requests,
+        'total_projects': total_projects,
+        'total_investor': total_investor,
+        'total_owners': total_owners
+    })
 
 
 def about(request):
@@ -44,10 +61,12 @@ def about(request):
 def deals(request):
     projects = Project.objects.all()
     categories = ProjectCategory.objects.all()
-    promo_requests = PromoRequest.objects.all()  # قم بتحميل طلبات الترويج
    
-    return  render(request, 'pages/deals.html' , {'projects': projects, 'categories': categories, 'promo_requests': promo_requests})
-
+    return render(request, 'pages/deals.html', {
+        'projects': projects,
+        'categories': categories,
+       
+    })
 # def reservation(request):
 #     if request.method == 'POST':
 #         add_project =ProjectForm(request.POST, request.FILES)
@@ -272,4 +291,101 @@ def favorite(request):
     else:
         # إذا لم يكن المستخدم مسجل الدخول، يتم توجيهه إلى صفحة تسجيل الدخول أو أي صفحة أخرى حسب التصميم الخاص بك
         return redirect('login')
+from django.shortcuts import render, redirect
+from Chat.forms import FeasibilityStudyRequestForm 
 
+def feasibility_study(request):
+    if request.method == 'POST':
+        form = FeasibilityStudyRequestForm(request.POST, request.FILES)
+        if form.is_valid():
+            request_instance = form.save(commit=False)
+            request_instance.user = request.user
+            request_instance.save()
+            return redirect('confirmation_page')  # تأكد من وجود صفحة تأكيد
+    else:
+        form = FeasibilityStudyRequestForm()
+    return render(request, 'pages/feasibility_study.html', {'form': form})
+
+
+
+def confirmation_page(request):
+    return render(request, 'pages/confirmation_page.html')
+
+from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render
+from Chat.models import FeasibilityStudyRequest
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from Chat.models import FeasibilityStudyRequest, FeasibilityStudy, Chat
+from Chat.forms import ChatForm
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from Chat.models import FeasibilityStudyRequest, FeasibilityStudy, Chat
+from Chat.forms import ChatForm
+
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from Chat.models import FeasibilityStudyRequest, FeasibilityStudy, Chat
+from Chat.forms import ChatForm
+
+@login_required
+def services(request):
+    user_requests = FeasibilityStudyRequest.objects.filter(user=request.user)
+    user_feasibility_studies = []
+
+    for feasibility_request in user_requests:
+        if feasibility_request.is_allowed:
+            studies = feasibility_request.feasibility_studies.all()
+            user_feasibility_studies.extend(studies)
+
+    return render(request, 'pages/services.html', {
+        'user_feasibility_studies': user_feasibility_studies,
+        'user_requests': user_requests
+    })
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from Chat.models import FeasibilityStudy, Chat
+from Chat.forms import ChatForm
+
+@login_required
+def chat_list(request, feasibility_study_id):
+    feasibility_study = get_object_or_404(FeasibilityStudy, id=feasibility_study_id)
+    chats = Chat.objects.filter(feasibility_study=feasibility_study).order_by('date')
+
+    if request.method == 'POST':
+        form = ChatForm(request.POST)
+        if form.is_valid():
+            chat = form.save(commit=False)
+            if request.user.is_staff:
+                chat.admin = request.user
+            elif hasattr(request.user, 'owner'):
+                chat.owner = request.user.owner
+            elif hasattr(request.user, 'investor'):
+                chat.investor = request.user.investor
+            chat.feasibility_study = feasibility_study
+            chat.save()
+            return redirect('chat_list', feasibility_study_id=feasibility_study_id)
+    else:
+        form = ChatForm()
+
+    return render(request, 'pages/chat_list.html', {
+        'feasibility_study': feasibility_study,
+        'chats': chats,
+        'form': form,
+    })
+
+@login_required
+def send_message(request, feasibility_study_id):
+    feasibility_study = get_object_or_404(FeasibilityStudy, id=feasibility_study_id)
+    if request.method == 'POST':
+        form = ChatForm(request.POST)
+        if form.is_valid():
+            chat = form.save(commit=False)
+            chat.admin = request.user
+            chat.feasibility_study = feasibility_study
+            chat.save()
+            return redirect('chat_list', feasibility_study_id=feasibility_study_id)
+    else:
+        form = ChatForm()
+    return render(request, 'pages/send_message.html', {'form': form, 'feasibility_study': feasibility_study})

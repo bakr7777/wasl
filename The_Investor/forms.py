@@ -59,5 +59,5 @@ class RatingCommentForm(forms.ModelForm):
             'comment': 'التعليق',
         }
         widgets = {
-            'rating': forms.NumberInput(attrs={'min': '1', 'max': '10'}), # نطاق من 1 إلى 10 في الفورم
+            'rating': forms.NumberInput(attrs={'min': '1', 'max': '5'}), # نطاق من 1 إلى 10 في الفورم
         }

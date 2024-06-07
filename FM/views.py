@@ -9,39 +9,8 @@ from .forms import InvForm , PromoForm
 from django.contrib.auth.models import User
 from django.http import HttpResponseBadRequest
 
-
-# def invreq(request, project_id):
-#     project = get_object_or_404(Project, id=project_id)
-    
-#     if request.method == 'POST':
-#         # استخراج البيانات من نموذج الدفع
-#         payer_name = request.POST.get('payer_name')
-#         image = request.FILES.get('image')
-        
-#         # الحصول على معرف المستخدم
-#         user_id = request.user.id
-        
-#         # التحقق مما إذا كان المستثمر موجود بالفعل
-#         investor = Investor.objects.filter(user_id=user_id).first()
-#         if not investor:
-#             # إذا لم يكن المستثمر موجودًا، عرض رسالة الخطأ
-#             return HttpResponseBadRequest("قم بإنشاء حساب مستثمر")
-        
-#         # إنشاء عملية استثمار جديدة
-#         new_investment = InvestmentRequest.objects.create(
-#             investor=investor,
-#             project=project,
-#             payer_name=payer_name,
-#             image=image,
-#         )
-
-
-        
-#         # تحديث واجهة المستخدم
-#         return redirect('index')
-#     else:
-        # return render(request, 'pages/invreq.html', {'project': project})
-
+from django.shortcuts import render
+from .models import FinancialReport
 
 
 def invreq(request, project_id):
@@ -77,3 +46,12 @@ def promoreq(request, project_id):
     }
 
     return render(request, 'pages/promoreq.html', context)
+
+# from django.shortcuts import render
+# from .models import FinancialReport
+
+# def financial_reports_view(request):
+#     reports = FinancialReport.objects.all()
+#     return render(request, 'FM/financial_reports.html', {'reports': reports})
+
+

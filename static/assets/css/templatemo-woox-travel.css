@@ -961,20 +961,6 @@ Banner Style
     margin-left: 0;
   }
 }
-.main-containerrrr {
-
-
-  direction: rtl;
-
-
-  background-image: url(../images/_03d3f79b-4096-41bb-a9d3-6d9e6d5edb95.jpeg);
-  
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center center;
-  padding:50%;
-
-}
 
 /* 
 ---------------------------------------------
@@ -1736,7 +1722,7 @@ body #user-button:hover .u-icons, body #user-button:focus-within .u-icons {
 
 @media (prefers-color-scheme: dark) {
   body:not(.light) {
-    background: #232223;
+    background: #ffffff;
     color: white;
   }
 }
@@ -1902,47 +1888,67 @@ body .options .option .label .info .sub {
   border-color: #22b3c1;
   opacity: 0.85;
 }
-
-.containerr {
-  display: flex; /* يجعل الـ divs تظهر جنبًا إلى جنب */
-  justify-content: space-between; /* يوزع المسافة بين الـ divs بالتساوي */
-  max-width: 800px;
-  margin: 50px auto;
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
 .containerrr {
-  display: flex; /* يجعل الـ divs تظهر جنبًا إلى جنب */
-  justify-content: space-between; /* يوزع المسافة بين الـ divs بالتساوي */
+  display: flex;
+  justify-content: space-between;
   max-width: 1100px;
   margin: 50px auto;
   background-color: #fff;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  flex-wrap: wrap; /* يسمح بالتفاف الـ divs عند صغر الشاشة */
 }
 
-.box11, .box22 {
-  flex: 1; /* يحصل كل div على نصف المساحة */
+.text-box, .image-box {
+  flex: 1;
   padding: 20px;
   border: 1px solid #000000;
   border-radius: 4px;
   box-sizing: border-box;
+  margin: 10px;
 }
 
-.box11 {
+.text-box {
   background-color: #fafafa;
-  font: #000000;
-  
+  color: #000000;
 }
 
-.box22 {
+.image-box {
   background-color: #22b3c1;
   color: #000000;
 }
 
+.main-container-image {
+  direction: rtl;
+  background-image: url(../images/_03d3f79b-4096-41bb-a9d3-6d9e6d5edb95.jpeg);
+  background-repeat: no-repeat;
+  background-size: cover; /* غيّر "contain" إلى "cover" */
+  background-position: center center;
+  height: 100%;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+  .containerrr {
+      flex-direction: column; /* يجعل الـ divs تظهر فوق بعضها البعض عند صغر الشاشة */
+  }
+
+  .main-container-image {
+      background-size: cover; /* تغطي الخلفية كامل الـ div */
+      background-position: center center;
+      padding: 40%; /* تعديل الحشو ليتناسب مع الشاشات الصغيرة */
+  }
+}
+
+@media (max-width: 480px) {
+  .main-container-image {
+      background-size: cover; /* تغطي الخلفية كامل الـ div */
+      background-position: center center;
+      padding: 129px; /* زيادة الحشو لتتناسب مع الشاشات الأصغر */
+  }
+}
 
 
 
@@ -2039,6 +2045,35 @@ Deals Page Style
 .search-form #search-form button:hover {
   background-color: #fff;
   color: #22b3c1;
+}
+
+
+
+.confirmation-message {
+  
+  padding: 70px;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  
+  text-align: center;
+
+  margin-bottom: 0px;
+}
+
+
+@media (max-width: 768px) {
+  .services-page {
+      padding: 10px;
+  }
+
+  .study-item,
+  .request-item {
+      padding: 15px;
+  }
+
+  .payment-image {
+      max-width: 80px;
+  }
 }
 
 .amazing-deals {
@@ -2140,6 +2175,8 @@ Deals Page Style
 .amazing-deals ul.page-numbers li:last-child a {
   border: none;
 }
+
+
 
 
 /* 
