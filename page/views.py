@@ -17,8 +17,14 @@ from .models import *
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
+from django.http import HttpResponse
+from django.core.exceptions import ObjectDoesNotExist
+from django.db import IntegrityError
+from django.contrib import messages
 
-from django.shortcuts import render
+
+from django.shortcuts import render, get_object_or_404
 from django.db.models import Avg
 from The_Owner.models import Project, ProjectCategory
 from The_Investor.models import Investor, Owner
@@ -38,7 +44,9 @@ def index(request):
     total_projects = Project.objects.count()
     total_investor = Investor.objects.count()
     total_owners = Owner.objects.count()
-
+    total_investmentrequest = InvestmentRequest.objects.filter(is_allowed=True).count()
+   
+    # حساب متوسط التقييم لكل مشروع
     for project in projects:
         project.average_rating = project.investorratingcomment_set.aggregate(Avg('rating'))['rating__avg']
 
@@ -143,21 +151,28 @@ def addpost(request):
     return render(request, 'pages/addpost.html')
 from django.db.models import Avg
 
-def project_detail(request, project_id):
+def project_detail(request, project_id,):
+    investor = request.user.investor
+    project = get_object_or_404(Project, id=project_id)
     if request.method == 'POST':
-        project_id = request.POST.get('project_id')
-        investor_id = request.POST.get('investor_id')
-        
-        project = Project.objects.get(id=project_id)
-        investor = Investor.objects.get(id=investor_id)
-
-        Favorite.objects.get_or_create(investor=investor, project=project)
-        return redirect('favorite')
+        investor = request.user.investor
+        project = get_object_or_404(Project, id=project_id)
     
-    project = Project.objects.get(id=project_id)
+    if request.method == 'POST':
+        investor_id = request.POST.get('investor')
+        project_id = request.POST.get('project')
+
+        if investor_id and project_id:
+            investor = Investor.objects.get(id=investor_id)
+            project = Project.objects.get(id=project_id)
+            Favorite.objects.get_or_create(investor=investor, project=project)
+            return redirect('favorite')
+   
+
     # حساب متوسط التقييم
-    average_rating = project.investorratingcomment_set.aggregate(Avg('rating'))['rating__avg']
-    return render(request, 'pages/project_detail.html', {'project': project, 'average_rating': average_rating})
+    average_rating = project.investorratingcomment_set.aggregate(Avg('rating'))['rating__avg']   
+    
+    return render(request, 'pages/project_detail.html', {'project': project, 'average_rating': average_rating, 'status': 'failed'}, status=400)
 
 def condations(request):
     return render(request, 'pages/condations.html')
@@ -175,29 +190,77 @@ from django.shortcuts import redirect
 from django.urls import reverse
 
 def project(request):
-    if request.user.is_authenticated:
-        # التأكد من أن المستخدم مسجل الدخول
-        owner = request.user.owner  # الحصول على مالك المشروع الحالي
+    print("Entered project view")
+    try:  
+        if not request.user.is_authenticated:
+           messages.error(request, 'يرجى تسجيل الدخول للوصول إلى هذه الصفحة.')
+           print("User not authenticated")
+           return redirect('login')
 
-        # عرض مشاريع المالك الحالي فقط
-        projects = Project.objects.filter(owner=owner)
+        owner = request.user.owner
+        print("Owner retrieved:", owner)
+
+        if hasattr(owner, 'investor') and owner.investor:
+           messages.error(request, 'ليس لديك صلاحية الوصول إلى هذه الصفحة.')
+           print("Owner is an investor")
+           return redirect('index')   
+         
+        if request.user.is_authenticated:
+            # التأكد من أن المستخدم مسجل الدخول
+            owner = request.user.owner  # الحصول على مالك المشروع الحالي
+
+            # عرض مشاريع المالك الحالي فقط
+            projects = Project.objects.filter(owner=owner)
+            
+            return render(request, 'pages/project.html', {'projects': projects})
+        else:
+            # إعادة توجيه المستخدم إلى صفحة تسجيل الدخول
+            return redirect(reverse('login'))
+     
+    except AttributeError:
+        messages.error(request, ' project لاتوجد لك صلاحية بالدخول الى صفحة')
+        print("AttributeError: No access rights")
+        return redirect('index')  # أو أي صفحة أخرى تريد إعادة التوجيه إليها
+    
         
-        return render(request, 'pages/project.html', {'projects': projects})
-    else:
-        # إعادة توجيه المستخدم إلى صفحة تسجيل الدخول
-        return redirect(reverse('login'))
+
 # في ملف views.pyfrom django.shortcuts import render, redirect
 from The_Owner.models import Message
 from The_Owner.forms import MessageForm
 
 
+# def twsl(request):
+#     user_messages = None  # يمكنك إعداده لقائمة فارغة أو None، اعتمادًا على ما تفضله
+
+#     if request.method == 'POST':
+#         add_Message = MessageForm(request.POST, request.FILES)
+#         if add_Message.is_valid():
+#             message_instance = add_Message.save(commit=False)
+#             if request.user.is_authenticated:
+#                 message_instance.name = request.user
+#             message_instance.save()
+#             return redirect('twsl')  # بعد إرسال الرسالة بنجاح، قم بتوجيه المستخدم مباشرة إلى صفحة twsl
+
+#     if request.user.is_authenticated:
+#         user_messages = Message.objects.filter(name=request.user)
+
+#     context = {
+#         'Messages': user_messages,
+#         'form': MessageForm(user=request.user if request.user.is_authenticated else None),
+#     }
+
+#     return render(request, 'pages/twsl.html', context)
+
+
+
+@login_required
 def twsl(request):
-    user_messages = None  # يمكنك إعداده لقائمة فارغة أو None، اعتمادًا على ما تفضله
+    user_messages = None
 
     if request.method == 'POST':
-        add_Message = MessageForm(request.POST, request.FILES)
-        if add_Message.is_valid():
-            message_instance = add_Message.save(commit=False)
+        form = MessageForm(request.POST, request.FILES)
+        if form.is_valid():
+            message_instance = form.save(commit=False)
             if request.user.is_authenticated:
                 message_instance.name = request.user
             message_instance.save()
@@ -205,6 +268,9 @@ def twsl(request):
 
     if request.user.is_authenticated:
         user_messages = Message.objects.filter(name=request.user)
+        # تحديد جميع الرسائل غير المقروءة وتحديثها عند عرض صفحة الرسائل
+        unread_messages = user_messages.filter(is_read=False)
+        unread_messages.update(is_read=True)
 
     context = {
         'Messages': user_messages,
@@ -213,6 +279,25 @@ def twsl(request):
 
     return render(request, 'pages/twsl.html', context)
 
+# ######تحديث صفحة المراسلة :-
+
+# @login_required
+# def update_messages(request):
+#     if request.method == 'GET' and request.user.is_authenticated:
+#         # احصل على الرسائل الجديدة من قاعدة البيانات
+#         user_messages = Message.objects.filter(name=request.user)
+#         unread_messages = user_messages.filter(is_read=False)
+#         unread_messages.update(is_read=True)
+
+#         # إرجاع الرد بنجاح
+#         return JsonResponse({'success': True})
+#     else:
+#         # في حالة عدم توفر صلاحيات أو طلب غير صحيح
+#         return JsonResponse({'success': False}, status=400)
+
+
+
+    
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from The_Investor.forms import RatingCommentForm
@@ -244,42 +329,89 @@ from The_Investor.models import InvestorRatingComment
 
 @login_required
 def prodesc(request):
-    investor = request.user.investor
+    print("Entered prodesc view")
+    try:  
+        if not request.user.is_authenticated:
+           messages.error(request, 'يرجى تسجيل الدخول للوصول إلى هذه الصفحة.')
+           print("User not authenticated")
+           return redirect('login')
 
-    if request.method == 'POST':
-        form = RatingCommentForm(request.POST)
-        if form.is_valid():
-            rating_comment = form.save(commit=False)
-            rating_comment.investor = investor
-            project_id = request.POST.get('project_id')
-            investment_request = InvestmentRequest.objects.get(project_id=project_id, investor=investor)
-            rating_comment.project = investment_request.project
+        investor = request.user.investor
+        print("Investor retrieved:", investor)
 
-            try:
-                rating_comment.save()
-            except IntegrityError:
-                # يمكن هنا إضافة رسالة للمستخدم توضح أنه قد قام بتقييم هذا المشروع مسبقاً
-                form.add_error(None, "لقد قمت بتقييم هذا المشروع مسبقاً.")
+        if hasattr(investor, 'owner') and investor.owner:
+           messages.error(request, 'ليس لديك صلاحية الوصول إلى هذه الصفحة.')
+           print("Investor is an owner")
+           return redirect('index')
+
+
+        if request.method == 'POST':
+            form = RatingCommentForm(request.POST)
+            if form.is_valid():
+                rating_comment = form.save(commit=False)
+                rating_comment.investor = investor
+                project_id = request.POST.get('project_id')
+                investment_request = InvestmentRequest.objects.get(project_id=project_id, investor=investor)
+                rating_comment.project = investment_request.project
+
+                try:
+                    rating_comment.save()
+                except IntegrityError:
+                    # يمكن هنا إضافة رسالة للمستخدم توضح أنه قد قام بتقييم هذا المشروع مسبقاً
+                    form.add_error(None, "لقد قمت بتقييم هذا المشروع مسبقاً.")
+                    return redirect('prodesc')
+
                 return redirect('prodesc')
+        else:
+            form = RatingCommentForm()
 
-            return redirect('prodesc')
-    else:
-        form = RatingCommentForm()
+        investment_requests = InvestmentRequest.objects.filter(investor=investor)
+        rated_projects = InvestorRatingComment.objects.filter(investor=investor).values_list('project_id', flat=True)
 
-    investment_requests = InvestmentRequest.objects.filter(investor=investor)
-    rated_projects = InvestorRatingComment.objects.filter(investor=investor).values_list('project_id', flat=True)
+        context = {
+            'investment_requests': investment_requests,
+            'form': form,
+            'rated_projects': rated_projects
+        }
+        
+        if request.method == 'POST':
+            projectid = request.POST.get('project')
+            investorid = request.POST.get('investor')
 
-    context = {
-        'investment_requests': investment_requests,
-        'form': form,
-        'rated_projects': rated_projects
-    }
+            project = Project.objects.get(id = projectid)
+            investor =  Investor.objects.get(id = investorid)
 
-    return render(request, 'pages/prodesc.html', context)
+
+            Favorite.objects.get_or_create(investor=investor , project=project)
+            return redirect('favorite')
+        
+    
+        project = Project.objects.all()
+        investment_request = InvestmentRequest.objects.all()
+
+
+        return render(request, 'pages/prodesc.html', context)
+    
+    except AttributeError:
+        messages.error(request, ' prodesc لاتوجد لك صلاحية بالدخول الى صفحة')
+        print("AttributeError: No access rights")
+        return redirect('index')  # أو أي صفحة أخرى تريد إعادة التوجيه إليها
 
 from django.contrib.auth.models import User
 
 def favorite(request):
+    if request.method == 'POST':
+        project_id = request.POST.get('project_id')
+        
+        try:
+            current_investor = Investor.objects.get(user=request.user)
+        except Investor.DoesNotExist:
+            # تعامل مع الحالة حيث لا يوجد مستثمر مرتبط بالمستخدم الحالي
+            return render(request, 'error.html', {'message': 'Investor does not exist'})
+
+        favorite = get_object_or_404(Favorite, investor=current_investor, project_id=project_id)
+        favorite.delete()
+        return redirect('favorite')
     # التأكد من تسجيل الدخول
     if request.user.is_authenticated:
         # استعلام للحصول على المستثمر الحالي

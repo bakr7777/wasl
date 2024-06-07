@@ -58,7 +58,7 @@ https://templatemo.com/tm-580-woox-travel
           {% if request.user.is_authenticated %}
           <h4 class="alert alert-secondary">
               اهلا, {{request.user.username}}, انت الان مسجل دخولك في الموقع,
-              <a href="{% url 'logout' %}">تسجيل الخروج</a>
+              <a href="{% url 'index' %}">الصفحة الرئيسية</a>
           </h4>
           {% else %}
 
@@ -96,6 +96,8 @@ https://templatemo.com/tm-580-woox-travel
                       <button class="main-button" type="submit" name="btnlogin">تسجيل الدخول</button>
                   </fieldset>
               </div>
+              <p><a href="{% url 'reset_password' %}">نسيت كلمة المرور؟</a></p>
+
 
               <div class="col-lg-12"  style="padding-top: 10px;">                        
                 

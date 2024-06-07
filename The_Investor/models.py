@@ -20,7 +20,15 @@ class Investor(models.Model):
    
     def __str__(self):
         return f'Profile of {self.user.username}'
+    
+    def invested_projects(self):
+        return [investment.project for investment in self.investmentrequest_set.all()]
+    
+    def total_investmentrequest(self):
+        return InvestmentRequest.objects.filter(investor=self, is_allowed=True).count()
 
+    
+    
 ###################################investor#######################
 class Favorite(models.Model):
     investor = models.ForeignKey(Investor, on_delete=models.CASCADE, null=True, blank=True)
@@ -28,6 +36,7 @@ class Favorite(models.Model):
     
     def __str__(self):
         return f"investor: {self.investor}"
+    
 
 class InvestmentRequest(models.Model):
     date = models.DateTimeField(default=datetime.now)
@@ -37,7 +46,7 @@ class InvestmentRequest(models.Model):
     image = models.ImageField(upload_to='pay_images/%Y/%m/%d/', null=True, blank=True)
     is_allowed = models.BooleanField(default=False)
     investor_identifier = models.CharField(max_length=100, null=True, blank=True)  
-    
+   
     def __str__(self):
         return f'request of {self.payer_name}'
     

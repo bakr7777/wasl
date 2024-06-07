@@ -139,6 +139,8 @@ TEMPLATES = [
 
                 'django.contrib.messages.context_processors.messages',
 
+                'The_Owner.context_processors.unread_messages_count',
+
             ],
 
         },
@@ -248,11 +250,37 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # أو ملف
+
 
 from django.contrib.messages import constants as messages
+from django.contrib.messages import constants as messages_constants
 
 #messages
 MESSAGE_TAGS = {
-    messages.ERROR: 'danger',
+    messages_constants.ERROR: 'danger',
+    messages_constants.DEBUG: 'debug',
+    messages_constants.INFO: 'info',
+    messages_constants.SUCCESS: 'success',
+    messages_constants.WARNING: 'warning',
 }
+
+
+
+
+
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_HOST = 'localhost'
+# EMAIL_PORT = 1025
+# EMAIL_HOST_USER = ''
+# EMAIL_HOST_PASSWORD = ''
+# EMAIL_USE_TLS = False
+# EMAIL_USE_SSL = False
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 1025
+
+
 

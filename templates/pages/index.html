@@ -1,9 +1,20 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<section id="section-1">
-  <div class="content-slider">
-    {% if promo_requests %}
+
+<br>
+<br>
+<br>
+
+{% for message in messages %}
+<div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+  <li class="{{ message.tags }}">{{ message }}</li>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+</div>
+{% endfor %}
+  <section id="section-1">
+    <div class="content-slider">
+      {% if promo_requests %}
       {% for promo_request in promo_requests %}
         {% if promo_request.active %}
           <input type="radio" id="banner{{ forloop.counter }}" class="sec-1-input" name="banner" {% if forloop.first %}checked{% endif %}>
@@ -69,6 +80,7 @@
           {% endif %}
         {% endfor %}
       </div>
+      
       <nav>
         <div class="controls">
           {% for promo_request in promo_requests %}
@@ -133,6 +145,7 @@
     
       
     <div class="main-container">
+      {% if request.user.owner %}
       <!-- القطعة الأولى -->
       <div class="info-blockk">
         <div class="info-text">قدم طلبك للحصول على استثمار
@@ -264,50 +277,40 @@
 </div>
 </div></div>
 
-
 <div class="call-to-action2">
   <div class="container">
-    <div class="row" style="margin-left: -240px; margin-right: 400px;">
-      <div class="col-lg-6">
-        <div class="row">
-          <div class="col-lg-12">
-            <h2 style="text-align: center;">لدينا</h2>
-            
-          </div>
-          <div class="col-lg-6">
-            <div class="row">
-              <div class="col-12">
-                <div class="count-area-content percentage">
-                  <div class="count-digit">94</div>
-                  <div class="count-title">نجاح الاستثمار</div>
-                </div>
-              </div>
-              <div class="col-12">
-                <div class="count-area-content">
-                  <div class="count-digit">{{ total_owners }}</div>
-                  <div class="count-title">رواد مشاريع</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-6">
-            <div class="row">
-              <div class="col-12">
-                <div class="count-area-content new-students">
-                  <div class="count-digit">{{ total_investor }}</div>
-                  <div class="count-title">مستثمرين</div>
-                </div>
-              </div> 
-              <div class="col-12">
-                <div class="count-area-content">
-                  <div class="count-digit"> {{ total_projects }}</div>
-                  <div class="count-title">مشاريع</div>
-                </div>
-              </div>
-            </div>
-          </div>
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="text-center">
+          <h2>لدينا</h2>
         </div>
-      </div> 
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-md-6 col-lg-3">
+        <div class="count-area-content percentage text-center">
+          <div class="count-digit">{{ total_investmentrequest }}</div>
+          <div class="count-title">نجاح الاستثمار</div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="count-area-content text-center">
+          <div class="count-digit">{{ total_owners }}</div>
+          <div class="count-title">رواد مشاريع</div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="count-area-content new-students text-center">
+          <div class="count-digit">{{ total_investor }}</div>
+          <div class="count-title">مستثمرين</div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="count-area-content text-center">
+          <div class="count-digit">{{ total_projects }}</div>
+          <div class="count-title">مشاريع</div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -729,6 +732,7 @@ document.getElementById('new-filter-form').addEventListener('submit', function (
     position: relative;
     overflow: hidden;
 }
+
   </style>   
   
 {% endblock %}
